@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>38-0 España · 5v5 v35</title>
+<style>
+:root{--bg:#070b12;--card:#101827;--line:rgba(255,255,255,.12);--text:#f6f8fb;--muted:#9aa8ba;--gold:#f5c84b;--green:#52d68a;--red:#ff5d73;--blue:#7db4ff;--violet:#b99cff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 50% -10%,rgba(245,200,75,.20),transparent 30%),linear-gradient(180deg,#08111d,#04060a);color:var(--text);min-height:100vh}.app{max-width:980px;margin:0 auto;padding:14px 12px 30px}.hero,.card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(16,24,39,.96),rgba(7,11,18,.96));border-radius:24px;box-shadow:0 18px 55px rgba(0,0,0,.34)}.hero{padding:17px}h1{margin:0;font-size:31px;line-height:1;letter-spacing:-1px}h1 span{color:var(--gold)}p{color:var(--muted);line-height:1.45}.bar,.buttons{display:flex;gap:8px;flex-wrap:wrap}.pill,.badge,.role,.pos{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:6px 9px;font-size:12px;color:var(--muted)}.layout{display:grid;grid-template-columns:1.5fr .9fr;gap:12px;margin-top:12px}.card{padding:14px}.head,.challenge{display:flex;align-items:center;justify-content:space-between;gap:10px}.club{font-size:25px;font-weight:900}.era,.small{font-size:13px;color:var(--muted)}.round{border:1px solid var(--line);border-radius:14px;padding:9px 11px;color:var(--gold);font-weight:900}.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin-top:14px;max-height:520px;overflow:auto;padding-right:3px}button{font:inherit}.player,.slot{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.055);color:var(--text);text-align:left;padding:11px;min-height:82px}.player{cursor:pointer}.player:active,.slot.available:active{transform:scale(.985)}.player.selected{border-color:var(--gold);background:rgba(245,200,75,.14);box-shadow:0 0 0 2px rgba(245,200,75,.08) inset}.player.used{opacity:.35;pointer-events:none}.player.noFit{opacity:.38}.player.noFit::after{content:'Sin hueco válido';display:block;margin-top:5px;font-size:11px;color:var(--red)}.name{font-weight:850;margin:6px 0 7px}.role{color:var(--gold);font-weight:850}.positions{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px}.pos.ok{color:var(--green);border-color:rgba(82,214,138,.35)}.badges{display:flex;gap:4px;flex-wrap:wrap}.badge{font-size:11px;padding:4px 7px}.team{display:grid;gap:8px;margin-top:12px}.slot{display:grid;grid-template-columns:54px 1fr;gap:9px;align-items:center;position:relative}.slot.available{border-color:rgba(82,214,138,.7);background:rgba(82,214,138,.12);cursor:pointer}.slot.blocked{opacity:.48}.slot.filled{background:rgba(255,255,255,.075)}.tag{font-weight:950;color:var(--gold)}.empty{color:var(--muted)}.hint{margin-top:10px;border:1px solid rgba(125,180,255,.25);background:rgba(125,180,255,.09);border-radius:16px;padding:10px;color:#cfe1ff;font-size:13px}.scorebox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.metric{border:1px solid var(--line);border-radius:16px;padding:10px;text-align:center;background:rgba(255,255,255,.05)}.metric strong{display:block;font-size:24px}.metric span{font-size:12px;color:var(--muted)}.note{margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:10px;color:var(--muted);font-size:13px}.btn{border:0;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,#f5c84b,#ffae35);font-weight:950;color:#1c1300;cursor:pointer;margin-top:12px}.btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.result{margin-top:14px;border:1px solid var(--line);border-radius:18px;padding:12px;background:rgba(255,255,255,.055)}.hidden{display:none}.record{font-size:38px;font-weight:1000;color:var(--gold)}.good{color:var(--green)}.bad{color:var(--red)}.log{display:grid;gap:6px;max-height:280px;overflow:auto}.game{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:6px 0;color:var(--muted)}.why{display:grid;gap:6px;margin:8px 0 12px}.why div{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
+.seasonStory{border:1px solid rgba(125,180,255,.20);background:rgba(125,180,255,.06);border-radius:16px;padding:10px;margin:10px 0;color:#cfe1ff}.storyGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0}.storyBox{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.045);padding:9px}.storyBox b{display:block;margin-bottom:3px}.storyBox span{color:var(--muted);font-size:12px}.tableMini{display:grid;gap:4px;margin:8px 0}.rankRow{display:grid;grid-template-columns:30px 1fr 44px;gap:6px;color:var(--muted);font-size:13px;border-bottom:1px solid rgba(255,255,255,.07);padding:5px 0}.rankRow.me{color:var(--gold);font-weight:900}.resultActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tinyBtn{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);border-radius:12px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.hof{margin-top:12px;border:1px solid rgba(245,200,75,.20);background:rgba(245,200,75,.055);border-radius:16px;padding:10px}.hof h3{margin:0 0 8px;font-size:14px}.hofList{display:grid;gap:7px}.hofRow{border-top:1px solid rgba(255,255,255,.08);padding-top:7px;color:var(--muted);font-size:12px}.hofRow:first-child{border-top:0;padding-top:0}.hofRow b{color:var(--text)}.hofRow .rank{color:var(--gold);font-weight:950}.hofEmpty{color:var(--muted);font-size:12px}.hofControls{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.hof.compact{background:rgba(245,200,75,.035)}.hof.compact details{cursor:pointer}.hof.compact summary{font-weight:950;color:var(--gold);list-style:none}.hof.compact summary::-webkit-details-marker{display:none}.hof.compact .hofList{margin-top:8px}.hofMainClosed{color:var(--muted);font-size:12px;margin-top:4px}
+.balancePanel{margin-top:12px;border:1px solid rgba(125,180,255,.22);background:rgba(125,180,255,.06);border-radius:16px;padding:10px;display:grid;gap:8px}.balancePanel label{font-size:12px;color:var(--muted);font-weight:800}.balancePanel select{width:100%;border:1px solid var(--line);background:#101827;color:var(--text);border-radius:12px;padding:10px;font-weight:800}.balanceHelp{font-size:12px;color:var(--muted);line-height:1.35}.balanceTag{color:var(--gold);font-weight:900}
+@media(max-width:760px){.layout{grid-template-columns:1fr}h1{font-size:27px}.opts{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}.club{font-size:22px}}
+</style></head>
+<body><div class="app"><section class="hero"><h1><span>38-0</span> España 5v5 v35</h1><p>v35: balance final. Menos empates artificiales, más pegada si hay estrellas reales y defensas/MVP más coherentes.</p><div class="bar"><div class="pill">5 picks</div><div class="pill">Muchas plantillas sin repetición</div><div class="pill">Principal/secundaria</div><div class="pill">Stats + aura</div><div class="pill">Rivales reales</div><div class="pill">Sinergias históricas</div><div class="pill">Hall of Fame</div></div><div class="balancePanel"><label>Balance</label><div class="balanceHelp" id="balanceHelp"><span class="balanceTag">v34 final:</span> calibrado con simulaciones internas: sube élites reales, baja falsos 80 puntos por control/defensa artificial y mantiene difícil el 38-0.</div></div></section><div class="layout"><main class="card"><div class="head"><b>Draft</b><span class="small" id="need">Primero elige jugador</span></div><div class="challenge"><div><div class="club" id="club">Pulsa empezar</div><div class="era" id="era">Aparece un equipo/temporada y eliges de su plantilla.</div></div><div class="round" id="round">0/5</div></div><div class="hint" id="hint">Cuando selecciones un jugador, los huecos válidos se iluminarán en verde.</div><div class="opts" id="options"></div><div class="buttons"><button class="btn" id="startBtn">Empezar draft</button><button class="btn secondary" id="rerollBtn" disabled>Otro equipo (2)</button></div><div class="result hidden" id="result"></div><div class="hof hidden" id="hallPanelMain"></div></main><aside class="card"><div class="head"><b>Tu cinco</b><span class="small" id="teamCount">0/5</span></div><div class="team" id="team"></div><div class="scorebox"><div class="metric"><strong id="atk">0</strong><span>Ataque</span></div><div class="metric"><strong id="def">0</strong><span>Defensa</span></div><div class="metric"><strong id="ctrl">0</strong><span>Control</span></div></div><div class="note"><b>Simulación:</b> rivales históricos reales, estrellas en partidos igualados y resultado narrativo.</div><div class="hof" id="hallPanel"></div><div class="buttons"><button class="btn" id="simBtn" disabled>Simular 38 partidos</button><button class="btn secondary" id="resetBtn">Reiniciar</button></div></aside></div></div>
+<script>
+// v35: balance final: reduce empates artificiales, sube pegada real y ajusta MVP defensivo.
+const squads=[
+{club:'FC Barcelona',era:'2010-11 · Guardiola',players:[['Víctor Valdés','POR',8,85,78,['porterazo','salida limpia']],['Dani Alves','DEF',84,82,84,['lateral total']],['Piqué','DEF',72,86,80,['jerarquía']],['Puyol','DEF',58,92,72,['capitán']],['Abidal','DEF',56,86,72,['seguro']],['Mascherano','DEF',50,86,76,['corrector']],['Busquets','MED',56,86,92,['ancla']],['Xavi','MED',68,76,97,['control absoluto']],['Iniesta','MED',78,70,95,['magia']],['Keita','MED',64,78,78,['físico']],['Thiago','MED',70,62,84,['talento']],['Messi','DEL',99,55,92,['GOAT']],['David Villa','DEL',91,48,78,['gol']],['Pedro','DEL',84,58,78,['presión']],['Bojan','DEL',76,38,66,['revulsivo']],['Afellay','MED',72,45,74,['rotación']],['Adriano','DEF',68,72,74,['polivalente']]]},
+{club:'Real Madrid',era:'2016-17 · Zidane',players:[['Keylor Navas','POR',8,86,72,['reflejos']],['Carvajal','DEF',74,84,78,['ritmo']],['Sergio Ramos','DEF',78,90,78,['líder']],['Varane','DEF',60,87,72,['velocidad']],['Marcelo','DEF',82,70,86,['talento']],['Nacho','DEF',55,80,68,['fiable']],['Casemiro','MED',62,90,76,['muro']],['Kroos','MED',70,74,94,['pase']],['Modrić','MED',76,78,94,['motor']],['Isco','MED',80,58,88,['fantasía']],['Asensio','DEL',78,46,74,['zurda']],['James Rodríguez','MED',80,52,84,['último pase']],['Cristiano Ronaldo','DEL',99,48,78,['depredador']],['Benzema','DEL',86,55,86,['asociativo']],['Bale','DEL',88,55,76,['potencia']],['Morata','DEL',83,45,68,['gol banquillo']],['Lucas Vázquez','DEL',72,66,70,['trabajo']],['Kovacic','MED',70,72,82,['conducción']]]},
+{club:'Atlético de Madrid',era:'2013-14 · Simeone campeón',players:[['Courtois','POR',7,91,70,['muro']],['Juanfran','DEF',66,84,72,['lateral']],['Miranda','DEF',55,89,66,['central']],['Godín','DEF',58,94,70,['jefe']],['Filipe Luis','DEF',70,86,78,['completo']],['Toby Alderweireld','DEF',54,82,70,['rotación']],['Gabi','MED',62,90,82,['capitán']],['Tiago','MED',60,82,80,['orden']],['Koke','MED',72,82,86,['trabajo+calidad']],['Arda Turan','MED',78,70,84,['pausa']],['Raúl García','MED',74,78,72,['llegada']],['Diego Costa','DEL',91,78,70,['bestia']],['David Villa','DEL',82,56,74,['colmillo']],['Adrián','DEL',74,52,70,['movilidad']],['Cebolla Rodríguez','MED',68,66,70,['energía']],['Sosa','MED',68,56,76,['balón parado']],['Insua','DEF',52,72,66,['fondo']]]},
+{club:'Valencia CF',era:'2003-04 · Benítez doblete',players:[['Cañizares','POR',6,89,70,['seguridad']],['Curro Torres','DEF',58,78,66,['oficio']],['Ayala','DEF',52,92,66,['central élite']],['Marchena','DEF',55,86,72,['carácter']],['Carboni','DEF',54,82,70,['veterano']],['Pellegrino','DEF',48,82,62,['altura']],['Albelda','MED',48,90,74,['ancla']],['Baraja','MED',72,84,84,['llegada']],['Vicente','MED',84,55,82,['banda']],['Aimar','MED',84,45,88,['mago']],['Rufete','MED',72,66,74,['trabajo']],['Mista','DEL',86,55,70,['racha histórica']],['Angulo','DEL',76,66,74,['polivalente']],['Carew','DEL',76,45,60,['tanque']],['Sissoko','MED',58,82,70,['físico']],['Canobbio','MED',70,52,74,['técnica']],['Xisco','DEL',66,48,60,['rotación']]]},
+{club:'Deportivo',era:'1999-00 · SuperDepor campeón',players:[['Molina','POR',7,86,72,['líder']],['Manuel Pablo','DEF',70,84,76,['lateralazo']],['Naybet','DEF',50,88,66,['sobrio']],['Donato','DEF',58,86,72,['veterano']],['Romero','DEF',60,80,70,['regular']],['Djalminha','MED',86,42,90,['genio']],['Mauro Silva','MED',50,92,82,['mediocentro élite']],['Flávio Conceição','MED',70,82,80,['box-to-box']],['Fran','MED',74,62,86,['capitán']],['Víctor Sánchez','MED',78,66,78,['banda']],['Sergio González','MED',68,76,80,['equilibrio']],['Turu Flores','DEL',82,45,70,['gol']],['Makaay','DEL',89,42,68,['killer']],['Pandiani','DEL',80,58,64,['rifle']],['Scaloni','DEF',64,76,70,['carácter']],['César Martín','DEF',50,80,62,['rotación']],['Pauleta','DEL',82,42,66,['remate']]]},
+{club:'Real Sociedad',era:'2002-03 · subcampeona',players:[['Westerveld','POR',6,82,70,['seguro']],['Aranzabal','DEF',62,80,72,['lateral']],['Jauregi','DEF',48,80,62,['central']],['Kvarme','DEF',46,78,62,['oficio']],['Rekarte','DEF',58,78,66,['regular']],['Xabi Alonso','MED',70,78,90,['director']],['Aranburu','MED',68,76,80,['cantera']],['Karpin','MED',78,66,84,['carácter']],['De Pedro','MED',76,58,84,['zurda']],['Nihat','DEL',88,54,76,['dinamita']],['Kovacevic','DEL',86,55,72,['remate']],['Tayfun','MED',58,70,72,['rotación']],['Gabilondo','MED',68,62,76,['toque']],['Boris','DEF',48,74,62,['fondo']],['Khakhokhidze','DEF',46,72,60,['rotación']],['Llorente','DEL',72,46,62,['banquillo']]]},
+{club:'Sevilla FC',era:'2006-07 · Juande Ramos',players:[['Palop','POR',7,87,72,['héroe']],['Dani Alves','DEF',86,78,84,['lateral histórico']],['Javi Navarro','DEF',45,86,62,['duro']],['Escudé','DEF',52,84,68,['elegante']],['Dragutinović','DEF',54,80,66,['oficio']],['Adriano','DEF',72,72,78,['carrilero']],['Poulsen','MED',55,88,72,['perro de presa']],['Maresca','MED',72,72,82,['clase']],['Renato','MED',74,74,80,['llegada']],['Jesús Navas','MED',80,60,78,['banda']],['Puerta','MED',76,68,76,['talento']],['Kanouté','DEL',90,60,82,['delanterazo']],['Luis Fabiano','DEL',89,50,74,['gol']],['Kerzhakov','DEL',78,44,66,['rotación']],['Chevantón','DEL',76,45,64,['revulsivo']],['Martí','MED',60,76,76,['orden']],['Hinkel','DEF',58,74,66,['fondo']]]},
+{club:'Athletic Club',era:'1983-84 · Clemente',players:[['Zubizarreta','POR',6,91,72,['leyenda']],['Urkiaga','DEF',58,84,66,['lateral']],['Goikoetxea','DEF',48,90,60,['duro']],['Liceranzu','DEF',46,84,62,['central']],['De la Fuente','DEF',62,78,70,['banda']],['Dani','DEL',82,54,70,['capitán']],['Urtubi','MED',68,78,78,['equilibrio']],['Gallego','MED',62,82,74,['trabajo']],['Sarabia','MED',82,58,86,['clase']],['Argote','MED',78,56,84,['zurda']],['Endika','DEL',78,52,68,['final copera']],['Noruega','DEF',52,76,64,['rotación']],['Patxi Salinas','DEF',56,76,66,['joven']],['Julio Salinas','DEL',78,44,66,['remate']],['Sola','MED',64,70,72,['rotación']],['Bengoetxea','MED',60,68,70,['plantilla']]]},
+{club:'Real Betis',era:'2004-05 · Champions',players:[['Doblas','POR',5,80,66,['cantera']],['Varela','DEF',62,78,68,['lateral']],['Juanito','DEF',54,84,66,['central']],['Rivas','DEF',48,80,60,['duro']],['Luis Fernández','DEF',58,76,68,['oficio']],['Assunção','MED',62,80,78,['faltas']],['Arzu','MED',60,78,76,['equilibrio']],['Joaquín','MED',84,58,82,['banda histórica']],['Edu','MED',78,62,80,['llegada']],['Benjamín','MED',68,70,74,['trabajo']],['Fernando','DEL',78,55,72,['segundo punta']],['Ricardo Oliveira','DEL',89,46,72,['killer']],['Dani Martín','DEL',74,52,64,['copa']],['Capi','MED',72,60,78,['talento']],['Melli','DEF',50,76,60,['rotación']],['Castellini','DEF',52,74,62,['fondo']]]},
+{club:'Villarreal CF',era:'2007-08 · Pellegrini',players:[['Diego López','POR',6,84,70,['seguro']],['Ángel López','DEF',64,78,70,['lateral']],['Godín','DEF',52,84,66,['joven muro']],['Gonzalo Rodríguez','DEF',54,82,68,['central']],['Capdevila','DEF',66,80,74,['completo']],['Senna','MED',68,88,88,['jefe']],['Bruno Soriano','MED',60,78,80,['toque']],['Cazorla','MED',82,62,86,['talento']],['Pires','MED',78,58,84,['clase']],['Cani','MED',76,60,82,['interior']],['Ibagaza','MED',74,55,84,['último pase']],['Nihat','DEL',86,50,74,['gol']],['Rossi','DEL',84,48,76,['movilidad']],['Tomasson','DEL',76,50,70,['oficio']],['Matías Fernández','MED',76,45,80,['fantasía']],['Cygan','DEF',42,76,58,['rotación']],['Venta','DEF',56,76,66,['fondo']]]},
+{club:'Real Madrid',era:'2001-02 · Galácticos Champions',players:[['Casillas','POR',7,94,72,['santo']],['Hierro','DEF',62,86,78,['líder']],['Roberto Carlos','DEF',88,78,82,['cañón']],['Salgado','DEF',64,82,70,['intenso']],['Helguera','DEF',58,82,76,['salida']],['Makelele','MED',50,92,78,['equilibrio']],['Figo','MED',88,58,90,['balón de oro']],['Zidane','MED',90,62,96,['elegancia']],['Solari','MED',74,66,80,['rotación lujo']],['Guti','MED',80,50,88,['pase imposible']],['Raúl','DEL',91,62,84,['leyenda']],['Morientes','DEL',84,48,74,['remate']],['McManaman','MED',76,60,80,['clase']],['Munitis','DEL',72,54,70,['revulsivo']],['César','POR',5,82,64,['portería']],['Pavón','DEF',44,72,58,['cantera']]]},
+{club:'FC Barcelona',era:'2005-06 · Rijkaard Champions',players:[['Valdés','POR',6,84,72,['joven seguro']],['Belletti','DEF',68,76,72,['final París']],['Puyol','DEF',56,92,72,['capitán']],['Márquez','DEF',62,86,82,['salida']],['Oleguer','DEF',48,76,60,['fondo']],['Van Bronckhorst','DEF',66,78,78,['lateral']],['Edmílson','MED',54,84,76,['ancla']],['Deco','MED',80,78,90,['motor']],['Xavi','MED',70,72,92,['control']],['Iniesta','MED',76,62,88,['joven magia']],['Ronaldinho','DEL',96,45,94,['sonrisa']],['Eto’o','DEL',94,62,78,['killer']],['Messi','DEL',84,42,82,['joven genio']],['Giuly','DEL',80,58,76,['ruptura']],['Larsson','DEL',82,52,78,['lujo']],['Motta','MED',60,78,74,['físico']],['Sylvinho','DEF',62,74,72,['rotación']]]}
+,
+{club:'FC Barcelona',era:'1991-92 · Dream Team Wembley',players:[['Zubizarreta','POR',6,90,72,['seguro']],['Ferrer','DEF',64,82,72,['lateral']],['Koeman','DEF',82,86,88,['libero']],['Nando','DEF',48,78,62,['oficio']],['Juan Carlos Rojo','DEF',62,78,70,['carril']],['Guardiola','MED',62,78,92,['director']],['Bakero','MED',76,80,82,['llegada']],['Amor','MED',72,78,84,['trabajo']],['Laudrup','MED',88,52,94,['genio']],['Stoichkov','DEL',94,58,84,['colmillo']],['Salinas','DEL',82,46,68,['remate']],['Eusebio Sacristán','MED',66,74,80,['control']],['Goikoetxea','DEL',76,56,70,['banda']],['Begiristain','DEL',80,50,76,['técnica']]]},
+{club:'FC Barcelona',era:'1993-94 · Dream Team finalista',players:[['Zubizarreta','POR',6,88,72,['seguro']],['Ferrer','DEF',64,82,72,['lateral']],['Koeman','DEF',82,86,88,['libero']],['Nadal','DEF',54,84,72,['físico']],['Sergi','DEF',68,78,76,['cantera']],['Guardiola','MED',62,80,94,['director']],['Bakero','MED',74,78,82,['llegada']],['Amor','MED',72,78,84,['trabajo']],['Laudrup','MED',88,52,94,['genio']],['Romário','DEL',98,38,84,['killer']],['Stoichkov','DEL',94,58,84,['colmillo']],['Goikoetxea','DEL',76,56,70,['banda']],['Eusebio Sacristán','MED',66,74,80,['control']],['Begiristain','DEL',80,50,76,['técnica']]]},
+{club:'FC Barcelona',era:'1996-97 · Ronaldo Fenómeno',players:[['Vítor Baía','POR',6,84,70,['reflejos']],['Ferrer','DEF',62,80,70,['lateral']],['Abelardo','DEF',54,84,70,['central']],['Nadal','DEF',54,82,72,['físico']],['Sergi','DEF',68,78,76,['carril']],['Guardiola','MED',62,78,92,['director']],['Luis Enrique','MED',82,76,84,['garra']],['Figo','MED',88,58,90,['banda']],['De la Peña','MED',76,52,88,['pase']],['Giovanni','MED',78,54,82,['técnica']],['Ronaldo','DEL',100,36,86,['fenómeno']],['Pizzi','DEL',82,45,68,['gol']],['Stoichkov','DEL',88,52,78,['colmillo']],['Amunike','DEL',74,58,68,['potencia']]]},
+{club:'FC Barcelona',era:'1998-99 · Van Gaal campeón',players:[['Hesp','POR',5,82,66,['regular']],['Reiziger','DEF',66,80,72,['lateral']],['Abelardo','DEF',54,84,70,['central']],['Frank de Boer','DEF',62,84,82,['salida']],['Sergi','DEF',68,78,76,['carril']],['Guardiola','MED',62,78,92,['director']],['Cocu','MED',72,82,84,['equilibrio']],['Luis Enrique','MED',82,76,84,['llegada']],['Rivaldo','DEL',96,48,92,['balón de oro']],['Figo','MED',88,58,90,['banda']],['Kluivert','DEL',88,50,82,['nueve']],['Anderson','DEL',82,45,70,['gol']],['Zenden','MED',74,66,76,['trabajo']],['Xavi','MED',68,64,84,['joven control']]]},
+{club:'FC Barcelona',era:'2008-09 · Triplete',players:[['Valdés','POR',6,86,74,['salida limpia']],['Dani Alves','DEF',86,80,86,['lateral total']],['Piqué','DEF',72,86,82,['salida']],['Puyol','DEF',58,92,72,['capitán']],['Abidal','DEF',56,86,72,['seguro']],['Busquets','MED',56,84,90,['ancla']],['Touré Yaya','MED',74,86,84,['poder']],['Xavi','MED',70,76,98,['control']],['Iniesta','MED',80,70,96,['magia']],['Messi','DEL',98,52,94,['GOAT']],['Eto’o','DEL',94,62,78,['killer']],['Henry','DEL',89,50,82,['clase']],['Pedro','DEL',78,58,72,['joven']],['Keita','MED',64,78,78,['físico']],['Márquez','DEF',60,84,80,['salida']]]},
+{club:'FC Barcelona',era:'2014-15 · MSN triplete',players:[['Bravo','POR',6,87,72,['seguro']],['Ter Stegen','POR',6,84,78,['copas']],['Dani Alves','DEF',82,78,84,['lateral']],['Piqué','DEF',72,88,82,['jerarquía']],['Mascherano','DEF',54,88,78,['corrector']],['Jordi Alba','DEF',78,78,82,['profundidad']],['Busquets','MED',58,86,92,['ancla']],['Rakitic','MED',76,78,86,['equilibrio']],['Xavi','MED',66,70,92,['control']],['Iniesta','MED',78,68,94,['magia']],['Messi','DEL',100,48,96,['GOAT']],['Suárez','DEL',96,62,84,['colmillo']],['Neymar','DEL',94,44,88,['desborde']],['Pedro','DEL',80,58,76,['rotación lujo']],['Mathieu','DEF',54,82,68,['fondo']],['Bartra','DEF',52,78,70,['cantera']]]},
+{club:'FC Barcelona',era:'2018-19 · Messi dominante',players:[['Ter Stegen','POR',6,90,80,['élite']],['Sergi Roberto','DEF',68,76,80,['polivalente']],['Piqué','DEF',70,86,82,['jerarquía']],['Lenglet','DEF',54,82,72,['central']],['Jordi Alba','DEF',80,76,84,['sociedad Messi']],['Busquets','MED',56,82,90,['ancla']],['Rakitic','MED',72,76,84,['equilibrio']],['Arthur','MED',66,70,86,['pausa']],['Vidal','MED',72,82,78,['garra']],['Coutinho','MED',78,52,84,['talento']],['Messi','DEL',100,42,96,['GOAT']],['Suárez','DEL',92,55,82,['gol']],['Dembélé','DEL',84,42,78,['desborde']],['Malcom','DEL',74,44,70,['rotación']],['Semedo','DEF',64,78,70,['fondo']]]},
+{club:'Real Madrid',era:'1985-86 · Quinta del Buitre',players:[['Buyo','POR',6,88,68,['seguro']],['Chendo','DEF',60,84,66,['lateral']],['Sanchís','DEF',56,88,72,['líder joven']],['Camacho','DEF',58,86,72,['carácter']],['Gordillo','DEF',76,78,82,['banda']],['Míchel','MED',82,64,86,['centro']],['Martín Vázquez','MED',78,62,88,['clase']],['Gallego','MED',62,84,76,['equilibrio']],['Butragueño','DEL',92,42,84,['buitre']],['Hugo Sánchez','DEL',98,45,74,['killer']],['Valdano','DEL',84,50,78,['inteligencia']],['Juanito','DEL',86,55,78,['raza']],['Santillana','DEL',82,50,68,['remate']],['Maceda','DEF',52,84,64,['central']]]},
+{club:'Real Madrid',era:'1997-98 · Séptima',players:[['Illgner','POR',6,86,68,['seguro']],['Panucci','DEF',64,82,72,['lateral']],['Hierro','DEF',64,88,78,['líder']],['Sanchís','DEF',50,82,66,['veterano']],['Roberto Carlos','DEF',88,78,82,['cañón']],['Redondo','MED',66,88,92,['elegancia']],['Seedorf','MED',78,76,88,['poder']],['Karembeu','MED',66,80,76,['físico']],['Raúl','DEL',90,60,84,['leyenda']],['Mijatović','DEL',90,42,78,['finalista']],['Suker','DEL',88,42,74,['killer']],['Morientes','DEL',82,48,70,['remate']],['Guti','MED',74,48,82,['talento']],['Víctor Sánchez','MED',70,66,74,['rotación']]]},
+{club:'Real Madrid',era:'2011-12 · Mourinho 100 puntos',players:[['Casillas','POR',7,92,74,['santo']],['Arbeloa','DEF',50,80,66,['oficio']],['Pepe','DEF',54,90,68,['muro']],['Sergio Ramos','DEF',76,90,78,['líder']],['Marcelo','DEF',84,72,86,['talento']],['Xabi Alonso','MED',68,82,92,['director']],['Khedira','MED',66,82,78,['físico']],['Özil','MED',84,48,92,['último pase']],['Di María','MED',86,64,86,['eléctrico']],['Cristiano Ronaldo','DEL',100,48,82,['depredador']],['Benzema','DEL',90,55,86,['asociativo']],['Higuaín','DEL',88,42,72,['gol']],['Kaká','MED',78,48,82,['clase']],['Coentrão','DEF',62,78,72,['fondo']],['Callejón','DEL',76,58,68,['trabajo']]]},
+{club:'Real Madrid',era:'2013-14 · Décima',players:[['Casillas','POR',7,88,72,['copas']],['Diego López','POR',6,84,68,['liga']],['Carvajal','DEF',72,80,76,['lateral']],['Pepe','DEF',54,90,68,['muro']],['Sergio Ramos','DEF',78,91,80,['Lisboa']],['Marcelo','DEF',82,72,86,['talento']],['Coentrão','DEF',60,78,72,['fondo']],['Xabi Alonso','MED',68,82,92,['director']],['Modrić','MED',76,78,92,['motor']],['Di María','MED',86,72,88,['interior brutal']],['Isco','MED',78,58,86,['fantasía']],['Cristiano Ronaldo','DEL',100,48,82,['balón de oro']],['Benzema','DEL',88,55,86,['asociativo']],['Bale','DEL',92,54,80,['potencia']],['Jesé','DEL',78,44,72,['promesa']],['Illarra','MED',58,74,78,['rotación']]]},
+{club:'Real Madrid',era:'2021-22 · Champions remontadas',players:[['Courtois','POR',7,95,74,['muro']],['Carvajal','DEF',70,80,74,['veterano']],['Militão','DEF',58,86,70,['físico']],['Alaba','DEF',66,84,84,['salida']],['Mendy','DEF',58,84,68,['defensa']],['Casemiro','MED',62,88,76,['muro']],['Kroos','MED',68,72,94,['pase']],['Modrić','MED',76,76,94,['leyenda']],['Valverde','MED',74,82,82,['motor']],['Vinícius','DEL',92,48,84,['desborde']],['Benzema','DEL',98,52,90,['balón de oro']],['Rodrygo','DEL',84,50,78,['remontadas']],['Camavinga','MED',70,76,82,['energía']],['Asensio','DEL',78,44,74,['zurda']],['Nacho','DEF',54,80,68,['fiable']]]},
+{club:'Atlético de Madrid',era:'1995-96 · Doblete',players:[['Molina','POR',6,88,70,['seguro']],['Geli','DEF',62,80,68,['lateral']],['Santi','DEF',50,82,62,['central']],['Solozábal','DEF',52,84,66,['capitán']],['Toni','DEF',58,78,66,['banda']],['Vizcaíno','MED',58,82,74,['trabajo']],['Pantic','MED',84,62,88,['balón parado']],['Simeone','MED',76,88,80,['alma']],['Caminero','MED',84,66,86,['clase']],['Kiko','DEL',88,48,84,['talento']],['Penev','DEL',86,46,74,['nueve']],['Pizzi','DEL',82,44,68,['gol']],['Roberto Fresnedoso','MED',68,72,72,['rotación']],['Juanma López','DEF',46,80,60,['duro']]]},
+{club:'Atlético de Madrid',era:'2015-16 · finalista Champions',players:[['Oblak','POR',6,94,72,['muro']],['Juanfran','DEF',66,84,72,['lateral']],['Godín','DEF',58,94,70,['jefe']],['Savic','DEF',48,84,64,['central']],['Filipe Luis','DEF',70,86,78,['completo']],['Gabi','MED',62,88,82,['capitán']],['Koke','MED',74,82,88,['equilibrio']],['Saúl','MED',74,84,82,['llegada']],['Tiago','MED',60,82,80,['orden']],['Carrasco','DEL',84,52,78,['desborde']],['Griezmann','DEL',94,62,88,['estrella']],['Fernando Torres','DEL',82,54,72,['revival']],['Correa','DEL',78,50,76,['agitador']],['Augusto','MED',58,78,76,['rotación']],['Giménez','DEF',52,86,66,['garra']]]},
+{club:'Atlético de Madrid',era:'2020-21 · campeón',players:[['Oblak','POR',6,94,72,['muro']],['Trippier','DEF',70,80,78,['centro']],['Savic','DEF',48,86,64,['duro']],['Giménez','DEF',52,88,66,['garra']],['Hermoso','DEF',58,80,74,['salida']],['Lodi','DEF',66,74,72,['carril']],['Koke','MED',72,82,88,['capitán']],['Llorente','MED',84,80,84,['explosión']],['Carrasco','MED',84,60,82,['banda']],['Saúl','MED',68,80,78,['trabajo']],['João Félix','DEL',84,46,86,['talento']],['Luis Suárez','DEL',92,42,78,['colmillo']],['Correa','DEL',82,56,80,['agitador']],['Lemar','MED',74,58,82,['toque']],['Kondogbia','MED',60,82,76,['físico']]]},
+{club:'Valencia CF',era:'1999-00 · finalista Champions',players:[['Cañizares','POR',6,90,70,['seguridad']],['Angloma','DEF',64,82,68,['veterano']],['Djukic','DEF',50,86,66,['jerarquía']],['Pellegrino','DEF',48,84,62,['altura']],['Carboni','DEF',54,82,70,['veterano']],['Mendieta','MED',86,76,90,['capitán']],['Farinos','MED',70,78,82,['cantera']],['Kily González','MED',82,64,82,['garra']],['Gerard','MED',78,68,84,['llegada']],['Claudio López','DEL',90,48,78,['piojo']],['Angulo','DEL',76,66,74,['polivalente']],['Ilie','DEL',82,42,76,['talento']],['Juan Sánchez','DEL',78,48,68,['gol']],['Albelda','MED',52,84,72,['muro']],['Bjorklund','DEF',46,80,60,['rotación']]]},
+{club:'Valencia CF',era:'2001-02 · campeón de Liga',players:[['Cañizares','POR',6,90,70,['seguridad']],['Curro Torres','DEF',58,80,66,['lateral']],['Ayala','DEF',52,92,66,['central élite']],['Pellegrino','DEF',48,84,62,['altura']],['Carboni','DEF',54,82,70,['veterano']],['Albelda','MED',48,90,74,['ancla']],['Baraja','MED',72,84,84,['llegada']],['Aimar','MED',86,45,90,['mago']],['Vicente','MED',82,55,82,['banda']],['Kily González','MED',80,64,80,['garra']],['Carew','DEL',80,46,62,['tanque']],['Mista','DEL',78,50,66,['trabajo']],['Juan Sánchez','DEL',80,48,68,['gol']],['Marchena','DEF',54,84,72,['carácter']],['Rufete','MED',70,66,74,['trabajo']]]},
+{club:'Valencia CF',era:'2006-07 · Villa-Silva-Mata',players:[['Cañizares','POR',6,86,68,['veterano']],['Miguel','DEF',70,78,76,['lateral']],['Ayala','DEF',50,88,64,['central']],['Albiol','DEF',54,84,72,['cantera']],['Moretti','DEF',52,78,66,['oficio']],['Albelda','MED',48,86,72,['ancla']],['Baraja','MED',68,78,80,['veterano']],['Joaquín','MED',82,56,82,['banda']],['Vicente','MED',78,50,78,['calidad']],['Silva','MED',84,52,90,['magia']],['Villa','DEL',94,48,80,['killer']],['Morientes','DEL',82,46,72,['remate']],['Angulo','DEL',74,64,72,['polivalente']],['Marchena','DEF',54,84,72,['carácter']],['Edu','MED',68,70,76,['rotación']]]},
+{club:'Valencia CF',era:'2018-19 · Copa del Rey',players:[['Neto','POR',6,84,68,['seguro']],['Wass','DEF',68,76,80,['polivalente']],['Garay','DEF',48,84,62,['central']],['Gabriel Paulista','DEF',50,84,64,['duro']],['Gayà','DEF',74,80,80,['cantera']],['Parejo','MED',74,72,90,['director']],['Kondogbia','MED',62,84,78,['físico']],['Coquelin','MED',52,84,72,['muro']],['Soler','MED',74,68,82,['cantera']],['Guedes','DEL',84,46,80,['potencia']],['Rodrigo','DEL',86,58,82,['movilidad']],['Gameiro','DEL',80,48,70,['gol']],['Santi Mina','DEL',78,52,68,['pelea']],['Cheryshev','MED',76,58,74,['banda']],['Diakhaby','DEF',46,78,58,['rotación']]]},
+{club:'Deportivo',era:'2001-02 · Copa del Centenariazo',players:[['Molina','POR',7,86,72,['líder']],['Manuel Pablo','DEF',70,84,76,['lateralazo']],['César Martín','DEF',50,82,62,['central']],['Naybet','DEF',50,88,66,['sobrio']],['Romero','DEF',60,80,70,['regular']],['Mauro Silva','MED',50,92,82,['élite']],['Sergio González','MED',70,78,82,['equilibrio']],['Víctor Sánchez','MED',78,66,78,['banda']],['Fran','MED',74,62,86,['capitán']],['Valerón','MED',82,48,92,['mago']],['Djalminha','MED',84,42,90,['genio']],['Tristán','DEL',90,45,78,['killer']],['Makaay','DEL',91,42,70,['depredador']],['Pandiani','DEL',82,58,64,['rifle']],['Scaloni','DEF',64,76,70,['carácter']]]},
+{club:'Deportivo',era:'2003-04 · semifinal Champions',players:[['Molina','POR',7,84,70,['líder']],['Manuel Pablo','DEF',68,82,74,['lateral']],['Naybet','DEF',48,86,64,['sobrio']],['Andrade','DEF',52,86,68,['centralazo']],['Capdevila','DEF',66,80,74,['completo']],['Mauro Silva','MED',48,88,80,['ancla']],['Sergio González','MED',70,78,82,['equilibrio']],['Duscher','MED',58,82,72,['físico']],['Valerón','MED',82,46,92,['mago']],['Luque','DEL',84,46,76,['zurda']],['Pandiani','DEL',84,58,66,['rifle']],['Tristán','DEL',84,42,74,['calidad']],['Víctor Sánchez','MED',74,64,76,['banda']],['Fran','MED',70,58,82,['capitán']],['Scaloni','DEF',62,74,68,['carácter']]]},
+{club:'Sevilla FC',era:'2013-14 · Europa League',players:[['Beto','POR',6,82,66,['parapenaltis']],['Coke','DEF',66,78,70,['lateral']],['Fazio','DEF',52,84,66,['altura']],['Pareja','DEF',48,82,64,['central']],['Alberto Moreno','DEF',72,74,76,['cantera']],['Mbia','MED',66,84,76,['poder']],['Carriço','MED',52,82,72,['equilibrio']],['Rakitic','MED',84,70,90,['estrella']],['Reyes','MED',78,52,82,['calidad']],['Vitolo','MED',78,64,80,['banda']],['Bacca','DEL',88,50,72,['killer']],['Gameiro','DEL',84,48,72,['gol']],['Iborra','MED',70,78,76,['llegada']],['Marin','MED',72,48,76,['talento']],['Diogo Figueiras','DEF',60,74,68,['fondo']]]},
+{club:'Sevilla FC',era:'2015-16 · tercera Europa League',players:[['Sergio Rico','POR',5,80,66,['cantera']],['Mariano','DEF',72,76,72,['lateral']],['Rami','DEF',50,84,64,['central']],['Kolo','DEF',48,80,62,['físico']],['Escudero','DEF',68,78,76,['lateral']],['Krychowiak','MED',58,88,76,['muro']],['Nzonzi','MED',64,84,82,['poder']],['Banega','MED',78,62,90,['director']],['Vitolo','MED',80,64,82,['banda']],['Konoplyanka','DEL',80,44,76,['desborde']],['Gameiro','DEL',88,48,72,['killer']],['Llorente','DEL',78,44,66,['tanque']],['Iborra','MED',70,78,76,['llegada']],['Krohn-Dehli','MED',70,66,80,['toque']],['Coke','DEF',66,78,70,['capitán']]]},
+{club:'Sevilla FC',era:'2019-20 · Lopetegui Europa League',players:[['Vaclik','POR',6,82,66,['seguro']],['Jesús Navas','DEF',78,78,82,['capitán']],['Koundé','DEF',58,86,76,['talento']],['Diego Carlos','DEF',52,86,66,['muro']],['Reguilón','DEF',74,78,78,['profundidad']],['Fernando','MED',56,86,78,['ancla']],['Banega','MED',76,62,90,['director']],['Joan Jordán','MED',72,72,82,['equilibrio']],['Ocampos','DEL',86,66,80,['poder']],['Suso','DEL',78,44,82,['zurda']],['De Jong','DEL',80,46,68,['remate']],['En-Nesyri','DEL',78,54,66,['ruptura']],['Munir','DEL',76,48,74,['rotación']],['Óliver Torres','MED',70,58,82,['toque']],['Gudelj','MED',58,78,72,['fondo']]]},
+{club:'Villarreal CF',era:'2005-06 · semifinal Champions',players:[['Viera','POR',6,82,66,['seguro']],['Javi Venta','DEF',58,78,66,['lateral']],['Gonzalo Rodríguez','DEF',54,84,68,['central']],['Peña','DEF',48,80,62,['oficio']],['Arruabarrena','DEF',60,78,70,['veterano']],['Senna','MED',68,88,88,['jefe']],['Josico','MED',54,80,72,['trabajo']],['Riquelme','MED',90,38,96,['enganche']],['Sorín','MED',74,78,80,['corazón']],['Cazorla','MED',74,58,82,['joven']],['Forlán','DEL',92,46,76,['bota de oro']],['José Mari','DEL',76,52,68,['oficio']],['Franco','DEL',78,44,66,['remate']],['Roger','MED',70,60,78,['toque']],['Héctor Font','MED',66,62,72,['rotación']]]},
+{club:'Villarreal CF',era:'2020-21 · Europa League',players:[['Rulli','POR',6,82,68,['penaltis']],['Foyth','DEF',58,80,72,['polivalente']],['Albiol','DEF',48,86,70,['jerarquía']],['Pau Torres','DEF',58,84,78,['salida']],['Pedraza','DEF',72,74,76,['profundidad']],['Capoue','MED',64,84,78,['poder']],['Parejo','MED',74,72,90,['director']],['Trigueros','MED',72,68,84,['toque']],['Moi Gómez','MED',74,64,82,['asociativo']],['Chukwueze','DEL',82,44,76,['desborde']],['Gerard Moreno','DEL',92,54,84,['estrella']],['Alcácer','DEL',82,42,70,['gol']],['Bacca','DEL',78,46,68,['oficio']],['Coquelin','MED',52,82,72,['muro']],['Yeremy Pino','DEL',78,56,76,['cantera']]]},
+{club:'Athletic Club',era:'2011-12 · Bielsa finalista',players:[['Iraizoz','POR',5,82,66,['seguro']],['Iraola','DEF',72,78,82,['lateral']],['Javi Martínez','DEF',66,88,82,['central-mediocentro']],['Amorebieta','DEF',46,82,60,['duro']],['Aurtenetxe','DEF',58,76,68,['cantera']],['Iturraspe','MED',56,78,82,['ancla']],['De Marcos','MED',76,76,80,['motor']],['Ander Herrera','MED',76,68,88,['toque']],['Susaeta','MED',78,62,80,['banda']],['Muniain','DEL',82,48,84,['talento']],['Llorente','DEL',90,50,76,['tanque']],['Toquero','DEL',74,62,66,['trabajo']],['San José','DEF',54,80,70,['rotación']],['Ibai Gómez','DEL',76,50,74,['zurda']],['Gurpegui','MED',58,82,70,['garra']]]},
+{club:'Athletic Club',era:'2023-24 · Copa del Rey',players:[['Unai Simón','POR',6,88,74,['seguro']],['De Marcos','DEF',68,78,78,['veterano']],['Vivian','DEF',52,86,68,['central']],['Yeray','DEF',50,84,66,['fiable']],['Yuri','DEF',70,78,76,['lateral']],['Prados','MED',58,78,80,['cantera']],['Vesga','MED',60,80,78,['orden']],['Sancet','MED',82,64,86,['llegada']],['Nico Williams','DEL',88,46,82,['desborde']],['Iñaki Williams','DEL',86,56,78,['velocidad']],['Guruzeta','DEL',82,48,72,['gol']],['Berenguer','DEL',82,58,78,['revulsivo']],['Muniain','MED',74,50,84,['capitán']],['Ander Herrera','MED',66,70,82,['toque']],['Paredes','DEF',48,80,62,['rotación']]]},
+{club:'Real Betis',era:'1996-97 · Alfonso y Finidi',players:[['Jaro','POR',5,80,64,['seguro']],['Jaime','DEF',58,76,66,['lateral']],['Vidákovic','DEF',50,84,64,['central']],['Ureña','DEF',46,78,60,['oficio']],['Luis Fernández','DEF',56,76,66,['banda']],['Alexis','MED',62,78,76,['equilibrio']],['Cañas','MED',56,78,70,['trabajo']],['Jarni','MED',82,70,84,['carril']],['Finidi','MED',84,58,82,['banda']],['Capi','MED',72,60,78,['talento']],['Alfonso','DEL',90,46,84,['estrella']],['Pier','DEL',78,48,70,['gol']],['Oli','DEL',76,46,66,['nueve']],['Ito','MED',64,70,72,['rotación']],['Ríos','DEF',46,76,60,['fondo']]]},
+{club:'Real Betis',era:'2021-22 · Copa del Rey',players:[['Bravo','POR',6,84,76,['veterano']],['Bellerín','DEF',68,74,76,['lateral']],['Pezzella','DEF',48,84,64,['central']],['Bartra','DEF',56,80,76,['salida']],['Álex Moreno','DEF',76,74,78,['profundidad']],['Guido Rodríguez','MED',54,86,76,['ancla']],['William Carvalho','MED',68,78,84,['pausa']],['Canales','MED',82,66,90,['director']],['Fekir','MED',86,54,90,['estrella']],['Juanmi','DEL',86,48,74,['gol']],['Borja Iglesias','DEL',84,50,74,['panda']],['Joaquín','MED',72,48,80,['leyenda']],['Rodri','MED',70,58,78,['cantera']],['Tello','DEL',78,44,74,['velocidad']],['Ruibal','DEL',70,64,70,['trabajo']]]},
+{club:'Real Sociedad',era:'1981-82 · campeón',players:[['Arconada','POR',6,94,72,['leyenda']],['Gorriz','DEF',52,86,66,['central']],['Kortabarria','DEF',50,84,66,['capitán']],['Olaizola','DEF',54,80,66,['oficio']],['Larrañaga','MED',58,82,76,['trabajo']],['Zamora','MED',72,78,84,['calidad']],['Periko Alonso','MED',68,80,84,['director']],['López Ufarte','DEL',86,52,82,['banda']],['Satrústegui','DEL',90,50,76,['killer']],['Bakero','MED',76,74,82,['joven']],['Uralde','DEL',82,48,70,['gol']],['Idígoras','DEL',78,50,68,['profundidad']],['Diego','MED',66,72,78,['toque']],['Celayeta','DEF',46,76,58,['rotación']]]},
+{club:'Real Sociedad',era:'2012-13 · Champions',players:[['Bravo','POR',6,84,72,['seguro']],['Carlos Martínez','DEF',62,76,70,['lateral']],['Iñigo Martínez','DEF',56,84,72,['central']],['Mikel González','DEF',48,80,62,['fiable']],['De la Bella','DEF',62,76,70,['fondo']],['Illarramendi','MED',60,80,84,['ancla']],['Xabi Prieto','MED',78,62,86,['clase']],['Zurutuza','MED',72,72,82,['toque']],['Griezmann','DEL',88,56,84,['estrella']],['Vela','DEL',90,48,86,['talento']],['Agirretxe','DEL',82,48,72,['nueve']],['Chory Castro','DEL',76,52,74,['banda']],['Pardo','MED',66,64,80,['cantera']],['Elustondo','MED',58,74,72,['rotación']],['Ansotegi','DEF',46,76,58,['fondo']]]},
+{club:'Real Sociedad',era:'2022-23 · Imanol Champions',players:[['Remiro','POR',6,86,72,['seguro']],['Gorosabel','DEF',62,76,72,['lateral']],['Le Normand','DEF',50,86,68,['central']],['Zubeldia','DEF',54,82,74,['salida']],['Aihen','DEF',58,76,70,['fondo']],['Zubimendi','MED',62,84,88,['ancla']],['Merino','MED',78,84,86,['todocampista']],['Brais Méndez','MED',80,66,86,['zurda']],['David Silva','MED',80,52,92,['mago']],['Kubo','DEL',84,54,84,['talento']],['Oyarzabal','DEL',86,58,84,['capitán']],['Sørloth','DEL',82,50,72,['nueve']],['Isak','DEL',86,46,78,['recuerdo']],['Barrene','DEL',78,50,78,['cantera']],['Carlos Fernández','DEL',74,48,68,['rotación']]]},
+{club:'Celta de Vigo',era:'2002-03 · Champions',players:[['Cavallero','POR',6,84,66,['seguro']],['Míchel Salgado','DEF',66,80,70,['lateral']],['Cáceres','DEF',48,82,60,['central']],['Berizzo','DEF',50,84,64,['líder']],['Juanfran','DEF',64,78,72,['carril']],['Luccin','MED',58,80,74,['físico']],['Vagner','MED',62,76,78,['orden']],['Mostovoi','MED',86,52,92,['zar']],['Karpin','MED',80,66,86,['carácter']],['Gustavo López','MED',80,60,82,['banda']],['Catanha','DEL',84,48,70,['gol']],['Edu','DEL',82,52,74,['movilidad']],['Jesuli','DEL',76,52,72,['banda']],['Giovanella','MED',56,76,72,['trabajo']],['Sylvinho','DEF',66,76,74,['lateral']]]},
+{club:'Celta de Vigo',era:'2016-17 · semifinal Europa League',players:[['Sergio Álvarez','POR',5,80,64,['cantera']],['Hugo Mallo','DEF',66,78,74,['capitán']],['Cabral','DEF',48,82,62,['central']],['Fontàs','DEF',54,78,74,['salida']],['Jonny','DEF',64,78,72,['lateral']],['Radoja','MED',56,78,76,['ancla']],['Tucu Hernández','MED',70,78,78,['llegada']],['Wass','MED',72,72,82,['polivalente']],['Orellana','MED',82,50,86,['fantasía']],['Iago Aspas','DEL',92,50,86,['estrella']],['Guidetti','DEL',80,52,70,['pelea']],['Sisto','DEL',78,46,76,['desborde']],['Beauvue','DEL',74,48,68,['rotación']],['Marcelo Díaz','MED',62,70,82,['toque']],['Sergi Gómez','DEF',48,78,62,['fondo']]]},
+{club:'Real Zaragoza',era:'1994-95 · Recopa',players:[['Cedrún','POR',5,82,64,['seguro']],['Belsué','DEF',58,78,66,['lateral']],['Aguado','DEF',50,84,62,['capitán']],['Cáceres','DEF',48,82,60,['central']],['Solana','DEF',60,76,68,['banda']],['Nayim','MED',78,62,82,['Wembley']],['Poyet','MED',76,78,80,['llegada']],['Aragón','MED',70,72,80,['toque']],['Higuera','DEL',82,54,74,['movilidad']],['Pardeza','DEL',80,50,72,['calidad']],['Esnáider','DEL',88,48,74,['killer']],['Dani García Lara','DEL',76,50,66,['rotación']],['Gay','MED',62,72,72,['trabajo']],['Belsué','DEF',58,78,66,['lateral']]]},
+{club:'Real Zaragoza',era:'2003-04 · Copa del Rey',players:[['Laínez','POR',5,80,64,['copero']],['Ponzio','DEF',60,80,74,['garra']],['Álvaro','DEF',48,80,60,['duro']],['Milito','DEF',56,86,72,['centralazo']],['Toledo','DEF',60,76,70,['lateral']],['Movilla','MED',62,76,80,['orden']],['Zapater','MED',58,78,76,['cantera']],['Cani','MED',78,58,84,['talento']],['Savio','MED',80,50,82,['zurda']],['Galletti','DEL',82,56,76,['finalista']],['Villa','DEL',90,46,78,['killer']],['Drulic','DEL',76,46,64,['rotación']],['Corona','MED',68,66,76,['toque']],['Soriano','MED',66,72,74,['trabajo']]]},
+{club:'RCD Mallorca',era:'1998-99 · final Recopa',players:[['Leo Franco','POR',5,82,64,['joven']],['Olaizola','DEF',56,78,66,['lateral']],['Nadal','DEF',54,84,70,['jerarquía']],['Marcelino','DEF',48,80,62,['central']],['Miquel Soler','DEF',60,78,70,['veterano']],['Engonga','MED',62,80,76,['equilibrio']],['Ibagaza','MED',78,52,86,['mago']],['Stanković','MED',76,60,80,['banda']],['Lauren','MED',74,76,78,['motor']],['Dani García','DEL',84,48,72,['gol']],['Eto’o','DEL',82,54,74,['joven']],['Biagini','DEL',78,46,66,['remate']],['Paunović','MED',72,58,76,['talento']],['Soler','DEF',58,76,68,['fondo']]]},
+{club:'RCD Mallorca',era:'2002-03 · Copa del Rey',players:[['Leo Franco','POR',5,84,66,['seguro']],['Campano','DEF',62,76,70,['lateral']],['Nadal','DEF',52,82,68,['veterano']],['Fernando Niño','DEF',48,80,60,['central']],['Poli','DEF',58,76,66,['oficio']],['Marcos','MED',66,72,76,['trabajo']],['Ibagaza','MED',80,52,88,['mago']],['Novo','MED',72,58,76,['banda']],['Riera','MED',76,54,78,['zurda']],['Eto’o','DEL',90,56,80,['estrella']],['Pandiani','DEL',84,58,66,['rifle']],['Carlos','DEL',76,46,66,['rotación']],['Paunović','MED',72,58,76,['talento']],['Campano','MED',68,70,74,['balón parado']]]},
+{club:'RCD Espanyol',era:'2006-07 · final UEFA',players:[['Kameni','POR',6,84,66,['reflejos']],['Zabaleta','DEF',68,80,72,['garra']],['Jarque','DEF',50,84,66,['capitán']],['Torrejón','DEF',46,78,60,['cantera']],['Chica','DEF',58,76,66,['lateral']],['Moisés Hurtado','MED',56,80,74,['ancla']],['De la Peña','MED',76,52,90,['pase']],['Luis García','MED',82,58,82,['calidad']],['Riera','MED',80,54,80,['zurda']],['Tamudo','DEL',88,56,78,['leyenda']],['Pandiani','DEL',82,58,66,['rifle']],['Corominas','DEL',76,58,70,['trabajo']],['Lola Smiljanić','MED',60,74,72,['físico']],['Clemente Rodríguez','DEF',56,76,66,['fondo']]]},
+{club:'CA Osasuna',era:'2005-06 · Champions',players:[['Ricardo','POR',5,82,64,['seguro']],['Izquierdo','DEF',56,78,66,['lateral']],['Cuéllar','DEF',48,82,60,['central']],['Cruchaga','DEF',46,80,60,['capitán']],['Clavero','DEF',58,76,66,['oficio']],['Puñal','MED',56,82,74,['jefe']],['Raúl García','MED',76,80,78,['llegada']],['Delporte','MED',78,58,80,['banda']],['Valdo','MED',74,62,76,['velocidad']],['Milosevic','DEL',84,44,72,['veterano']],['Webó','DEL',80,56,68,['potencia']],['Romeo','DEL',76,46,64,['rotación']],['Muñoz','MED',62,74,72,['trabajo']],['Josetxo','DEF',46,78,58,['fondo']]]},
+{club:'Getafe CF',era:'2007-08 · cuartos UEFA',players:[['Pato Abbondanzieri','POR',6,84,66,['experiencia']],['Cortés','DEF',56,76,66,['lateral']],['Cata Díaz','DEF',48,84,60,['duro']],['Belenguer','DEF',46,80,58,['veterano']],['Contra','DEF',64,76,72,['carril']],['Casquero','MED',68,76,80,['orden']],['Celestini','MED',56,80,72,['trabajo']],['Granero','MED',76,60,84,['talento']],['Pablo Hernández','MED',78,56,80,['banda']],['Manu del Moral','DEL',80,52,74,['movilidad']],['Uche','DEL',82,48,70,['velocidad']],['Albín','DEL',78,46,72,['zurda']],['De la Red','MED',72,72,82,['toque']],['Mario Cotelo','MED',66,70,74,['rotación']]]},
+{club:'Málaga CF',era:'2012-13 · cuartos Champions',players:[['Caballero','POR',6,88,68,['porterazo']],['Gámez','DEF',60,78,70,['lateral']],['Demichelis','DEF',52,84,72,['jerarquía']],['Weligton','DEF',48,82,60,['duro']],['Monreal','DEF',66,80,76,['completo']],['Camacho','MED',58,82,76,['ancla']],['Toulalan','MED',62,86,82,['clase defensiva']],['Isco','MED',86,54,92,['estrella']],['Joaquín','MED',80,56,84,['banda']],['Portillo','MED',72,58,82,['cantera']],['Saviola','DEL',82,46,78,['movilidad']],['Santa Cruz','DEL',80,50,70,['nueve']],['Eliseu','MED',76,64,76,['velocidad']],['Duda','MED',74,58,80,['zurda']],['Iturra','MED',56,80,72,['trabajo']]]},
+{club:'Rayo Vallecano',era:'2012-13 · Paco Jémez',players:[['Rubén','POR',5,80,64,['seguro']],['Tito','DEF',58,76,68,['lateral']],['Gálvez','DEF',50,78,70,['salida']],['Amat','DEF',52,80,72,['joven']],['Casado','DEF',60,74,68,['fondo']],['Javi Fuego','MED',58,82,76,['ancla']],['Trashorras','MED',70,68,86,['director']],['Piti','MED',82,56,82,['estrella']],['Lass Bangoura','DEL',80,44,72,['velocidad']],['Leo Baptistao','DEL',84,48,76,['explosión']],['Delibasic','DEL',78,46,66,['remate']],['Chori Domínguez','MED',76,50,82,['talento']],['Adrián Embarba','DEL',70,48,70,['cantera']],['José Carlos','MED',72,54,76,['zurda']]]},
+{club:'Granada CF',era:'2020-21 · Europa League',players:[['Rui Silva','POR',6,84,66,['seguro']],['Foulquier','DEF',64,78,70,['lateral']],['Germán','DEF',50,82,62,['central']],['Domingos Duarte','DEF',52,82,66,['fiable']],['Carlos Neva','DEF',62,76,70,['cantera']],['Gonalons','MED',58,80,76,['orden']],['Yangel Herrera','MED',74,82,78,['llegada']],['Milla','MED',70,72,82,['toque']],['Kenedy','DEL',80,48,76,['zurda']],['Machís','DEL',82,50,76,['velocidad']],['Soldado','DEL',80,52,72,['veterano']],['Jorge Molina','DEL',78,50,70,['colmillo']],['Puertas','DEL',76,58,72,['trabajo']],['Montoro','MED',68,70,80,['balón parado']]]},
+{club:'Girona FC',era:'2023-24 · Champions',players:[['Gazzaniga','POR',6,82,70,['seguro']],['Yan Couto','DEF',76,72,80,['carril']],['Eric García','DEF',58,78,78,['salida']],['David López','DEF',54,80,76,['veterano']],['Miguel Gutiérrez','DEF',78,74,84,['profundidad']],['Aleix García','MED',76,74,88,['director']],['Yangel Herrera','MED',74,82,78,['llegada']],['Iván Martín','MED',74,68,84,['toque']],['Sávio','DEL',86,46,82,['desborde']],['Tsygankov','DEL',84,48,82,['zurda']],['Dovbyk','DEL',90,48,76,['pichichi']],['Stuani','DEL',80,46,70,['remate']],['Portu','DEL',78,58,74,['energía']],['Blind','DEF',58,80,84,['salida']]]},
+{club:'Real Madrid',era:'2023-24 · Liga + Champions',players:[['Lunin','POR',5,86,70,['temporada clave']],['Carvajal','DEF',72,84,78,['finalista']],['Rüdiger','DEF',50,90,66,['muro']],['Nacho','DEF',50,82,68,['capitán']],['Mendy','DEF',58,84,68,['defensa']],['Kroos','MED',68,72,96,['último baile']],['Valverde','MED',78,84,86,['motor']],['Camavinga','MED',72,80,86,['energía']],['Tchouaméni','MED',64,86,82,['ancla']],['Bellingham','MED',92,78,92,['MVP liga']],['Vinícius','DEL',96,48,88,['decisivo']],['Rodrygo','DEL',88,50,82,['calidad']],['Joselu','DEL',82,48,70,['héroe']],['Brahim','DEL',84,48,82,['revulsivo']],['Modrić','MED',70,72,90,['leyenda']]]},
+{club:'FC Barcelona',era:'2022-23 · Xavi campeón',players:[['Ter Stegen','POR',6,94,78,['Zamora']],['Koundé','DEF',64,86,78,['central-lateral']],['Araújo','DEF',56,92,70,['muro']],['Christensen','DEF',54,86,74,['salida']],['Balde','DEF',76,76,80,['profundidad']],['Busquets','MED',54,82,90,['director']],['De Jong','MED',76,78,90,['conducción']],['Pedri','MED',78,68,92,['talento']],['Gavi','MED',72,82,84,['intensidad']],['Raphinha','DEL',84,58,80,['banda']],['Lewandowski','DEL',94,42,78,['pichichi']],['Dembélé','DEL',86,42,82,['desborde']],['Ansu Fati','DEL',78,42,74,['gol']],['Ferran Torres','DEL',80,50,76,['movilidad']],['Jordi Alba','DEF',74,74,82,['veterano']]]},
+{club:'Real Madrid',era:'2006-07 · Capello remontada',players:[['Casillas','POR',6,93,72,['santo']],['Salgado','DEF',58,78,66,['veterano']],['Cannavaro','DEF',48,90,64,['balón de oro']],['Sergio Ramos','DEF',70,86,74,['joven líder']],['Roberto Carlos','DEF',78,76,78,['leyenda']],['Emerson','MED',52,82,74,['físico']],['Diarra','MED',58,84,74,['muro']],['Guti','MED',78,52,90,['pase']],['Beckham','MED',82,58,88,['centro']],['Raúl','DEL',84,60,80,['capitán']],['Van Nistelrooy','DEL',96,40,72,['pichichi']],['Robinho','DEL',86,42,84,['desborde']],['Higuaín','DEL',78,44,70,['joven']],['Reyes','DEL',80,50,78,['final liga']],['Helguera','DEF',50,80,72,['oficio']]]},
+{club:'FC Barcelona',era:'1988-89 · Cruyff Recopa',players:[['Zubizarreta','POR',6,88,70,['seguro']],['Aloisio','DEF',48,84,66,['central']],['Milla','MED',62,78,86,['director']],['Roberto','DEF',58,78,68,['lateral']],['Urbano','DEF',48,80,62,['oficio']],['Eusebio Sacristán','MED',66,74,82,['control']],['Amor','MED',70,78,82,['trabajo']],['Bakero','MED',78,78,84,['llegada']],['Begiristain','DEL',82,50,78,['técnica']],['Lineker','DEL',88,42,72,['gol']],['Salinas','DEL',82,48,68,['remate']],['Solèr','DEF',56,76,66,['fondo']],['Rekarte','DEF',54,76,64,['rotación']],['Carrasco','DEL',80,48,76,['banda']]]},
+{club:'Atlético de Madrid',era:'2009-10 · Europa League',players:[['De Gea','POR',6,86,70,['joven crack']],['Ujfalusi','DEF',56,82,66,['oficio']],['Domínguez','DEF',48,82,64,['cantera']],['Perea','DEF',48,80,60,['velocidad']],['Antonio López','DEF',62,78,70,['capitán']],['Assunção','MED',52,84,74,['ancla']],['Raúl García','MED',74,78,76,['llegada']],['Simao','MED',82,58,84,['banda']],['Reyes','MED',80,52,84,['talento']],['Jurado','MED',76,54,84,['pase']],['Forlán','DEL',94,46,82,['Bota de Oro']],['Agüero','DEL',92,48,86,['estrella']],['Diego Costa','DEL',78,62,68,['joven bestia']],['Tiago','MED',64,78,80,['orden']],['Valera','DEF',54,76,64,['fondo']]]},
+{club:'Valencia CF',era:'2008-09 · Villa-Mata-Silva',players:[['César','POR',5,82,66,['veterano']],['Miguel','DEF',66,76,74,['lateral']],['Albiol','DEF',54,86,72,['central']],['Marchena','DEF',54,84,72,['carácter']],['Moretti','DEF',52,78,66,['oficio']],['Albelda','MED',48,84,72,['ancla']],['Baraja','MED',66,76,78,['veterano']],['Banega','MED',72,64,86,['talento']],['Joaquín','MED',80,54,82,['banda']],['Silva','MED',86,52,92,['mago']],['Mata','DEL',88,54,86,['llegada']],['Villa','DEL',96,46,82,['killer']],['Pablo Hernández','MED',78,56,80,['banda']],['Morientes','DEL',78,44,68,['remate']],['Vicente','MED',74,48,76,['calidad']]]},
+{club:'Deportivo',era:'1994-95 · Copa del Rey',players:[['Liaño','POR',6,88,66,['Zamora']],['Djukic','DEF',52,88,68,['jerarquía']],['Ribera','DEF',52,80,66,['oficio']],['Voro','DEF',48,82,62,['central']],['Nando','DEF',56,78,68,['fondo']],['Mauro Silva','MED',50,92,82,['élite']],['Donato','MED',64,86,78,['llegada']],['Fran','MED',74,62,86,['cantera']],['Bebeto','DEL',94,42,82,['killer']],['Makaay','DEL',84,40,68,['joven']],['Manjarín','DEL',78,52,70,['banda']],['Claudio','DEL',76,48,68,['rotación']],['Alfredo','MED',66,70,76,['trabajo']],['Ribera II','DEF',48,76,60,['fondo']]]},
+{club:'Sevilla FC',era:'2022-23 · Europa League',players:[['Bono','POR',6,86,70,['copero']],['Jesús Navas','DEF',72,76,80,['capitán']],['Badé','DEF',50,84,66,['central']],['Gudelj','DEF',56,80,74,['salida']],['Acuña','DEF',74,78,80,['campeón mundo']],['Fernando','MED',54,84,76,['ancla']],['Rakitic','MED',72,70,86,['director']],['Óliver Torres','MED',72,58,84,['toque']],['Ocampos','DEL',84,64,80,['carácter']],['Bryan Gil','DEL',78,48,78,['desborde']],['En-Nesyri','DEL',86,54,72,['goles europeos']],['Lamela','DEL',80,52,78,['calidad']],['Suso','DEL',76,42,82,['zurda']],['Joan Jordán','MED',68,70,80,['rotación']],['Nianzou','DEF',46,78,60,['fondo']]]},
+{club:'Real Sociedad',era:'1997-98 · Kovacevic-De Pedro',players:[['Alberto','POR',5,82,64,['seguro']],['Aranzabal','DEF',62,80,72,['lateral']],['Loren','DEF',48,84,64,['central']],['Pikabea','DEF',46,80,60,['oficio']],['Fuentes','DEF',58,76,68,['fondo']],['Idiakez','MED',70,72,82,['toque']],['De Pedro','MED',78,58,86,['zurda']],['Karpin','MED',82,66,86,['carácter']],['Xabi Alonso','MED',64,72,84,['joven']],['Kovacevic','DEL',90,52,74,['remate']],['Nihat','DEL',82,50,74,['joven']],['Darko','DEL',82,50,74,['nueve']],['Gómez','MED',64,70,72,['trabajo']],['López Rekarte','DEF',58,76,66,['cantera']]]},
+{club:'Real Betis',era:'2012-13 · Pepe Mel Europa',players:[['Adrián','POR',5,82,64,['seguro']],['Chica','DEF',56,76,66,['lateral']],['Paulao','DEF',48,82,60,['central']],['Amaya','DEF',46,80,60,['duro']],['Nacho','DEF',58,76,68,['oficio']],['Beñat','MED',76,70,88,['director']],['Cañas','MED',54,80,72,['trabajo']],['Salva Sevilla','MED',72,62,82,['toque']],['Rubén Castro','DEL',88,46,78,['killer']],['Jorge Molina','DEL',82,52,72,['nueve']],['Joel Campbell','DEL',80,50,76,['desborde']],['Pabón','DEL',82,46,74,['gol']],['Juan Carlos','MED',74,58,76,['banda']],['Nono','MED',62,70,72,['cantera']]]},
+{club:'Levante UD',era:'2011-12 · Europa League',players:[['Munúa','POR',5,82,64,['seguro']],['Juanfran','DEF',58,78,66,['veterano']],['Ballesteros','DEF',42,84,56,['capitán']],['Nano','DEF',46,80,60,['central']],['Javi Venta','DEF',56,76,66,['lateral']],['Iborra','MED',68,80,76,['llegada']],['Barkero','MED',78,62,84,['zurda']],['Xavi Torres','MED',58,78,74,['trabajo']],['Valdo','MED',74,62,76,['banda']],['Koné','DEL',86,46,72,['explosión']],['Juanlu','MED',76,58,78,['gol desde banda']],['Rubén Suárez','DEL',76,44,74,['calidad']],['El Zhar','DEL',72,50,70,['rotación']],['Del Horno','DEF',54,76,64,['fondo']]]},
+{club:'Alavés',era:'2000-01 · final UEFA',players:[['Herrera','POR',5,82,64,['seguro']],['Contra','DEF',72,76,78,['carril']],['Téllez','DEF',46,80,58,['central']],['Karmona','DEF',46,82,58,['capitán']],['Geli','DEF',58,78,66,['lateral']],['Desio','MED',56,80,72,['trabajo']],['Tomic','MED',70,62,82,['toque']],['Jordi Cruyff','MED',76,52,82,['talento']],['Astudillo','MED',66,76,74,['equilibrio']],['Javi Moreno','DEL',88,46,72,['killer']],['Iván Alonso','DEL',82,48,70,['remate']],['Magno','DEL',76,46,70,['banda']],['Pablo Gómez','MED',70,60,76,['rotación']],['Eggen','DEF',44,78,58,['fondo']]]},
+{club:'Racing Santander',era:'2007-08 · Marcelino UEFA',players:[['Toño','POR',5,82,64,['seguro']],['Pinillos','DEF',56,78,66,['lateral']],['Garay','DEF',54,86,68,['central goleador']],['Oriol','DEF',46,80,60,['fiable']],['Ayoze','DEF',58,76,66,['banda']],['Colsa','MED',64,78,76,['equilibrio']],['Duscher','MED',56,82,72,['muro']],['Jorge López','MED',78,60,82,['calidad']],['Óscar Serrano','MED',76,58,78,['banda']],['Munitis','DEL',80,56,78,['movilidad']],['Tchité','DEL',82,46,70,['gol']],['Smolarek','DEL',78,44,70,['rotación']],['Pablo Álvarez','MED',72,58,76,['trabajo']],['Luis Fernández','DEF',54,76,64,['fondo']]]},
+{club:'UD Las Palmas',era:'2001-02 · Valerón-Viera cantera',players:[['Nacho González','POR',5,80,64,['seguro']],['Ángel Sánchez','DEF',58,76,66,['lateral']],['Samuél','DEF',46,78,58,['central']],['Olias','DEF',46,78,58,['oficio']],['Orlando','DEF',56,74,66,['fondo']],['Josico','MED',54,80,72,['trabajo']],['Jorge Larena','MED',72,62,82,['talento']],['Vinny Samways','MED',64,78,76,['orden']],['Guayre','DEL',80,50,76,['velocidad']],['Rubén Castro','DEL',78,44,72,['joven gol']],['Orlando Suárez','DEL',76,48,70,['banda']],['Álvaro','DEL',74,46,68,['rotación']],['Pablo Lago','MED',68,60,76,['toque']],['Schiavi','DEF',48,78,60,['central']]]},
+{club:'SD Eibar',era:'2017-18 · Mendilibar',players:[['Dmitrović','POR',5,82,66,['seguro']],['Capa','DEF',70,76,74,['lateral']],['Ramis','DEF',46,82,60,['central']],['Arbilla','DEF',56,80,70,['polivalente']],['José Ángel','DEF',66,76,74,['lateral']],['Dani García','MED',54,82,74,['ancla']],['Joan Jordán','MED',72,72,82,['toque']],['Inui','MED',80,54,82,['desborde']],['Orellana','MED',82,50,86,['fantasía']],['Pedro León','MED',78,54,82,['golpeo']],['Charles','DEL',84,48,70,['gol']],['Kike García','DEL',80,54,70,['trabajo']],['Sergi Enrich','DEL',78,56,72,['pelea']],['Escalante','MED',60,78,74,['físico']]]},
+{club:'Osasuna',era:'2022-23 · final Copa',players:[['Sergio Herrera','POR',5,84,66,['seguro']],['Nacho Vidal','DEF',56,76,66,['lateral']],['David García','DEF',48,86,62,['líder']],['Aridane','DEF',44,80,58,['central']],['Manu Sánchez','DEF',62,74,70,['profundidad']],['Torró','MED',56,82,74,['ancla']],['Moncayola','MED',70,76,82,['cantera']],['Moi Gómez','MED',74,64,84,['toque']],['Aimar Oroz','MED',76,62,84,['talento']],['Chimy Ávila','DEL',84,58,76,['colmillo']],['Budimir','DEL',82,46,70,['remate']],['Abde','DEL',82,44,78,['desborde']],['Rubén García','MED',74,58,80,['zurda']],['Kike García','DEL',78,54,68,['pelea']]]},
+{club:'Tenerife',era:'1992-93 · equipo revelación',players:[['Agustín','POR',5,82,64,['seguro']],['Toño','DEF',56,76,66,['lateral']],['César Gómez','DEF',48,82,60,['central']],['Dertycia','DEL',84,44,70,['gol']],['Chano','MED',72,72,82,['director']],['Redondo','MED',70,84,88,['elegancia']],['Felipe Miñambres','MED',78,62,84,['calidad']],['Pizzi','DEL',82,44,70,['joven gol']],['Pier','DEL',78,48,70,['movilidad']],['Juanele','DEL',80,50,76,['talento']],['Ezequiel Castillo','DEF',46,78,60,['oficio']],['Luis Delgado','DEF',52,76,64,['fondo']],['Quique Medina','MED',64,72,74,['trabajo']],['Dani','DEL',76,46,66,['rotación']]]}
+,
+{club:'FC Barcelona',era:'2004-05 · Rijkaard campeón',players:[['Valdés','POR',6,82,70,['joven seguro']],['Belletti','DEF',66,76,72,['lateral']],['Puyol','DEF',56,92,72,['capitán']],['Márquez','DEF',62,86,82,['salida']],['Van Bronckhorst','DEF',66,78,78,['lateral']],['Edmílson','MED',54,82,76,['ancla']],['Deco','MED',82,78,90,['motor']],['Xavi','MED',70,72,92,['control']],['Iniesta','MED',74,60,86,['joven magia']],['Ronaldinho','DEL',96,44,94,['balón de oro']],['Eto’o','DEL',92,62,78,['killer']],['Giuly','DEL',80,58,76,['ruptura']],['Larsson','DEL',82,52,78,['lujo']],['Motta','MED',60,78,74,['físico']],['Oleguer','DEF',48,76,60,['fondo']]]},
+{club:'Real Madrid',era:'2002-03 · Ronaldo campeón',players:[['Casillas','POR',7,93,72,['santo']],['Salgado','DEF',64,82,70,['intenso']],['Hierro','DEF',58,84,76,['líder']],['Helguera','DEF',58,82,76,['salida']],['Roberto Carlos','DEF',88,78,82,['cañón']],['Makelele','MED',50,92,78,['equilibrio']],['Figo','MED',88,58,90,['balón de oro']],['Zidane','MED',90,62,96,['elegancia']],['Guti','MED',80,50,88,['pase imposible']],['Raúl','DEL',91,62,84,['leyenda']],['Ronaldo','DEL',98,36,86,['fenómeno']],['Morientes','DEL',82,48,72,['remate']],['Solari','MED',74,66,80,['rotación lujo']],['McManaman','MED',74,60,78,['clase']],['Pavón','DEF',44,72,58,['cantera']]]},
+{club:'Atlético de Madrid',era:'2023-24 · Griezmann total',players:[['Oblak','POR',6,90,72,['muro']],['Nahuel Molina','DEF',70,78,76,['carrilero']],['Witsel','DEF',56,84,80,['salida']],['Giménez','DEF',52,86,66,['garra']],['Hermoso','DEF',62,82,76,['salida']],['Lino','MED',82,62,82,['banda']],['Koke','MED',70,82,88,['capitán']],['De Paul','MED',76,78,86,['motor']],['Llorente','MED',82,78,84,['ida y vuelta']],['Griezmann','DEL',94,62,90,['estrella']],['Morata','DEL',86,54,74,['nueve']],['Correa','DEL',80,56,78,['agitador']],['Memphis','DEL',82,44,78,['calidad']],['Riquelme','MED',76,58,80,['cantera']],['Barrios','MED',68,74,82,['talento']]]},
+{club:'Valencia CF',era:'2010-11 · Emery Champions',players:[['Guaita','POR',5,84,66,['cantera']],['Miguel','DEF',62,76,72,['veterano']],['Rami','DEF',50,84,64,['central']],['Ricardo Costa','DEF',48,80,62,['oficio']],['Mathieu','DEF',64,78,72,['físico']],['Topal','MED',54,82,74,['ancla']],['Banega','MED',76,66,88,['talento']],['Tino Costa','MED',76,70,84,['golpeo']],['Joaquín','MED',80,56,82,['banda']],['Mata','DEL',90,54,88,['estrella']],['Soldado','DEL',90,48,74,['killer']],['Aduriz','DEL',84,54,72,['remate']],['Pablo Hernández','MED',78,56,80,['banda']],['Vicente','MED',70,46,74,['veterano']],['Albelda','MED',46,82,70,['veterano']]]},
+{club:'Sevilla FC',era:'2010-11 · Kanouté-Navas',players:[['Palop','POR',6,84,68,['veterano']],['Cáceres','DEF',58,82,70,['polivalente']],['Escudé','DEF',50,82,66,['elegante']],['Fazio','DEF',50,82,66,['altura']],['Fernando Navarro','DEF',58,78,68,['oficio']],['Zokora','MED',56,82,74,['físico']],['Rakitic','MED',78,68,88,['director']],['Renato','MED',72,72,78,['llegada']],['Jesús Navas','MED',82,60,82,['banda']],['Perotti','MED',80,56,82,['desborde']],['Kanouté','DEL',88,58,82,['delanterazo']],['Luis Fabiano','DEL',86,48,72,['gol']],['Negredo','DEL',86,52,74,['nueve']],['Capel','MED',74,58,74,['banda']],['Romaric','MED',68,72,78,['toque']]]},
+{club:'Villarreal CF',era:'2015-16 · Marcelino Champions',players:[['Areola','POR',6,84,68,['seguro']],['Mario Gaspar','DEF',64,80,72,['lateral']],['Musacchio','DEF',50,84,66,['central']],['Víctor Ruiz','DEF',50,82,68,['salida']],['Jaume Costa','DEF',62,78,72,['lateral']],['Bruno Soriano','MED',62,82,88,['director']],['Trigueros','MED',72,70,86,['toque']],['Jonathan dos Santos','MED',70,70,84,['orden']],['Denis Suárez','MED',78,56,86,['talento']],['Bakambu','DEL',88,48,74,['ruptura']],['Soldado','DEL',82,52,78,['oficio']],['Adrián','DEL',78,50,74,['movilidad']],['Castillejo','DEL',78,50,78,['desborde']],['Nahuel','DEL',74,48,72,['rotación']],['Bailly','DEF',48,82,62,['físico']]]},
+{club:'Athletic Club',era:'1997-98 · subcampeón',players:[['Iru','POR',5,82,64,['seguro']],['Larrainzar','DEF',56,78,66,['lateral']],['Alkorta','DEF',50,84,66,['jerarquía']],['Karanka','DEF',50,82,66,['central']],['Larrazabal','DEF',66,76,72,['balón parado']],['Urrutia','MED',58,82,76,['ancla']],['Guerrero','MED',84,62,88,['estrella']],['Etxeberria','DEL',88,56,82,['banda']],['Urzaiz','DEL',86,54,72,['nueve']],['Ziganda','DEL',82,50,70,['remate']],['Ezquerro','DEL',78,52,74,['movilidad']],['Alkiza','MED',66,74,78,['toque']],['Carlos García','DEF',48,80,60,['fondo']],['Lasa','DEF',56,76,66,['oficio']]]},
+{club:'Celta de Vigo',era:'1998-99 · EuroCelta',players:[['Pinto','POR',5,82,64,['joven']],['Míchel Salgado','DEF',68,80,70,['lateral']],['Cáceres','DEF',48,82,60,['central']],['Djorović','DEF',48,82,62,['central']],['Juanfran','DEF',64,78,72,['carril']],['Makelele','MED',50,88,76,['muro']],['Mazinho','MED',70,74,84,['toque']],['Karpin','MED',82,66,86,['carácter']],['Mostovoi','MED',86,52,92,['zar']],['Gustavo López','MED',80,60,82,['banda']],['Revivo','DEL',82,46,76,['talento']],['Sánchez','DEL',80,50,70,['gol']],['Catanha','DEL',82,48,70,['nueve']],['Giovanella','MED',56,76,72,['trabajo']],['Velasco','DEF',54,76,64,['fondo']]]},
+{club:'Espanyol',era:'1999-00 · Copa del Rey',players:[['Mora','POR',5,82,64,['seguro']],['Cristóbal','DEF',56,78,66,['lateral']],['Pochettino','DEF',50,84,66,['jefe']],['Soldevilla','DEF',48,80,62,['central']],['Capdevila','DEF',66,78,74,['joven completo']],['Roger','MED',74,68,84,['toque']],['De la Peña','MED',78,52,90,['pase']],['Sergio','MED',68,76,80,['equilibrio']],['Tamudo','DEL',88,56,78,['leyenda']],['Velamazán','MED',76,58,80,['llegada']],['Benítez','DEL',78,48,70,['gol']],['Posse','DEL',76,50,70,['trabajo']],['Navas','MED',68,70,76,['rotación']],['Arteaga','MED',70,58,76,['banda']]]},
+{club:'Real Madrid',era:'1994-95 · Valdano campeón',players:[['Buyo','POR',6,86,66,['veterano']],['Chendo','DEF',58,82,66,['lateral']],['Hierro','DEF',64,88,78,['líder']],['Sanchís','DEF',52,84,68,['central']],['Miquel Soler','DEF',60,76,70,['lateral']],['Redondo','MED',66,88,92,['elegancia']],['Laudrup','MED',84,54,92,['genio']],['Luis Enrique','MED',80,74,84,['llegada']],['Amavisca','MED',78,58,80,['banda']],['Raúl','DEL',84,54,80,['joven leyenda']],['Zamorano','DEL',94,50,74,['pichichi']],['Míchel','MED',76,58,82,['veterano']],['Butragueño','DEL',78,40,76,['veterano']],['Alkorta','DEF',50,82,64,['oficio']]]},
+{club:'FC Barcelona',era:'1973-74 · Cruyff campeón',players:[['Sadurní','POR',6,86,66,['seguro']],['Rifé','DEF',58,82,66,['lateral']],['Migueli','DEF',52,88,66,['tarzán']],['De la Cruz','DEF',50,84,64,['central']],['Torres','DEF',56,80,66,['oficio']],['Juan Carlos Pérez','MED',70,78,82,['llegada']],['Asensi','MED',76,80,86,['calidad']],['Costas','MED',62,78,76,['trabajo']],['Sotil','DEL',86,46,82,['talento']],['Cruyff','DEL',98,52,96,['genio total']],['Marcial','DEL',84,48,80,['clase']],['Rexach','DEL',86,46,82,['zurda']],['Pérez','MED',64,74,74,['plantilla']],['Tomé','DEF',50,76,60,['fondo']]]},
+{club:'Atlético de Madrid',era:'1976-77 · Luis campeón',players:[['Reina','POR',6,86,66,['seguro']],['Marcelino','DEF',56,80,66,['lateral']],['Leal','DEF',50,84,64,['central']],['Capón','DEF',54,82,66,['defensa']],['Eusebio Bejarano','DEF',54,80,66,['oficio']],['Adelardo','MED',70,80,82,['leyenda']],['Benegas','MED',62,78,76,['trabajo']],['Rubén Cano','DEL',88,48,74,['goleador']],['Leivinha','DEL',88,46,82,['clase']],['Ayala','DEL',84,52,78,['ratón']],['Bermejo','MED',68,72,76,['toque']],['Luís Pereira','DEF',52,86,66,['centralazo']],['Aguilar','DEL',78,48,70,['rotación']],['Alberto','MED',64,74,74,['fondo']]]},
+{club:'Valencia CF',era:'1970-71 · Di Stéfano campeón',players:[['Abelardo González','POR',6,86,66,['seguro']],['Tatono','DEF',56,80,66,['lateral']],['Aníbal','DEF',50,84,64,['central']],['Sol','DEF',54,86,68,['defensa']],['Antón','DEF',54,80,66,['oficio']],['Claramunt','MED',82,76,88,['cerebro']],['Paquito','MED',70,78,80,['equilibrio']],['Barrachina','MED',68,74,78,['trabajo']],['Sergio','DEL',84,48,74,['gol']],['Forment','DEL',82,46,72,['nueve']],['Valdez','DEL',86,46,76,['remate']],['Poli','MED',66,72,76,['plantilla']],['Jara','DEL',78,46,70,['rotación']],['Voro','DEF',48,76,60,['fondo']]]},
+{club:'Real Sociedad',era:'1980-81 · campeón invicto parcial',players:[['Arconada','POR',6,94,72,['leyenda']],['Celayeta','DEF',48,78,60,['lateral']],['Gorriz','DEF',52,86,66,['central']],['Kortabarria','DEF',50,84,66,['capitán']],['Olaizola','DEF',54,80,66,['oficio']],['Larrañaga','MED',58,82,76,['trabajo']],['Zamora','MED',72,78,84,['calidad']],['Periko Alonso','MED',68,80,84,['director']],['López Ufarte','DEL',86,52,82,['banda']],['Satrústegui','DEL',90,50,76,['killer']],['Idígoras','DEL',78,50,68,['profundidad']],['Uralde','DEL',80,48,70,['gol']],['Diego','MED',66,72,78,['toque']],['Bakero','MED',72,72,80,['joven']]]}
+
+
+
+];
+
+
+const baseSlots=['POR','DEF','MED','DEL'];
+const refSlots=['REF_DEF','REF_MED','REF_DEL'];
+const slots=[...baseSlots,...refSlots];
+let team=[],current=null,used=new Set(),usedNames=new Set(),rerolls=2,selected=null, squadBag=[], lastSeason=null;
+let activeBalance='f';
+const balanceProfiles={
+ f:{label:'v35 final',desc:'Balance final: menos empates tontos, más pegada para ataques élite, defensa menos inflada y 38-0 reservado a combinaciones absurdas.',A:1.045,D:.948,C:1.018,powerAdd:.95,midLift:1.55,eliteLift:.55,rivalShift:-0.35,edgeAdd:.18,floorBoost:.45,lossRelief:.35,goalFor:.16,goalAgainst:.022,hofMin:70}
+};
+function balanceProfile(){ return balanceProfiles.f; }
+function updateBalanceHelp(){ const help=document.getElementById('balanceHelp'); if(help) help.innerHTML='<span class="balanceTag">'+balanceProfile().label+':</span> '+balanceProfile().desc; }
+function applyBalanceProfile(metrics){
+ const b=balanceProfile();
+ let {A,D,C,power,carry,coreQuality,decentLines,eliteSig}=metrics;
+ const originalPower=power;
+ A*=b.A; D*=b.D; C*=b.C;
+ const midBand=Math.max(0,Math.min(1,(originalPower-61)/15))*Math.max(0,Math.min(1,(78-originalPower)/13));
+ const eliteBand=Math.max(0,Math.min(1,(originalPower-78)/12));
+ const structure=(decentLines>=4?1:decentLines===3?.50:.10);
+ const attackIdentity=Math.max(0,A-76)*.035 + Math.max(0,carry-6)*.10;
+ const controlIdentity=Math.max(0,C-80)*.018;
+ const starIdentity = eliteSig ? Math.min(4.2, Math.max(0,eliteSig.raw-16)*.20 + (eliteSig.sPlus>=1&&eliteSig.a>=3?1.0:0) + (eliteSig.s>=3?.45:0)) : 0;
+ power += b.powerAdd + b.midLift*midBand*structure + b.eliteLift*eliteBand + attackIdentity + controlIdentity + starIdentity;
+ // Los equipos con muchísimo CONTROL pero poca amenaza real no deben convertirse automáticamente en campeones.
+ if(C>90 && A<79) power -= Math.min(7.5,(C-90)*.55 + (79-A)*.18 + 1.8);
+ // Los proyectos sin pegada suficiente pueden competir, pero no rascar 70-80 sólo por defensa correcta.
+ if(A<68 && C<76) power -= Math.min(6.5,(68-A)*.35 + (76-C)*.18 + 1.5);
+ if(D>=80 && A<68 && C<76) power += 2.6;
+ // Las élites absolutas sí deben tener techo de 95-105 si la estructura acompaña.
+ if(carry>=10 && A>=84 && C>=84) power += Math.min(3.4,(carry-9.5)*.30 + (A-84)*.12 + (C-84)*.05);
+ if(decentLines>=3 && carry>=5 && A>=70) power=Math.max(power, 67.2 + Math.min(4.8,(coreQuality-72)*.25) + Math.min(2.8,(carry-5)*.24));
+ if(originalPower<76 && power>77) power=77+(power-77)*.30;
+ if(originalPower<70 && power>73) power=73+(power-73)*.45;
+ A=Math.max(25,Math.min(99,A)); D=Math.max(25,Math.min(99,D)); C=Math.max(25,Math.min(99,C));
+ return {...metrics,A,D,C,power,balanceMode:'f'};
+}
+
+const $=id=>document.getElementById(id);
+const multi={
+ 'Cruyff':['DEL','MED'], 'Luis Enrique':['MED','DEL'], 'Laudrup':['MED','DEL'], 'Jarni':['MED','DEF'], 'Mata':['DEL','MED'], 'Sotil':['DEL','MED'], 'Leivinha':['DEL','MED'], 'Rexach':['DEL','MED'], 'Karpin':['MED','DEL'], 'Mostovoi':['MED','DEL'], 'Etxeberria':['DEL','MED'], 'Guerrero':['MED','DEL'], 'De la Peña':['MED','DEL'], 'Riquelme':['MED','DEL'], 'Bellingham':['MED','DEL'], 'Vinícius':['DEL','MED'], 'Rakitic':['MED','DEL'], 'Ocampos':['DEL','MED'], 'Dani Alves':['DEF','MED'], 'Marcelo':['DEF','MED'], 'Roberto Carlos':['DEF','MED'], 'Adriano':['DEF','MED'], 'Capdevila':['DEF','MED'], 'Belletti':['DEF','MED'], 'Van Bronckhorst':['DEF','MED'], 'Abidal':['DEF'], 'Mascherano':['DEF','MED'], 'Márquez':['DEF','MED'], 'Hierro':['DEF','MED'], 'Helguera':['DEF','MED'], 'Marchena':['DEF','MED'], 'Donato':['DEF','MED'], 'Scaloni':['DEF','MED'], 'Filipe Luis':['DEF','MED'], 'Juanfran':['DEF','MED'],
+ 'Busquets':['MED','DEF'], 'Casemiro':['MED','DEF'], 'Makelele':['MED'], 'Mauro Silva':['MED'], 'Albelda':['MED','DEF'], 'Baraja':['MED'], 'Senna':['MED'], 'Gabi':['MED'], 'Koke':['MED','DEL'], 'Arda Turan':['MED','DEL'], 'Raúl García':['MED','DEL'], 'Deco':['MED'], 'Iniesta':['MED','DEL'], 'Isco':['MED','DEL'], 'James Rodríguez':['MED','DEL'], 'Guti':['MED','DEL'], 'Figo':['MED','DEL'], 'Zidane':['MED','DEL'], 'Ronaldinho':['DEL','MED'], 'Messi':['DEL','MED'], 'Pedro':['DEL','MED'], 'Bale':['DEL','MED'], 'Lucas Vázquez':['DEL','MED'], 'Asensio':['DEL','MED'], 'Vicente':['MED','DEL'], 'Joaquín':['MED','DEL'], 'Nihat':['DEL','MED'], 'Cazorla':['MED','DEL'], 'Pires':['MED','DEL'], 'Cani':['MED','DEL'], 'Aimar':['MED','DEL'], 'Djalminha':['MED','DEL'], 'Fran':['MED','DEL'], 'Víctor Sánchez':['MED','DEL'], 'Jesús Navas':['MED','DEL'], 'Puerta':['MED','DEL'], 'Angulo':['DEL','MED'], 'Raúl':['DEL','MED'], 'Benzema':['DEL','MED'], 'Larsson':['DEL','MED'], 'Eusebio Sacristán':['MED'], 'Juan Carlos Rojo':['DEF','MED'], 'Juan Carlos Pérez':['MED'], 'Dani García Lara':['DEL'], 'Dani Martín':['DEL'], 'Ángel López':['DEF'], 'Ángel Sánchez':['DEF']
+};
+function lineFromSlot(slot){ return slot&&slot.startsWith('REF_') ? slot.replace('REF_','') : slot; }
+function slotLabel(slot){ return slot&&slot.startsWith('REF_') ? '+'+lineFromSlot(slot) : slot; }
+function isRefSlot(slot){ return slot&&slot.startsWith('REF_'); }
+function hasRef(){ return team.some(p=>isRefSlot(p.slot)); }
+function rawPositions(p){ return multi[p[0]] || [p[1]]; }
+function positions(p){
+ const primary=p[1];
+ const rest=rawPositions(p).filter(x=>x!==primary && x!=='POR');
+ return [primary,...rest];
+}
+function secondaryPositions(p){ return positions(p).filter(x=>x!==p[1]); }
+function secondaryFitRaw(name, primary, line){
+ // No todos los secundarios valen igual: Messi como MED es casi natural; un nueve puro bajaría bastante.
+ const key=name+'|'+primary+'>'+line;
+ const fit={
+  'Messi|DEL>MED':.89,'Ronaldinho|DEL>MED':.90,'Zidane|MED>DEL':.94,'Iniesta|MED>DEL':.94,'Xavi|MED>DEF':.82,
+  'Cristiano Ronaldo|DEL>MED':.76,'Ronaldo|DEL>MED':.74,'Eto’o|DEL>MED':.72,'Suárez|DEL>MED':.74,'Benzema|DEL>MED':.90,
+  'Raúl|DEL>MED':.88,'Griezmann|DEL>MED':.92,'Neymar|DEL>MED':.92,'Rivaldo|DEL>MED':.92,'Figo|MED>DEL':.94,
+  'Dani Alves|DEF>MED':.94,'Marcelo|DEF>MED':.91,'Roberto Carlos|DEF>MED':.88,'Jordi Alba|DEF>MED':.87,
+  'Mascherano|DEF>MED':.88,'Márquez|DEF>MED':.90,'Hierro|DEF>MED':.86,'Helguera|DEF>MED':.86,'Marchena|DEF>MED':.82,
+  'Busquets|MED>DEF':.94,'Casemiro|MED>DEF':.92,'Albelda|MED>DEF':.92,'Javi Martínez|DEF>MED':.94,
+  'Koke|MED>DEL':.88,'Arda Turan|MED>DEL':.90,'Raúl García|MED>DEL':.86,'Joaquín|MED>DEL':.92,
+  'Cazorla|MED>DEL':.92,'Aimar|MED>DEL':.91,'Djalminha|MED>DEL':.92,'Valerón|MED>DEL':.90,
+  'Jesús Navas|MED>DEL':.86,'Vicente|MED>DEL':.88,'Nihat|DEL>MED':.86,'Angulo|DEL>MED':.88,
+  'Lucas Vázquez|DEL>MED':.88,'Pedro|DEL>MED':.88,'Asensio|DEL>MED':.87,'Bale|DEL>MED':.84
+ };
+ if(fit[key]) return fit[key];
+ if(primary==='DEL' && line==='MED') return .82;
+ if(primary==='MED' && line==='DEL') return .86;
+ if(primary==='DEF' && line==='MED') return .84;
+ if(primary==='MED' && line==='DEF') return .86;
+ return .78;
+}
+function roleMultiplier(player,line){
+ const base = line===player.primary ? 1 : (player.secondary||[]).includes(line) ? secondaryFitRaw(player.name, player.primary, line) : 0;
+ // En mediocampo, los mediocentros/organizadores naturales mandan.
+ // Un GOAT atacante puede jugar ahí, pero no debe superar a Xavi/Modric/Kroos en control puro.
+ if(line==='MED' && player.primary!=='MED') return base*.96;
+ return base;
+}
+function playerNameKey(name){
+ return name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/^david villa$/,'villa')
+  .replace(/^ronaldo nazario$/,'ronaldo')
+  .replace(/\s+/g,' ').trim();
+}
+function playerId(p){return current.club+'|'+current.era+'|'+p[0]}
+function seasonToken(squad){ return (squad.club+'|'+squad.era).toLowerCase(); }
+function statAuraModel(name,squad,primary,a,d,c,carry){
+ // Modelo v12: combina producción de temporada, impacto colectivo y aura histórica.
+ // No enseña OVR; lo usa solo para calibrar coherencia interna.
+ const key=(squad.club+'|'+squad.era+'|'+name).toLowerCase();
+ const p=(apps,goals,assists,clean,team,ovr,aura)=>({apps,goals,assists,clean,team,ovr,aura});
+ const profiles=[
+  ['2014-15|messi',p(57,58,27,0,10,100,10)],['2010-11|messi',p(55,53,24,0,10,100,10)],['2018-19|messi',p(50,51,19,0,8,99,10)],['2008-09|messi',p(51,38,18,0,10,98,10)],['2005-06|messi',p(25,8,5,0,8,84,8)],
+  ['cristiano ronaldo',p(54,55,15,0,10,99,10)],['1996-97|ronaldo',p(49,47,12,0,8,100,10)],['2005-06|ronaldinho',p(45,26,20,0,10,97,10)],['1998-99|rivaldo',p(49,29,18,0,8,96,9)],['romário',p(47,32,8,0,9,97,9)],['stoichkov',p(45,24,10,0,9,94,8)],
+  ['2010-11|xavi',p(50,5,15,0,10,97,9)],['2008-09|xavi',p(54,10,24,0,10,98,9)],['iniesta',p(50,7,13,0,10,96,9)],['busquets',p(52,1,5,0,10,93,8)],['dani alves',p(50,4,16,0,10,94,8)],['puyol',p(45,1,1,24,10,93,8)],['pique',p(50,4,2,23,10,91,7)],
+  ['2023-24|bellingham',p(42,23,13,0,10,96,9)],['2023-24|vinícius',p(39,24,11,0,10,96,9)],['2023-24|kroos',p(48,1,10,0,10,94,9)],['2021-22|benzema',p(46,44,15,0,10,98,10)],['2021-22|courtois',p(52,0,0,22,10,96,9)],['2016-17|modrić',p(41,1,6,0,9,94,8)],['2016-17|kroos',p(48,4,17,0,9,93,8)],['2001-02|zidane',p(49,12,14,0,9,96,10)],['2001-02|casillas',p(41,0,0,18,9,94,9)],['2006-07|van nistelrooy',p(47,33,6,0,8,93,8)],['2006-07|casillas',p(48,0,0,18,8,94,9)],['1997-98|redondo',p(42,2,5,0,9,93,9)],
+  ['2013-14|courtois',p(56,0,0,29,10,93,8)],['2013-14|godín',p(50,5,1,29,10,94,8)],['2013-14|diego costa',p(52,36,5,0,10,93,8)],['2015-16|oblak',p(51,0,0,32,9,94,8)],['2015-16|griezmann',p(54,32,7,0,9,94,8)],['2020-21|luis suárez',p(38,21,3,0,8,91,7)],['2009-10|forlán',p(55,28,8,0,8,92,8)],['2009-10|agüero',p(53,19,9,0,8,91,8)],
+  ['2006-07|villa',p(45,21,5,0,7,92,7)],['2008-09|villa',p(43,31,8,0,7,94,8)],['2008-09|silva',p(40,8,11,0,7,91,8)],['2008-09|mata',p(45,14,13,0,7,90,7)],['2003-04|cañizares',p(49,0,0,23,10,91,7)],['2003-04|baraja',p(47,8,5,0,10,89,7)],['1999-00|mendieta',p(54,13,10,0,9,92,8)],['2003-04|villa',p(44,21,3,0,6,85,6)],
+  ['2001-02|makaay',p(48,26,5,0,7,90,7)],['2001-02|tristán',p(46,25,6,0,7,90,7)],['2001-02|valerón',p(50,5,13,0,7,91,8)],['1999-00|mauro silva',p(43,0,1,0,8,91,8)],['1994-95|bebeto',p(42,21,6,0,7,90,8)],
+  ['2006-07|kanouté',p(48,30,8,0,8,92,7)],['2006-07|luis fabiano',p(43,24,4,0,8,90,7)],['2013-14|rakitic',p(52,15,18,0,8,91,8)],['2015-16|banega',p(46,9,8,0,8,90,7)],['2019-20|ocampos',p(44,17,5,0,8,88,6)],['2022-23|bono',p(36,0,0,15,8,87,6)],
+  ['2005-06|riquelme',p(45,12,18,0,8,94,9)],['2005-06|forlán',p(45,13,6,0,8,89,7)],['2020-21|gerard moreno',p(46,30,11,0,8,92,8)],['2007-08|senna',p(45,4,5,0,8,91,8)],
+  ['2011-12|llorente',p(53,29,7,0,7,90,7)],['2023-24|nico williams',p(37,8,19,0,7,89,7)],['2023-24|iñaki williams',p(42,14,5,0,7,87,6)],['2023-24|unai simón',p(39,0,0,18,7,88,6)],
+  ['2021-22|fekir',p(47,10,10,0,7,90,7)],['2021-22|canales',p(49,8,11,0,7,89,7)],['1996-97|alfonso',p(42,25,5,0,7,90,7)],['1996-97|finidi',p(42,10,12,0,7,88,7)],
+  ['2012-13|isco',p(45,12,6,0,7,92,8)],['2012-13|caballero',p(44,0,0,15,7,88,6)],['2016-17|iago aspas',p(49,26,7,0,6,91,7)],['2023-24|dovbyk',p(39,24,8,0,8,90,7)],['2023-24|aleix garcía',p(40,3,6,0,8,88,6)],['2023-24|sávio',p(41,11,10,0,8,88,6)],
+  ['2011-12|koné',p(38,17,3,0,6,85,5)],['2000-01|javi moreno',p(48,26,5,0,7,88,6)],['2007-08|garay',p(38,7,1,0,6,86,5)],['2017-18|orellana',p(31,5,8,0,6,85,5)],['1985-86|butragueño',p(44,23,8,0,8,93,9)],['1985-86|hugo sánchez',p(45,34,3,0,8,96,9)],['1985-86|buyo',p(42,0,0,17,8,90,7)],['1992-93|redondo',p(34,2,3,0,6,90,8)],['1973-74|cruyff',p(34,16,15,0,9,99,10)],['1994-95|zamorano',p(45,28,4,0,8,94,8)],['2002-03|ronaldo',p(44,30,6,0,9,98,10)],['2004-05|ronaldinho',p(42,13,18,0,9,96,10)],['2004-05|eto’o',p(45,29,6,0,9,93,8)],['1998-99|mostovoi',p(40,9,12,0,6,91,8)],['1998-99|makelele',p(37,1,2,0,6,89,7)],['1997-98|guerrero',p(38,8,8,0,6,89,7)],['1997-98|etxeberria',p(39,11,8,0,6,89,7)],['2023-24|griezmann',p(48,24,8,0,8,94,8)],['2010-11|mata',p(44,9,15,0,7,91,7)],['2010-11|soldado',p(44,25,4,0,7,90,7)],['2015-16|bakambu',p(48,22,4,0,7,88,6)]
+ ];
+ let prof=null;
+ for(const [needle,data] of profiles){ if(key.includes(needle.toLowerCase())) { prof=data; break; } }
+ if(!prof){
+   // Estimación por rol cuando no hay perfil manual: conserva el dato existente, pero lo normaliza como temporada realista.
+   const peak=Math.max(a,d,c);
+   const team = (squad.era.includes('campeón')||squad.era.includes('Champions')||squad.era.includes('triplete')||squad.era.includes('doblete')||squad.era.includes('Liga')) ? 7 : 5;
+   const aura = peak>=92?6:peak>=88?5:peak>=84?3:1;
+   prof=p(34, primary==='DEL'?Math.max(8,Math.round((a-65)/2)):primary==='MED'?Math.max(2,Math.round((a-70)/5)):0, primary==='MED'?Math.max(3,Math.round((c-70)/3)):primary==='DEL'?Math.max(1,Math.round((c-70)/6)):0, primary==='POR'||primary==='DEF'?Math.max(8,Math.round((d-65)/1.6)):0, team, Math.min(91,peak), aura);
+ }
+ const appsFactor=Math.min(1,prof.apps/45);
+ const trophy=prof.team;
+ let statA=a, statD=d, statC=c;
+ if(primary==='POR'){
+   statD = 58 + prof.clean*.85 + prof.ovr*.28 + trophy*.9;
+   statC = 48 + prof.ovr*.22 + prof.aura*1.4;
+   statA = 4;
+ } else if(primary==='DEF'){
+   statD = 52 + prof.clean*.45 + prof.ovr*.34 + trophy*.75 + prof.aura*.8;
+   statC = 42 + prof.assists*.75 + prof.ovr*.30 + prof.aura*1.2;
+   statA = 36 + prof.goals*1.2 + prof.assists*.8 + prof.ovr*.22;
+ } else if(primary==='MED'){
+   statC = 50 + prof.assists*1.25 + prof.ovr*.33 + prof.aura*1.5;
+   statA = 42 + prof.goals*1.15 + prof.assists*.65 + prof.ovr*.26 + prof.aura*.8;
+   statD = 40 + prof.clean*.15 + prof.ovr*.23 + trophy*.55 + (prof.goals<5?prof.aura*.7:0);
+ } else {
+   statA = 50 + prof.goals*.95 + prof.assists*.55 + prof.ovr*.25 + prof.aura*1.3;
+   statC = 40 + prof.assists*1.05 + prof.ovr*.28 + prof.aura*1.3;
+   statD = 28 + prof.ovr*.16 + prof.aura*.5 + (prof.assists>10?4:0);
+ }
+ statA*= (.92 + appsFactor*.08); statD*= (.92 + appsFactor*.08); statC*= (.92 + appsFactor*.08);
+ const blend=.62;
+ a=a*(1-blend)+statA*blend; d=d*(1-blend)+statD*blend; c=c*(1-blend)+statC*blend;
+ carry = Math.max(carry, Math.max(0, prof.aura*1.05 + trophy*.18 + (prof.goals>=30?2.5:0) + (prof.assists>=15?1.5:0) + (prof.clean>=25?2:0) - 2));
+ return {a,d,c,carry,profile:prof};
+}
+
+function playerVersionStats(p,squad){
+ // v12: rating recalibrado con stats+aura + posición principal/secundaria.
+ const key=seasonToken(squad)+'|'+p[0].toLowerCase();
+ let a=p[2], d=p[3], c=p[4], carry=0;
+ const set=(na,nd,nc,ca=0)=>{a=na;d=nd;c=nc;carry=ca;};
+
+ if(key.includes('fc barcelona|2014-15') && p[0]==='Messi') set(100,45,97,15);
+ else if(key.includes('fc barcelona|2010-11') && p[0]==='Messi') set(100,50,96,15);
+ else if(key.includes('fc barcelona|2018-19') && p[0]==='Messi') set(100,42,96,14);
+ else if(key.includes('real madrid|2011-12') && p[0]==='Cristiano Ronaldo') set(100,45,84,14);
+ else if(key.includes('real madrid|2013-14') && p[0]==='Cristiano Ronaldo') set(100,45,84,14);
+ else if(key.includes('fc barcelona|1996-97') && p[0]==='Ronaldo') set(100,34,86,15);
+ else if(key.includes('real madrid|2002-03') && p[0]==='Ronaldo') set(98,36,84,12);
+ else if(key.includes('fc barcelona|1973-74') && p[0]==='Cruyff') set(98,52,97,14);
+ else if(key.includes('real madrid|2021-22') && p[0]==='Benzema') set(97,50,89,11);
+ else if(p[0]==='Zidane' && key.includes('real madrid|2001-02')) set(88,58,95,9);
+ else if(p[0]==='Ronaldinho' && key.includes('2005-06')) set(96,42,94,11);
+ else if(p[0]==='Xavi' && (key.includes('2010-11')||key.includes('2008-09'))) set(68,75,98,10);
+ else if(p[0]==='Iniesta' && (key.includes('2010-11')||key.includes('2008-09')||key.includes('2014-15'))) set(78,68,95,9);
+ else if(p[0]==='Modrić' && (key.includes('2016-17')||key.includes('2021-22'))) set(75,76,94,8);
+ else if(p[0]==='Kroos' && (key.includes('2016-17')||key.includes('2021-22'))) set(68,72,93,7);
+ else if(p[0]==='Casillas' && key.includes('2001-02')) set(5,93,72,8);
+ else if(p[0]==='Casillas' && key.includes('2011-12')) set(5,91,72,7);
+ else if(p[0]==='Courtois' && key.includes('2021-22')) set(5,95,72,9);
+ else if(p[0]==='Courtois' && key.includes('atlético de madrid|2013-14')) set(5,91,70,7);
+ else if(p[0]==='Oblak') set(5,94,72,8);
+ else if(p[0]==='Koeman' && key.includes('fc barcelona')) set(75,91,86,6);
+ else if(p[0]==='Villa' && key.includes('real zaragoza|2003-04')) set(84,44,74,2);
+ else if((p[0]==='Villa'||p[0]==='David Villa') && key.includes('valencia cf|2006-07')) set(92,46,79,6);
+ else if((p[0]==='Villa'||p[0]==='David Villa') && key.includes('fc barcelona|2010-11')) set(89,48,78,5);
+ else if((p[0]==='Villa'||p[0]==='David Villa') && key.includes('atlético de madrid|2013-14')) set(80,55,73,2);
+ else if(p[0]==='Butragueño' && key.includes('real madrid|1985-86')) set(92,44,86,8);
+ else if(p[0]==='Hugo Sánchez' && key.includes('real madrid|1985-86')) set(98,42,74,9);
+ else if(p[0]==='Buyo' && key.includes('real madrid|1985-86')) set(5,88,68,6);
+ else if(p[0]==='Webó') set(77,54,65,0);
+ else if(p[0]==='Rui Silva') set(4,81,63,0);
+ else if(p[0]==='Rui Silva' || p[0]==='Rulli' || p[0]==='Sergio Álvarez' || p[0]==='Doblas' || p[0]==='Rubén') { a=Math.min(a,5); d=Math.min(d,82); c=Math.min(c,66); }
+ else if(key.includes('ca osasuna') || key.includes('granada cf') || key.includes('getafe cf') || key.includes('rayo vallecano')){
+   a=Math.min(a,84); d=Math.min(d,82); c=Math.min(c,80);
+ }
+ const statAura=statAuraModel(p[0],squad,p[1],a,d,c,carry);
+ a=statAura.a; d=statAura.d; c=statAura.c; carry=statAura.carry;
+ // v21 balance: los MED puros ordenan, pero ya no ganan ligas solos; los delanteros históricos vuelven a decidir.
+ const name=p[0];
+ const primary=p[1];
+ const controlNerf=['Busquets','Albelda','Makelele','Casemiro','Khedira','Emerson','Diarra','Coquelin','Fernando','Kondogbia'];
+ if(primary==='MED' && controlNerf.includes(name)){
+   c*=.965; a*=.985; carry*=.94;
+ }
+ // v29: los grandes organizadores deben notarse de verdad en CONTROL.
+ const controlMaestros=['Xavi','Modrić','Kroos','Xabi Alonso','Redondo','Laudrup','Riquelme','Valerón','Parejo','Özil','Guardiola','Mendieta','David Silva','Canales','Mostovoi','Cazorla','Isco','Banega','Deco'];
+ if(primary==='MED' && controlMaestros.includes(name)){
+   c*=1.045; carry+=.45;
+ }
+ if(primary==='MED' && ['Mauro Silva','Senna','Toulalan','Gabi'].includes(name)){
+   c*=1.025; d*=1.015; carry+=.25;
+ }
+ const historicForwards=['Cristiano Ronaldo','Messi','Ronaldo','Cruyff','Raúl','Villa','David Villa','Butragueño','Hugo Sánchez','Forlán','Eto’o','Van Nistelrooy','Romário','Bebeto','Makaay','Tamudo','Alfonso','Iago Aspas','Suárez','Benzema','Lewandowski','Griezmann','Zamorano','Satrústegui'];
+ if(primary==='DEL' && historicForwards.includes(name)){
+   a*=1.045; c*=1.018; carry+=.8;
+ }
+
+ const trueElite=['Messi','Cristiano Ronaldo','Ronaldo','Cruyff','Ronaldinho','Xavi','Iniesta','Zidane','Modrić','Kroos','Casillas','Courtois','Benzema','Suárez','Neymar','Rivaldo','Romário','Figo','Raúl','Roberto Carlos','Eto’o','Godín','Oblak','Arconada','Bellingham','Vinícius','Lewandowski','Riquelme','Griezmann','Forlán','Van Nistelrooy','Redondo','Butragueño','Hugo Sánchez','Buyo','Mendieta','Bebeto','Makaay','Tamudo','Alfonso','Iago Aspas','Zamorano','Laudrup'];
+ const isElite=trueElite.includes(name) || carry>=6;
+ if(!isElite){
+   if(a>88) a=88+(a-88)*0.35;
+   if(d>88) d=88+(d-88)*0.35;
+   if(c>88) c=88+(c-88)*0.35;
+   if(Math.max(a,d,c)>91){ const peak=Math.max(a,d,c); const k=91/peak; a*=k; d*=k; c*=k; }
+ } else { if(a>100)a=100;if(d>97)d=97;if(c>100)c=100; }
+ const secondary=secondaryPositions(p);
+ return {name:p[0],primary,secondary,positions:[primary,...secondary],atk:Math.round(a),def:Math.round(d),ctrl:Math.round(c),carry,baseBadges:p[5],badges:p[5],club:squad.club,era:squad.era};
+}
+function slotAccepts(slot,pos){
+ const line=lineFromSlot(slot);
+ if(isRefSlot(slot) && pos==='POR') return false;
+ if(line==='POR' && isRefSlot(slot)) return false;
+ return pos===line;
+}
+function validSlots(p){
+ if(usedNames.has(playerNameKey(p[0]))) return [];
+ const pos=positions(p);
+ return slots.filter(s=>{
+   if(team.some(x=>x.slot===s)) return false;
+   if(isRefSlot(s) && hasRef()) return false;
+   return pos.some(pp=>slotAccepts(s,pp));
+ });
+}
+function refillSquadBag(){ squadBag=squads.map((_,i)=>i); }
+function takeSquadIndex(){ if(squadBag.length===0) refillSquadBag(); const r=Math.floor(Math.random()*squadBag.length); return squadBag.splice(r,1)[0]; }
+function nextSquad(){selected=null; current=squads[takeSquadIndex()]; renderAll();}
+function renderAll(){renderDraft();updateTeam();}
+function renderDraft(){
+ if(!current)return; $('club').textContent=current.club; $('era').textContent=current.era+' · '+current.players.length+' jugadores disponibles'; $('round').textContent=team.length+'/5'; $('need').textContent=selected?'Ahora colócalo en un hueco verde':'Primero elige jugador';
+ $('hint').textContent=selected?('Seleccionado: '+selected.p[0]+' · posiciones '+positions(selected.p).join('/')):'El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.';
+ $('options').innerHTML=current.players.map((p,i)=>{
+  const id=playerId(p);
+  const vs=validSlots(p);
+  const pos=positions(p);
+  const sec=secondaryPositions(p);
+  const alreadyUsed=used.has(id)||usedNames.has(playerNameKey(p[0]));
+  const cls='player'+(alreadyUsed?' used':'')+(selected&&selected.i===i?' selected':'')+(vs.length===0&&!alreadyUsed?' noFit':'');
+  return `<button class="${cls}" data-i="${i}">
+    <div class="positions"><span class="pos ok">${p[1]}</span>${sec.map(x=>`<span class="pos">${x}</span>`).join('')}</div>
+    <div class="name">${p[0]}</div>
+    <div class="badges">${p[5].map(b=>`<span class="badge">${b}</span>`).join('')}</div>
+  </button>`;
+ }).join('');
+ [...$('options').querySelectorAll('.player')].forEach(btn=>btn.onclick=()=>selectPlayer(Number(btn.dataset.i)));
+ $('rerollBtn').disabled=team.length>=5||rerolls<=0; $('simBtn').disabled=team.length<5;
+}
+function selectPlayer(i){if(team.length>=5)return; const p=current.players[i]; if(used.has(playerId(p))||usedNames.has(playerNameKey(p[0])))return; selected={p,i}; renderAll();}
+function place(slot){
+ if(!selected)return; const raw=selected.p; if(!validSlots(raw).includes(slot))return;
+ const ap=playerVersionStats(raw,current); const line=lineFromSlot(slot); const mult=roleMultiplier(ap,line);
+ if(mult<=0)return;
+ used.add(playerId(raw)); usedNames.add(playerNameKey(raw[0])); ap.slot=slot; ap.line=line; ap.roleMult=mult; team.push(ap); selected=null; $('result').classList.add('hidden');
+ if(team.length<5) nextSquad(); else {current=null; $('club').textContent='Cinco cerrado'; $('era').textContent='Simula la temporada.'; $('round').textContent='5/5'; $('options').innerHTML=''; $('hint').textContent='Plantilla cerrada. Dale a simular.'; $('simBtn').disabled=false; $('rerollBtn').disabled=true; updateTeam();}
+}
+function slotContribution(p){
+ // La línea elegida importa, pero también si es posición natural o secundaria.
+ // Xavi/Modric/Kroos/Busquets como MED deben controlar más que Messi usado de MED.
+ let a=p.atk*p.roleMult, d=p.def*p.roleMult, c=p.ctrl*p.roleMult;
+ const line=p.line || lineFromSlot(p.slot);
+ const natural = line===p.primary;
+ const secFromAttack = p.primary==='DEL' && line==='MED';
+ const secFromDef = p.primary==='DEF' && line==='MED';
+ if(line==='POR') return {atk:a*.08 + c*.07, def:d*1.20 + c*.08, ctrl:c*.62 + d*.08};
+ if(line==='DEF'){
+   const defMain = natural ? 1.06 : .91;
+   return {atk:a*.42 + c*.08, def:d*defMain, ctrl:c*.57 + d*.045};
+ }
+ if(line==='MED'){
+   const controlMain = natural ? 1.16 : (secFromAttack ? .91 : 1.02);
+   const attackMain = natural ? .64 : (secFromAttack ? .86 : .70);
+   const defMain = natural ? .72 : (secFromDef ? .80 : .64);
+   return {atk:a*attackMain + c*.15, def:d*defMain + c*.06, ctrl:c*controlMain};
+ }
+ if(line==='DEL'){
+   const attackMain = natural ? 1.17 : .98;
+   return {atk:a*attackMain + c*.15, def:d*.30, ctrl:c*.66 + a*.05};
+ }
+ return {atk:a,def:d,ctrl:c};
+}
+function topAvg(arr,n){ const x=[...arr].sort((a,b)=>b-a).slice(0,n); return x.reduce((s,v)=>s+v,0)/(x.length||1); }
+function avg(arr){ return arr.reduce((s,v)=>s+v,0)/(arr.length||1); }
+
+function playerStarTier(name){
+ const tierMap={
+  'Messi':13.5,'Cristiano Ronaldo':13.5,'Ronaldo':13.5,'Cruyff':12.6,
+  'Ronaldinho':11.0,'Zidane':10.8,'Xavi':10.2,'Iniesta':10.0,'Benzema':10.2,'Rivaldo':9.8,'Romário':9.6,'Laudrup':9.3,
+  'Neymar':9.0,'Suárez':9.0,'Raúl':9.0,'Figo':8.8,'Modrić':8.7,'Kroos':8.4,'Bellingham':8.5,'Vinícius':8.8,'Lewandowski':8.4,'Riquelme':8.8,'Griezmann':8.5,
+  'Butragueño':9.0,'Hugo Sánchez':9.4,'Mendieta':8.0,'Bebeto':8.0,'Makaay':7.8,'Tamudo':7.2,'Alfonso':7.4,'Iago Aspas':7.5,'Villa':8.5,'David Villa':8.5,'Forlán':8.7,'Eto’o':8.7,'Van Nistelrooy':8.6,
+  'Roberto Carlos':7.6,'Dani Alves':7.4,'Godín':7.6,'Oblak':7.6,'Casillas':7.6,'Courtois':7.8,'Arconada':7.8,'Koeman':7.7,'Sergio Ramos':7.8,'Redondo':8.4,'David Silva':7.3,'Cazorla':7.0,'Joaquín':6.7,'Nico Williams':6.5,'Dovbyk':6.7
+ };
+ return tierMap[name]||0;
+}
+function eliteSignature(){
+ const vals=team.map(p=>{
+   const line=p.line||lineFromSlot(p.slot);
+   const raw=playerStarTier(p.name) || Math.max(0,(Math.max(p.atk,p.def,p.ctrl)-86)*.42) + (p.carry||0)*.72;
+   const rolePenalty=p.roleMult<1 ? .86 : 1;
+   const lineBonus=(line==='DEL'&&p.atk>=92)?.55:(line==='MED'&&p.ctrl>=92)?.45:(line==='DEF'&&p.def>=90)?.35:(line==='POR'&&p.def>=92)?.35:0;
+   return Math.max(0, raw*rolePenalty + lineBonus);
+ }).sort((a,b)=>b-a);
+ const top1=vals[0]||0, top2=vals[1]||0, top3=vals[2]||0, top4=vals[3]||0;
+ const sPlus=vals.filter(v=>v>=12).length;
+ const s=vals.filter(v=>v>=9).length;
+ const a=vals.filter(v=>v>=7).length;
+ const spineBonus=(sPlus>=1&&a>=3)?4.8:(sPlus>=1&&a>=2)?2.8:(s>=3?2.2:0);
+ return {raw:top1*1.0+top2*.56+top3*.32+top4*.16+spineBonus, top1, top2, top3, sPlus, s, a};
+}
+
+function starCarry(){
+ // v15: tiers + rendimientos decrecientes. La estrella decide partidos igualados, no suma poder bruto infinito.
+ const tierMap={
+  'Messi':13.0,'Cristiano Ronaldo':13.0,'Ronaldo':13.0,
+  'Ronaldinho':10.7,'Zidane':10.0,'Xavi':9.2,'Iniesta':9.4,'Benzema':10.4,'Rivaldo':9.4,'Romário':9.3,'Cruyff':11.0,'Laudrup':8.8,
+  'Neymar':8.8,'Suárez':8.7,'Zamorano':8.4,'Satrústegui':7.7,'Raúl':9.2,'Figo':8.3,'Modrić':7.7,'Kroos':7.1,'Bellingham':8.0,'Vinícius':8.0,'Lewandowski':8.0,'Riquelme':8.0,'Griezmann':8.0,
+  'Butragueño':9.0,'Hugo Sánchez':9.3,'Mendieta':7.5,'Bebeto':7.6,'Makaay':7.2,'Tamudo':6.4,'Alfonso':6.8,'Iago Aspas':7.0,'Villa':8.3,'David Villa':8.3,'Forlán':8.6,'Eto’o':8.5,'Roberto Carlos':6.8,'Godín':6.8,'Oblak':6.8,'Casillas':6.8,'Courtois':6.8,'Arconada':6.8,'Dovbyk':6.6,
+  'David Silva':5.8,'Cazorla':5.6,'Joaquín':5.3,'Navas':5.0,'Jesús Navas':5.0,'Kiko':5.0,'Nico Williams':5.0
+ };
+ const parts=[];
+ team.forEach(p=>{
+   const peak=Math.max(p.atk,p.def,p.ctrl);
+   const linePenalty=p.roleMult<1 ? .78 : 1;
+   let b=Math.max(p.carry||0, tierMap[p.name]||0) * linePenalty;
+   b += Math.max(0, peak-93)*0.08*linePenalty;
+   if((p.line||lineFromSlot(p.slot))==='DEL' && team.filter(x=>(x.line||lineFromSlot(x.slot))==='DEL').length>=2) b*=.90;
+   parts.push(Math.max(0,b));
+ });
+ parts.sort((a,b)=>b-a);
+ const weights=[1,.50,.28,.14,.07];
+ const total=parts.reduce((sum,v,i)=>sum+v*(weights[i]||.04),0);
+ return Math.min(14.2,total);
+}
+function lineCounts(){
+ const counts={POR:0,DEF:0,MED:0,DEL:0};
+ team.forEach(p=>{ const l=p.line||lineFromSlot(p.slot); if(counts[l]!==undefined) counts[l]++; });
+ return counts;
+}
+function computeTeamMetrics(){
+ if(team.length===0) return {A:0,D:0,C:0,chem:0,balance:-30,carry:0,ceiling:0,power:0,counts:{POR:0,DEF:0,MED:0,DEL:0},synergy:synergyBonus()};
+ const contrib=team.map(slotContribution);
+ const atk=contrib.map(v=>v.atk), def=contrib.map(v=>v.def), ctrl=contrib.map(v=>v.ctrl);
+ const counts=lineCounts();
+ const gk=team.find(p=>(p.line||lineFromSlot(p.slot))==='POR');
+ const defenders=team.filter(p=>(p.line||lineFromSlot(p.slot))==='DEF');
+ const forwards=team.filter(p=>(p.line||lineFromSlot(p.slot))==='DEL');
+ const rawAtk=team.map(p=>p.atk*p.roleMult), rawDef=team.map(p=>p.def*p.roleMult), rawCtrl=team.map(p=>p.ctrl*p.roleMult);
+ const carry=starCarry();
+ const eliteSig=eliteSignature();
+ const syn=synergyBonus();
+ const chem=chemistry();
+ const threatValues=rawAtk.map((v,i)=>v + rawCtrl[i]*.34).sort((a,b)=>b-a);
+ const starThreat=((threatValues[0]||0) + (threatValues[1]||0)*.50 + (threatValues[2]||0)*.22)/1.37;
+ const ceiling=starThreat;
+ const gkQuality=gk ? gk.def*gk.roleMult : 38;
+ const defLine=defenders.map(p=>p.def*p.roleMult);
+ const medNatural=team.filter(p=>(p.line||lineFromSlot(p.slot))==='MED' && p.primary==='MED').map(p=>p.ctrl*p.roleMult);
+ const naturalDef=defenders.filter(p=>p.primary==='DEF').map(p=>p.def*p.roleMult);
+ const naturalFor=forwards.filter(p=>p.primary==='DEL').map(p=>p.atk*p.roleMult);
+
+ let A = topAvg(naturalFor.length?naturalFor:rawAtk,2)*.32 + topAvg(rawAtk,3)*.21 + topAvg(rawCtrl,2)*.15 + avg(atk)*.10 + Math.max(0,counts.DEL-1)*3.0 + Math.max(0,counts.MED-1)*1.0;
+ let D = gkQuality*.40 + topAvg(naturalDef.length?naturalDef:defLine,2)*.34 + topAvg(rawDef,4)*.10 + avg(def)*.040 + Math.max(0,counts.DEF-1)*4.8 + Math.max(0,counts.MED-1)*1.0;
+ let C = topAvg(medNatural,2)*.40 + topAvg(rawCtrl,2)*.22 + topAvg(rawCtrl,4)*.14 + avg(ctrl)*.075 + topAvg(rawDef,2)*.014 + Math.max(0,counts.MED-1)*5.2 + Math.max(0,counts.DEL-1)*.40;
+
+ const has={POR:counts.POR>0,DEF:counts.DEF>0,MED:counts.MED>0,DEL:counts.DEL>0};
+ const balance=(has.POR?4:-20)+(has.DEF?4:-13)+(has.MED?4:-10)+(has.DEL?4:-10);
+ const weakGkPenalty = gkQuality<82 ? (82-gkQuality)*.30 : 0;
+ const weakDefPenalty = (counts.DEF<2 ? 3.2 : 0) + (topAvg(defLine,1)<82 ? (82-topAvg(defLine,1))*.18 : 0);
+ const overAttackPenalty = counts.DEL>=2 && counts.DEF<2 ? 2.6 : 0;
+ const noMidPenalty = counts.MED<1 ? 8 : 0;
+ const shapeBonus = (counts.DEF>=2?2.9:0)+(counts.MED>=2?2.7:0)+(counts.DEL>=2?2.2:0) - (counts.DEF===0?10:0) - (counts.MED===0?7:0) - (counts.DEL===0?7:0) - weakGkPenalty - weakDefPenalty - overAttackPenalty - noMidPenalty;
+
+ A=Math.min(99,A + syn.A + carry*.15 + ceiling*.040 + chem*.05 + shapeBonus*.08 + (has.DEL?0:-7));
+ D=Math.min(99,D + syn.D + carry*.045 + chem*.055 + shapeBonus*.38 + (has.POR?0:-13));
+ C=Math.min(99,C + syn.C + carry*.050 + ceiling*.010 + chem*.06 + shapeBonus*.26);
+ A=Math.max(25,A); D=Math.max(25,D); C=Math.max(25,C);
+
+ // v15: más fútbol. Para dominar no basta atacar; el eje POR+DEF decide cuántas derrotas evitas.
+ const killerFloor=Math.max(0, starThreat-88)*.18 + Math.max(0, carry-8)*.16;
+ // v34: capa de estrellas más contenida. El bloque colectivo da suelo; las leyendas elevan techo, pero no duplican impacto en todas las capas.
+ const eliteCore = Math.max(0, eliteSig.raw-13.5);
+ const eliteGate = Math.min(6.8, eliteCore*.38 + Math.max(0,A-82)*.11 + Math.max(0,C-78)*.030 + (eliteSig.sPlus>=1&&eliteSig.a>=3?1.25:0));
+ const weakStarCap = eliteSig.top1<7 ? -2.0 : 0;
+ const defenseGate = Math.max(-5.8, Math.min(3.2, (D-79)*.13 + (gkQuality-84)*.10 + (counts.DEF>=2?1.0:-1.4)));
+ const midfieldGate = Math.max(-3.0, Math.min(2.8, (C-78)*.12 + (counts.MED>=2?.95:0)));
+ const bestDefLine=topAvg(defLine,1);
+ const bestMedLine=topAvg(rawCtrl,1);
+ const bestAtkLine=topAvg(rawAtk,1);
+ const coreQuality=Math.min(gkQuality,bestDefLine,bestMedLine,bestAtkLine);
+ const decentLines=[gkQuality,bestDefLine,bestMedLine,bestAtkLine].filter(v=>v>=76).length;
+ // v28: equipos con columna vertebral real no deben caer por un precipicio sólo por no tener 5 leyendas.
+ // El bonus se apaga en equipos monstruosos para no regalar 38-0, y apenas toca equipos flojos.
+ let competitiveBalanceBonus=0;
+ if(decentLines>=4) competitiveBalanceBonus=Math.max(0,Math.min(4.4,(coreQuality-73)*.34));
+ else if(decentLines===3) competitiveBalanceBonus=Math.max(0,Math.min(2.2,(Math.min(gkQuality,bestDefLine,bestMedLine,bestAtkLine)-70)*.20));
+ const prePower=A*.315 + D*.325 + C*.255 + balance*.30 + shapeBonus*.34 + chem*.10 + carry*.08 + killerFloor + eliteGate + weakStarCap + defenseGate + midfieldGate - 6.6;
+ const topTeamFade=Math.max(0,1-Math.max(0,prePower-80)*.07);
+ competitiveBalanceBonus*=topTeamFade;
+ const baselineFloor = 66 + Math.max(0,D-74)*.10 + Math.max(0,C-74)*.035 + Math.max(0,carry-5)*.28 + competitiveBalanceBonus*.55;
+ let power=Math.max(baselineFloor, prePower + competitiveBalanceBonus);
+ return applyBalanceProfile({A,D,C,chem,balance,carry,ceiling,power,counts,synergy:syn,coreQuality,decentLines,competitiveBalanceBonus,eliteSig});
+}
+function updateTeam(){
+ $('teamCount').textContent=team.length+'/5';
+ $('team').innerHTML=slots.map(s=>{
+   const p=team.find(x=>x.slot===s); const avail=selected && validSlots(selected.p).includes(s); const blocked=selected && !avail && !p;
+   const label=slotLabel(s);
+   const line=lineFromSlot(s);
+   const isRef=isRefSlot(s);
+   let emptyText = isRef ? `Refuerzo ${line}` : 'Vacío';
+   return `<button class="slot ${p?'filled':''} ${avail?'available':''} ${blocked?'blocked':''}" data-slot="${s}"><div class="tag">${label}</div><div>${p?`<b>${p.name}</b><br><span class="small">${p.primary}${p.secondary.length?'/'+p.secondary.join('/'):''} · usado en ${p.line}</span>`:(avail?`<b>Colocar aquí</b><br><span class="small">${isRef?'Suma a '+line:'Slot principal'} </span>`:`<span class="empty">${emptyText}</span>`)}</div></button>`;
+ }).join('');
+ [...document.querySelectorAll('.slot')].forEach(b=>b.onclick=()=>place(b.dataset.slot));
+ const m=computeTeamMetrics(); $('atk').textContent=Math.round(m.A);$('def').textContent=Math.round(m.D);$('ctrl').textContent=Math.round(m.C);
+}
+function chemistry(){
+ const clubs={}, eras={};
+ team.forEach(p=>{clubs[p.club]=(clubs[p.club]||0)+1; eras[p.era]=(eras[p.era]||0)+1;});
+ return Math.max(0,...Object.values(clubs))*1.15 + Math.max(0,...Object.values(eras))*0.65 + synergyBonus().chem;
+}
+function nkey(x){return playerNameKey(x||'');}
+function hasPlayer(name){ const k=nkey(name); return team.some(p=>nkey(p.name)===k); }
+function synergyBonus(){
+ let A=0,D=0,C=0,chem=0,labels=[];
+ const add=(a,d,c,ch,label)=>{A+=a;D+=d;C+=c;chem+=ch;if(label)labels.push(label);};
+ if(hasPlayer('Xavi')&&hasPlayer('Iniesta')) add(.4,0,3.0,1.0,'Xavi + Iniesta');
+ if(hasPlayer('Xavi')&&hasPlayer('Busquets')) add(0,.9,2.1,.8,'Xavi + Busquets');
+ if(hasPlayer('Iniesta')&&hasPlayer('Busquets')) add(.2,.6,1.8,.6,'Iniesta + Busquets');
+ if(hasPlayer('Messi')&&hasPlayer('Dani Alves')) add(2.1,0,1.0,.8,'Messi + Dani Alves');
+ if(hasPlayer('Messi')&&hasPlayer('Xavi')) add(1.2,0,1.7,.8,'Messi + Xavi');
+ if(hasPlayer('Messi')&&hasPlayer('Iniesta')) add(1.3,0,1.5,.8,'Messi + Iniesta');
+ if(hasPlayer('Cristiano Ronaldo')&&hasPlayer('Benzema')) add(2.0,0,1.1,.8,'Cristiano + Benzema');
+ if(hasPlayer('Cristiano Ronaldo')&&hasPlayer('Modrić')) add(1.3,0,1.2,.6,'Cristiano + Modrić');
+ if(hasPlayer('Modrić')&&hasPlayer('Kroos')) add(.2,0,2.8,.9,'Modrić + Kroos');
+ if(hasPlayer('Sergio Ramos')&&hasPlayer('Casillas')) add(0,2.2,.2,.7,'Casillas + Ramos');
+ if(hasPlayer('Godín')&&hasPlayer('Courtois')) add(0,3.0,0,.9,'Godín + Courtois');
+ if(hasPlayer('Godín')&&hasPlayer('Miranda')) add(0,2.4,0,.7,'Godín + Miranda');
+ if(hasPlayer('Puyol')&&hasPlayer('Piqué')) add(0,2.4,.4,.7,'Puyol + Piqué');
+ if(hasPlayer('Ayala')&&hasPlayer('Albelda')) add(0,2.1,.6,.6,'Ayala + Albelda');
+ if((hasPlayer('Villa')||hasPlayer('David Villa'))&&hasPlayer('Silva')) add(1.8,0,1.1,.7,'Villa + Silva');
+ if(hasPlayer('Villa')&&hasPlayer('Mata')) add(1.2,0,1.0,.5,'Villa + Mata');
+ if(hasPlayer('Roberto Carlos')&&hasPlayer('Zidane')) add(1.0,0,1.0,.5,'Roberto Carlos + Zidane');
+ if(hasPlayer('Riquelme')&&hasPlayer('Forlán')) add(1.6,0,1.3,.7,'Riquelme + Forlán');
+ return {A,D,C,chem,labels};
+}
+const rivalPool=[
+ {name:'Barça 2010-11',tier:98},{name:'Real Madrid 2016-17',tier:96},{name:'Barça 2014-15',tier:96},{name:'Real Madrid 2023-24',tier:95},{name:'Real Madrid 2011-12',tier:95},{name:'Atlético 2013-14',tier:94},{name:'Valencia 2003-04',tier:93},{name:'Real Madrid 2021-22',tier:93},{name:'Barça 2008-09',tier:97},{name:'Deportivo 1999-00',tier:91},{name:'Sevilla 2006-07',tier:90},{name:'Villarreal 2007-08',tier:88},{name:'Real Sociedad 2002-03',tier:88},{name:'Athletic 2023-24',tier:86},{name:'Betis 2021-22',tier:85},{name:'Girona 2023-24',tier:87},{name:'Málaga 2012-13',tier:86},{name:'Celta 2002-03',tier:85},{name:'Zaragoza 1994-95',tier:83},{name:'Racing 2007-08',tier:80},{name:'Osasuna 2005-06',tier:82},{name:'Rayo 2012-13',tier:79},{name:'Eibar 2017-18',tier:78},{name:'Alavés 2000-01',tier:81},{name:'Mallorca 2002-03',tier:82},{name:'Getafe 2007-08',tier:81}
+];
+function squadRivalTier(s){
+ // Estima la fuerza de cada plantilla histórica para poder construir un calendario fijo top 38.
+ const vals=s.players.map(p=>Math.max(p[2],p[3],p[4]));
+ const top=[...vals].sort((a,b)=>b-a).slice(0,6);
+ const avgTop=top.reduce((a,b)=>a+b,0)/(top.length||1);
+ const stars=s.players.filter(p=>Math.max(p[2],p[3],p[4])>=90).length;
+ const gk=s.players.filter(p=>p[1]==='POR').map(p=>p[3]).sort((a,b)=>b-a)[0]||78;
+ const era=s.era.toLowerCase();
+ let bonus=0;
+ if(/triplete|100 puntos|champions|liga \+ champions/.test(era)) bonus+=5;
+ else if(/campeón|doblete|doblete|guardiola|mourinho|zidane/.test(era)) bonus+=3;
+ else if(/finalista|semifinal|europa league|copa/.test(era)) bonus+=1.5;
+ return Math.round(Math.min(99, Math.max(76, avgTop*.78 + gk*.10 + stars*1.4 + bonus + 10)));
+}
+function buildRivalCalendar(){
+ const manual=rivalPool.map(r=>({...r}));
+ const derived=squads.map(s=>{
+   const cleanEra=s.era.split('·')[0].trim();
+   const shortClub=s.club.replace('FC ','').replace(' CF','').replace(' Club','').replace(' de Madrid','').replace('Real Madrid','Real Madrid').replace('FC Barcelona','Barça');
+   return {name:`${shortClub} ${cleanEra}`, tier:squadRivalTier(s)};
+ });
+ const byName=new Map();
+ [...manual,...derived].forEach(r=>{
+   const k=r.name;
+   if(!byName.has(k) || byName.get(k).tier<r.tier) byName.set(k,r);
+ });
+ const ordered=[...byName.values()].sort((a,b)=>b.tier-a.tier).slice(0,38);
+ // Siempre son los 38 más fuertes; sólo mezclamos el orden para que la temporada no sea idéntica visualmente.
+ for(let i=ordered.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [ordered[i],ordered[j]]=[ordered[j],ordered[i]];
+ }
+ return ordered;
+}
+function pickRival(i,calendar){
+ return calendar[(i-1)%calendar.length];
+}
+function simulate(){
+ const m=computeTeamMetrics();
+ const A=m.A,D=m.D,C=m.C,chem=m.chem,carry=m.carry,power=m.power,counts=m.counts,eliteSig=m.eliteSig||eliteSignature();
+ const bal=balanceProfile();
+ let w=0,d=0,l=0,gf=0,ga=0,log='';
+ let lostAgainst=[], drewAgainst=[], games=[];
+ const calendar=buildRivalCalendar();
+ for(let i=1;i<=38;i++){
+   const rival=pickRival(i,calendar);
+   const tier=rival.tier + bal.rivalShift + (Math.random()*1.6-.8);
+   const volatility=(Math.random()*6-3) + (Math.random()*2-1);
+   let edge=power-tier+volatility+bal.edgeAdd;
+   // v15: carry decide sobre todo partidos igualados, no toda la liga.
+   if(Math.abs(edge)<9) edge += (Math.min(3.4, carry*.20) + Math.min(2.0, Math.max(0,eliteSig.raw-14)*.09)) * (Math.random()<.68?1:.35);
+   else if(edge>7) edge += Math.min(1.1, carry*.035 + Math.max(0,eliteSig.raw-17)*.018);
+   else if(edge< -7 && (carry>=6 || eliteSig.top1>=9)) edge += Math.min(2.1, carry*.10 + Math.max(0,eliteSig.raw-13)*.045) * (Math.random()<.42?1:.25);
+   let res,forG,againstG;
+   const goalBoost=Math.max(0,(A-80)/18) + Math.max(0,(carry-7)/30) + Math.max(0,eliteSig.raw-16)*.018 + Math.max(0,counts.DEL-1)*.090 + bal.goalFor;
+   const defBoost=Math.max(0,(D-81)/17) + Math.max(0,counts.DEF-1)*.090;
+   const defLeak=Math.max(0,(79-D)/22) + (counts.DEF<2?.10:0) + bal.goalAgainst;
+   const attackCloseBonus=Math.min(.20, Math.max(0,A-78)*.009 + Math.max(0,counts.DEL-1)*.035 + Math.max(0,eliteSig.top1-8)*.012);
+   const drawSuppress=Math.min(.24, Math.max(0,A-78)*.010 + Math.max(0,carry-6)*.010 + Math.max(0,eliteSig.raw-15)*.006);
+   if(edge>18){
+     w++;res='V';forG=2+Math.floor(Math.random()*2+goalBoost*.75);againstG=Math.random()<(.48+defBoost*.07)?0:1;
+   } else if(edge>9){
+     w++;res='V';forG=2+Math.floor(Math.random()*2+goalBoost*.40);againstG=Math.random()<(.30+defBoost*.06)?0:1;
+   } else if(edge>1){
+     if(Math.random()<Math.min(.84,.66+attackCloseBonus)){w++;res='V';forG=1+Math.floor(Math.random()*2+goalBoost*.36);againstG=Math.max(0,forG-1+(Math.random()<defLeak?1:0));}
+     else{d++;res='E';forG=Math.floor(Math.random()*2)+1;againstG=forG; drewAgainst.push(rival.name);}
+   } else if(edge>-7){
+     const roll=Math.random();
+     if(roll<Math.min(.52,.36+attackCloseBonus*.75)){w++;res='V';forG=1+Math.floor(Math.random()*2+goalBoost*.18);againstG=Math.max(0,forG-1);}
+     else if(roll<Math.max(.56,.70-drawSuppress)){d++;res='E';forG=Math.floor(Math.random()*3);againstG=forG; drewAgainst.push(rival.name);}
+     else {l++;res='D';againstG=1+Math.floor(Math.random()*2+(defLeak>.3?1:0));forG=Math.max(0,againstG-1-Math.floor(Math.random()*2)); lostAgainst.push(rival.name);}
+   } else {
+     const rescue = (power>70?.10:power>66?.06:.03) + Math.max(0,carry-6)*.012;
+     const drawChance = Math.max(.16, .25 + Math.max(0,D-76)*.004 + Math.max(0,C-76)*.003 - drawSuppress*.55);
+     const roll=Math.random();
+     if(edge>-18 && roll<rescue){w++;res='V';forG=1+Math.floor(Math.random()*2);againstG=Math.max(0,forG-1);}
+     else if(roll<rescue+drawChance){d++;res='E';forG=Math.floor(Math.random()*2)+1;againstG=forG; drewAgainst.push(rival.name);}
+     else {l++;res='D';againstG=1+Math.floor(Math.random()*2+(defLeak>.28?1:0));forG=Math.max(0,againstG-1-Math.floor(Math.random()*2)); lostAgainst.push(rival.name);}
+   }
+   if(D>=78 && againstG>3 && Math.random()<.65) againstG=3;
+   if(D>=84 && againstG>2 && Math.random()<.55) againstG=2;
+   if(A>=84 && res==='V' && Math.random()<Math.min(.36, goalBoost*.12)) forG+=1;
+   forG=Math.min(A>=88?6:5,forG); againstG=Math.min(4,againstG);
+   gf+=forG;ga+=againstG; games.push({j:i,rival:rival.name,res,forG,againstG,edge}); log+=`<div class="game"><b>J${i}</b><span>${rival.name}</span><b class="${res==='V'?'good':res==='D'?'bad':''}">${res} ${forG}-${againstG}</b></div>`;
+ }
+ // v34: resistencia histórica. Incluso un equipazo debe dejarse puntos salvo combinación verdaderamente absurda.
+ const historicResistance = (power>86 || eliteSig.raw>24) ? Math.min(4.8, Math.max(0,power-86)*.32 + Math.max(0,eliteSig.raw-24)*.16) : 0;
+ if(w>=35 && historicResistance>0){
+   let targetDrop = Math.round(historicResistance + Math.random()*1.6);
+   // Sólo los equipos de poder extremo pueden sostener 37-38 victorias.
+   if(power>93 && eliteSig.sPlus>=1 && eliteSig.a>=4) targetDrop=Math.max(0,targetDrop-2);
+   for(let k=games.length-1;k>=0 && targetDrop>0;k--){
+     const g=games[k];
+     if(g.res==='V' && g.edge<24){
+       if(Math.random()<.62){ g.res='E'; g.againstG=g.forG=Math.max(1,Math.min(2,g.forG)); w--; d++; }
+       else { g.res='D'; g.forG=Math.max(0,g.forG-1); g.againstG=Math.max(g.forG+1,1); w--; l++; }
+       targetDrop--;
+     }
+   }
+ }
+ // v28: suelo competitivo suave. Evita 7-14-17 con plantillas buenas, sin tocar a los equipos flojos ni regalar élites.
+ const balancedFloor = (m.decentLines>=4 && power>=67) ? Math.round(7 + (power-67)*.42 + Math.max(0,m.coreQuality-76)*.10 + Math.max(0,carry-5)*.11 + bal.floorBoost) : 0;
+ const floorWins = Math.max(0, balancedFloor, Math.round((power-66)*0.25 + (A-74)*0.09 + (D-76)*0.045 + (carry-5)*0.10 + Math.max(0,eliteSig.raw-15)*0.10));
+ if(w<floorWins){
+   let need=floorWins-w;
+   for(let k=0;k<games.length && need>0;k++){
+     const g=games[k];
+     if(g.res==='D' && g.edge>-20){
+       g.res='V'; g.forG=Math.max(1,g.againstG); g.againstG=Math.max(0,g.forG-1);
+       w++; l--; gf += (g.forG - (games[k].oldForG||0)); ga += (g.againstG - (games[k].oldAgainstG||0)); need--;
+     }
+   }
+ }
+ const balanceLossRelief = (m.decentLines>=4 && power>=67) ? Math.min(6, Math.max(0,m.coreQuality-74)*.18 + Math.max(0,power-68)*.18 + bal.lossRelief) : 0;
+ const maxLosses = Math.max(5, Math.round(29 - Math.max(0,power-66)*0.52 - Math.max(0,A-76)*0.12 - Math.max(0,D-76)*0.08 - Math.max(0,carry-6)*0.14 - Math.max(0,eliteSig.raw-15)*0.13 - balanceLossRelief));
+ if(l>maxLosses){
+   let need=l-maxLosses;
+   for(let k=0;k<games.length && need>0;k++){
+     const g=games[k];
+     if(g.res==='D' && g.edge>-24){
+       g.res='E'; g.forG=1; g.againstG=1; d++; l--; need--;
+     }
+   }
+ }
+ // v35: si hay ataque real, varios empates cerrados se convierten en victorias; evita 16 empates con equipos claramente superiores.
+ const drawToWinBudget = Math.max(0, Math.min(4, Math.round((A-78)*0.16 + Math.max(0,carry-7)*0.12 + Math.max(0,eliteSig.raw-16)*0.08 + (counts.DEL>=2?1:0))));
+ if(drawToWinBudget>0){
+   let converted=0;
+   const candidates=games.filter(g=>g.res==='E' && g.edge>-8).sort((a,b)=>b.edge-a.edge);
+   for(const g of candidates){
+     if(converted>=drawToWinBudget) break;
+     const chance=Math.min(.72,.22 + Math.max(0,A-78)*.018 + Math.max(0,carry-7)*.018 + Math.max(0,g.edge+8)*.018);
+     if(Math.random()<chance){
+       g.res='V';
+       g.forG=Math.max(1,g.forG+1);
+       g.againstG=Math.max(0,Math.min(g.forG-1,g.againstG));
+       w++; d--; converted++;
+     }
+   }
+ }
+ // Reconstruye goles/log tras los ajustes de suelo.
+ gf=0; ga=0; log='';
+ games.forEach(g=>{gf+=g.forG;ga+=g.againstG; log+=`<div class="game"><b>J${g.j}</b><span>${g.rival}</span><b class="${g.res==='V'?'good':g.res==='D'?'bad':''}">${g.res} ${g.forG}-${g.againstG}</b></div>`;});
+ const cls=w===38?'good':(l>10?'bad':''); $('result').classList.remove('hidden');
+ const shape=`${counts.POR}-${counts.DEF}-${counts.MED}-${counts.DEL}`;
+ const points=w*3+d;
+ const verdict = w===38?'Temporada perfecta de verdad. Esto ya sí es una locura histórica.':w>=34?'Equipo monstruoso, pero el 38-0 ya no se regala.':w>=28?'Equipo brutal. Domina LaLiga, aunque no es invencible.':w>=20?'Buen cinco. Calidad real, pero lejos de temporada perfecta.':w>=14?'Equipo irregular: tiene piezas buenas, pero la estructura le pesa.':'Equipo insuficiente para dominar toda la liga.';
+ const synText=m.synergy.labels.length?m.synergy.labels.slice(0,3).join(', '):'Sin sinergia especial';
+ const season={w,d,l,gf,ga,points,A,D,C,shape}; lastSeason=season;
+ const hofUpdate=updateHallOfFame(season);
+ const mvp=pickMvp(season);
+ const best=games.filter(g=>g.res==='V').sort((a,b)=>(b.forG-b.againstG)-(a.forG-a.againstG) || b.edge-a.edge)[0];
+ const worst=games.filter(g=>g.res==='D').sort((a,b)=>(b.againstG-b.forG)-(a.againstG-a.forG))[0];
+ const story=seasonNarrative(season,mvp,best,worst);
+ const pain = lostAgainst.length?`<p>Derrotas contra: ${lostAgainst.slice(0,4).join(', ')}${lostAgainst.length>4?'…':''}</p>`:'';
+ const draws = drewAgainst.length?`<p>Empates clave: ${drewAgainst.slice(0,3).join(', ')}${drewAgainst.length>3?'…':''}</p>`:'';
+ const mvpLine=mvp?`<div class="storyBox"><b>🏆 MVP: ${mvp.name}</b><span>${mvp.line} · ${mvp.club}<br>Impacto estimado: ${Math.round(mvp.mvpScore/10)} puntos de influencia.</span></div>`:'';
+ const bestLine=best?`<div class="storyBox"><b>🔥 Mejor victoria</b><span>${best.rival}<br>${best.forG}-${best.againstG}</span></div>`:`<div class="storyBox"><b>🔥 Mejor victoria</b><span>No hubo una victoria clara que salve el relato.</span></div>`;
+ const worstLine=worst?`<div class="storyBox"><b>💀 Peor derrota</b><span>${worst.rival}<br>${worst.forG}-${worst.againstG}</span></div>`:`<div class="storyBox"><b>💀 Peor derrota</b><span>Nadie te ganó esta temporada.</span></div>`;
+ const topTable=makeTopTable(points);
+ const hpMain=$('hallPanelMain'); if(hpMain) hpMain.classList.remove('hidden');
+ $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div><div><span>Balance</span><b>${balanceProfile().label}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox"><b>📊 Top 5 final</b><div class="tableMini">${topTable}</div></div>${pain}${draws}<div class="resultActions"><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><div class="log">${log}</div>`;
+}
+
+
+
+function pickMvp(season){
+ if(!team.length) return null;
+ const counts=lineCounts();
+ const scores=team.map(p=>{
+   const line=p.line||lineFromSlot(p.slot);
+   let s=0;
+   if(line==='POR') s=p.def*1.16 + (season.ga<25?26:season.ga<35?18:season.ga<45?10:4);
+   else if(line==='DEF') s=p.def*1.00 + p.ctrl*.22 + (season.ga<25?22:season.ga<35?15:season.ga<45?8:3);
+   else if(line==='MED') s=p.ctrl*.94 + p.def*.28 + p.atk*.24 + (counts.MED>=2?3:0) + (season.points>=80?4:0);
+   else s=p.atk*1.16 + p.ctrl*.34 + (season.gf>90?16:season.gf>75?10:season.gf>60?5:1);
+   s += (p.carry||0)*5.0;
+   if(p.roleMult<1) s*=.90;
+   if(['Messi','Cristiano Ronaldo','Ronaldo','Benzema','Raúl','Butragueño','Hugo Sánchez','Forlán','Villa','David Villa','Eto’o','Van Nistelrooy','Ronaldinho','Cruyff','Rivaldo','Romário','Suárez','Neymar','Griezmann','Iago Aspas','Makaay','Bebeto','Tamudo','Alfonso'].includes(p.name)) s+=10;
+   if(line==='DEF') s*=.92;
+   if(line==='POR') s*=.94;
+   return {...p,mvpScore:s};
+ }).sort((a,b)=>b.mvpScore-a.mvpScore);
+ return scores[0];
+}
+function seasonNarrative(season,mvp,best,worst){
+ const m=computeTeamMetrics();
+ const strongLine = m.A>=m.D && m.A>=m.C ? 'ataque' : m.D>=m.A && m.D>=m.C ? 'defensa' : 'control';
+ const name=mvp?mvp.name:'tu bloque principal';
+ let intro='';
+ if(season.points>=95) intro='Temporada histórica: el equipo no sólo ganó, impuso una tiranía competitiva.';
+ else if(season.points>=84) intro='Temporada de campeón: estructura fuerte, pegada suficiente y pocas noches realmente malas.';
+ else if(season.points>=70) intro='Buen proyecto: compitió arriba, pero le faltó una pieza diferencial para romper la liga.';
+ else if(season.points>=55) intro='Equipo de zona media-alta: hubo calidad, pero demasiadas jornadas se escaparon por detalles.';
+ else intro='Proyecto frágil: nombres interesantes, pero sin una columna vertebral capaz de sostener 38 jornadas.';
+ const lineText={
+   ataque:'El equipo vivió de la pegada y del talento en campo rival.',
+   defensa:'El equipo se sostuvo desde atrás y convirtió muchos partidos en guerras largas.',
+   control:'El equipo quiso mandar desde la pelota y bajar el ritmo de los rivales.'
+ }[strongLine];
+ const closer = worst ? `La derrota ante ${worst.rival} marcó el techo real del equipo.` : 'Nadie encontró una forma clara de tumbarte.';
+ return `<b>${intro}</b><br>${lineText} ${name} fue la pieza que más sostuvo el plan. ${closer}`;
+}
+function makeTopTable(points){
+ const rivals=buildRivalCalendar().sort((a,b)=>b.tier-a.tier).slice(0,4).map(r=>({name:r.name,pts:Math.max(72,Math.min(99,Math.round(r.tier*.92 + Math.random()*5 - 1)))}));
+ const rows=[{name:'Tu equipo',pts:points,me:true},...rivals].sort((a,b)=>b.pts-a.pts).slice(0,5);
+ return rows.map((r,i)=>`<div class="rankRow ${r.me?'me':''}"><span>${i+1}</span><span>${r.name}</span><b>${r.pts}</b></div>`).join('');
+}
+
+const HOF_KEY='laliga_5v5_hall_v35';
+function loadHallOfFame(){
+ try{return JSON.parse(localStorage.getItem(HOF_KEY)||'[]');}catch(e){return window.__hofMemory||[];}
+}
+function saveHallOfFame(hall){try{localStorage.setItem(HOF_KEY,JSON.stringify(hall.slice(0,10)));}catch(e){window.__hofMemory=hall.slice(0,10);}}
+function currentTeamSummary(){
+ return team.map(p=>`${p.name} (${slotLabel(p.slot)})`).join(' · ');
+}
+function updateHallOfFame(season){
+ const hall=loadHallOfFame();
+ const entry={
+  record:`${season.w}-${season.d}-${season.l}`,
+  points:season.points,
+  gf:season.gf,
+  ga:season.ga,
+  gd:season.gf-season.ga,
+  team:currentTeamSummary(),
+  shape:season.shape,
+  date:new Date().toLocaleDateString()
+ };
+ const minHallPoints=balanceProfile().hofMin || 70;
+ let isNew=false;
+ let top=hall;
+ if(entry.points>=minHallPoints){
+   hall.push(entry);
+   hall.sort((a,b)=>b.points-a.points || b.gd-a.gd || b.gf-a.gf || a.ga-b.ga);
+   top=hall.slice(0,10);
+   isNew=top.some(x=>x===entry) || top.some(x=>x.date===entry.date && x.team===entry.team && x.record===entry.record && x.points===entry.points);
+   saveHallOfFame(top);
+ }
+ renderHallOfFame();
+ return {isNew};
+}
+function renderHallOfFame(){
+ const hall=loadHallOfFame();
+ const list=hall.length?`<div class="hofList">${hall.map((h,i)=>`<div class="hofRow"><span class="rank">#${i+1}</span> <b>${h.points} pts</b> · ${h.record} · ${h.gf}-${h.ga}<br>${h.team}<br><span>${h.date||''}</span></div>`).join('')}</div>`:'<div class="hofEmpty">Tus mejores equipos de 70+ puntos aparecerán aquí.</div>';
+ const full=`<h3>👑 Hall of Fame</h3>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div>`;
+ const compact=`<details><summary>👑 Hall of Fame ${hall.length?`· mejor: ${hall[0].points} pts`:''}</summary>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div></details><div class="hofMainClosed">El resultado de la temporada queda arriba; el Hall sólo guarda tus mejores equipos.</div>`;
+ const aside=$('hallPanel'); if(aside){aside.classList.remove('compact'); aside.innerHTML=full;}
+ const main=$('hallPanelMain'); if(main){main.classList.add('compact'); main.innerHTML=compact; if(!$('result').classList.contains('hidden')) main.classList.remove('hidden');}
+}
+function clearHallOfFame(){
+ if(confirm('¿Borrar el Hall of Fame guardado?')){try{localStorage.removeItem(HOF_KEY);}catch(e){window.__hofMemory=[];}renderHallOfFame();}
+}
+
+function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;selected=null;refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Aparece un equipo/temporada y eliges de su plantilla.';$('round').textContent='0/5';$('options').innerHTML='';$('hint').textContent='El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.';$('simBtn').disabled=true;$('rerollBtn').disabled=true;$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
+$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
+$('rerollBtn').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
+$('simBtn').onclick=simulate;$('resetBtn').onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
+</script></body></html>
