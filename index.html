@@ -10,8 +10,66 @@
 .seasonStory{border:1px solid rgba(125,180,255,.20);background:rgba(125,180,255,.06);border-radius:16px;padding:10px;margin:10px 0;color:#cfe1ff}.storyGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0}.storyBox{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.045);padding:9px}.storyBox b{display:block;margin-bottom:3px}.storyBox span{color:var(--muted);font-size:12px}.tableMini{display:grid;gap:4px;margin:8px 0}.rankRow{display:grid;grid-template-columns:30px 1fr 44px;gap:6px;color:var(--muted);font-size:13px;border-bottom:1px solid rgba(255,255,255,.07);padding:5px 0}.rankRow.me{color:var(--gold);font-weight:900}.resultActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tinyBtn{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);border-radius:12px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.hof{margin-top:12px;border:1px solid rgba(245,200,75,.20);background:rgba(245,200,75,.055);border-radius:16px;padding:10px}.hof h3{margin:0 0 8px;font-size:14px}.hofList{display:grid;gap:7px}.hofRow{border-top:1px solid rgba(255,255,255,.08);padding-top:7px;color:var(--muted);font-size:12px}.hofRow:first-child{border-top:0;padding-top:0}.hofRow b{color:var(--text)}.hofRow .rank{color:var(--gold);font-weight:950}.hofEmpty{color:var(--muted);font-size:12px}.hofControls{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.hof.compact{background:rgba(245,200,75,.035)}.hof.compact details{cursor:pointer}.hof.compact summary{font-weight:950;color:var(--gold);list-style:none}.hof.compact summary::-webkit-details-marker{display:none}.hof.compact .hofList{margin-top:8px}.hofMainClosed{color:var(--muted);font-size:12px;margin-top:4px}
 .balancePanel{margin-top:12px;border:1px solid rgba(125,180,255,.22);background:rgba(125,180,255,.06);border-radius:16px;padding:10px;display:grid;gap:8px}.balancePanel label{font-size:12px;color:var(--muted);font-weight:800}.balancePanel select{width:100%;border:1px solid var(--line);background:#101827;color:var(--text);border-radius:12px;padding:10px;font-weight:800}.balanceHelp{font-size:12px;color:var(--muted);line-height:1.35}.balanceTag{color:var(--gold);font-weight:900}
 @media(max-width:760px){.layout{grid-template-columns:1fr}h1{font-size:27px}.opts{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}.club{font-size:22px}}
+.mobilePickDock{display:none}
+.actionHidden{display:none!important}
+.matchDetails{margin-top:10px}.matchDetails summary{cursor:pointer;color:var(--gold);font-weight:950;padding:10px 0;list-style:none}.matchDetails summary::-webkit-details-marker{display:none}
+.shareToast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#f6f8fb;color:#07101d;border-radius:999px;padding:10px 14px;font-weight:950;box-shadow:0 12px 36px rgba(0,0,0,.35);z-index:40}
+@media(max-width:760px){
+ body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+ .app{padding:10px 9px 24px;max-width:560px}
+ .hero,.card{border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.26)}
+ .hero{padding:12px}
+ h1{font-size:24px;letter-spacing:0;line-height:1.05}
+ p{font-size:13px;margin:8px 0}
+ .bar{display:flex;overflow:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.bar::-webkit-scrollbar{display:none}
+ .pill{white-space:nowrap;font-size:11px;padding:5px 8px}
+ .balancePanel{padding:8px;margin-top:9px}
+ .layout{gap:9px;margin-top:9px}
+ .card{padding:10px}
+ .head{align-items:flex-start}
+ .challenge{align-items:flex-start}
+ .club{font-size:20px;line-height:1.08}
+ .era,.small{font-size:12px}
+ .round{padding:7px 9px;font-size:13px;white-space:nowrap}
+ .hint{font-size:12px;border-radius:12px;padding:8px;margin-top:8px}
+ .opts{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}
+ .player,.slot{border-radius:13px;min-height:70px;padding:9px}
+ .name{font-size:14px;margin:5px 0 6px;line-height:1.12}
+ .positions,.badges{gap:4px}
+ .pos,.badge,.role{font-size:10px;padding:3px 6px}
+ .buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ .btn{width:100%;margin-top:8px;border-radius:12px;padding:12px 10px;min-height:46px;font-size:14px}
+ .team{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .slot{grid-template-columns:42px 1fr;min-height:62px;font-size:13px}
+ .slot .tag{font-size:13px}
+ .scorebox{gap:6px;margin-top:10px}
+ .metric{border-radius:12px;padding:8px 4px}.metric strong{font-size:20px}.metric span{font-size:11px}
+ .note{display:none}
+ .hof{border-radius:12px;padding:9px}
+ aside .hof{max-height:170px;overflow:auto}
+ .record{font-size:34px}
+ .why{grid-template-columns:1fr 1fr;gap:6px}.why div{display:block;font-size:12px}.why b{display:block;color:var(--text);margin-top:2px}
+ .storyGrid{grid-template-columns:1fr;gap:7px}
+ .storyBox,.seasonStory{border-radius:12px;padding:9px;font-size:13px}
+ .game{font-size:12px;grid-template-columns:34px 1fr 58px;display:grid;gap:5px;align-items:center}
+ .game span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .resultActions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ .resultActions .tinyBtn:first-child{grid-column:1/-1}
+ .tinyBtn{min-height:40px;border-radius:11px}
+ .mobilePickDock{display:none;position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:30;border:1px solid rgba(82,214,138,.45);background:rgba(8,13,22,.96);backdrop-filter:blur(14px);border-radius:16px;padding:9px;box-shadow:0 14px 42px rgba(0,0,0,.48)}
+ .mobilePickDock.active{display:grid;gap:8px}
+ .dockTitle{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+ .dockTitle b{color:var(--text);font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .dockSlots{display:grid;grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:6px}
+ .dockSlot{border:1px solid rgba(82,214,138,.55);background:rgba(82,214,138,.15);color:var(--text);border-radius:12px;padding:10px 6px;font-weight:950;min-height:42px}
+ .dockCancel{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);border-radius:10px;padding:8px 10px;font-weight:850}
+ .dockActions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ .dockPrimary{border:0;background:linear-gradient(135deg,#f5c84b,#ffae35);color:#1c1300;border-radius:12px;padding:13px 10px;font-weight:1000}
+ .dockSecondary{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);border-radius:12px;padding:13px 10px;font-weight:900}
+ .dockActions .dockPrimary{grid-column:1/-1}
+}
 </style></head>
-<body><div class="app"><section class="hero"><h1><span>38-0</span> España 5v5 v35</h1><p>v35: balance final. Menos empates artificiales, más pegada si hay estrellas reales y defensas/MVP más coherentes.</p><div class="bar"><div class="pill">5 picks</div><div class="pill">Muchas plantillas sin repetición</div><div class="pill">Principal/secundaria</div><div class="pill">Stats + aura</div><div class="pill">Rivales reales</div><div class="pill">Sinergias históricas</div><div class="pill">Hall of Fame</div></div><div class="balancePanel"><label>Balance</label><div class="balanceHelp" id="balanceHelp"><span class="balanceTag">v34 final:</span> calibrado con simulaciones internas: sube élites reales, baja falsos 80 puntos por control/defensa artificial y mantiene difícil el 38-0.</div></div></section><div class="layout"><main class="card"><div class="head"><b>Draft</b><span class="small" id="need">Primero elige jugador</span></div><div class="challenge"><div><div class="club" id="club">Pulsa empezar</div><div class="era" id="era">Aparece un equipo/temporada y eliges de su plantilla.</div></div><div class="round" id="round">0/5</div></div><div class="hint" id="hint">Cuando selecciones un jugador, los huecos válidos se iluminarán en verde.</div><div class="opts" id="options"></div><div class="buttons"><button class="btn" id="startBtn">Empezar draft</button><button class="btn secondary" id="rerollBtn" disabled>Otro equipo (2)</button></div><div class="result hidden" id="result"></div><div class="hof hidden" id="hallPanelMain"></div></main><aside class="card"><div class="head"><b>Tu cinco</b><span class="small" id="teamCount">0/5</span></div><div class="team" id="team"></div><div class="scorebox"><div class="metric"><strong id="atk">0</strong><span>Ataque</span></div><div class="metric"><strong id="def">0</strong><span>Defensa</span></div><div class="metric"><strong id="ctrl">0</strong><span>Control</span></div></div><div class="note"><b>Simulación:</b> rivales históricos reales, estrellas en partidos igualados y resultado narrativo.</div><div class="hof" id="hallPanel"></div><div class="buttons"><button class="btn" id="simBtn" disabled>Simular 38 partidos</button><button class="btn secondary" id="resetBtn">Reiniciar</button></div></aside></div></div>
+<body><div class="app"><section class="hero"><h1><span>38-0</span> España 5v5 v35</h1><p>v35: balance final. Menos empates artificiales, más pegada si hay estrellas reales y defensas/MVP más coherentes.</p><div class="bar"><div class="pill">5 picks</div><div class="pill">Muchas plantillas sin repetición</div><div class="pill">Principal/secundaria</div><div class="pill">Stats + aura</div><div class="pill">Rivales reales</div><div class="pill">Sinergias históricas</div><div class="pill">Hall of Fame</div></div><div class="balancePanel"><label>Balance</label><div class="balanceHelp" id="balanceHelp"><span class="balanceTag">v34 final:</span> calibrado con simulaciones internas: sube élites reales, baja falsos 80 puntos por control/defensa artificial y mantiene difícil el 38-0.</div></div></section><div class="layout"><main class="card"><div class="head"><b>Draft</b><span class="small" id="need">Primero elige jugador</span></div><div class="challenge"><div><div class="club" id="club">Pulsa empezar</div><div class="era" id="era">Aparece un equipo/temporada y eliges de su plantilla.</div></div><div class="round" id="round">0/5</div></div><div class="hint" id="hint">Cuando selecciones un jugador, los huecos válidos se iluminarán en verde.</div><div class="opts" id="options"></div><div class="buttons"><button class="btn" id="startBtn" type="button">Empezar draft</button><button class="btn secondary" id="rerollBtn" type="button" disabled>Otro equipo (2)</button><button class="btn secondary" id="undoBtn" type="button">Deshacer pick</button></div><div class="result hidden" id="result" aria-live="polite"></div><div class="hof hidden" id="hallPanelMain"></div></main><aside class="card"><div class="head"><b>Tu cinco</b><span class="small" id="teamCount">0/5</span></div><div class="team" id="team"></div><div class="scorebox"><div class="metric"><strong id="atk">0</strong><span>Ataque</span></div><div class="metric"><strong id="def">0</strong><span>Defensa</span></div><div class="metric"><strong id="ctrl">0</strong><span>Control</span></div></div><div class="note"><b>Simulación:</b> rivales históricos reales, estrellas en partidos igualados y resultado narrativo.</div><div class="hof" id="hallPanel"></div><div class="buttons"><button class="btn" id="simBtn" type="button" disabled>Simular 38 partidos</button><button class="btn secondary" id="resetBtn" type="button">Reiniciar</button></div></aside></div></div><div class="mobilePickDock" id="mobilePickDock"></div>
 <script>
 // v35: balance final: reduce empates artificiales, sube pegada real y ajusta MVP defensivo.
 const squads=[
@@ -115,7 +173,7 @@ const squads=[
 const baseSlots=['POR','DEF','MED','DEL'];
 const refSlots=['REF_DEF','REF_MED','REF_DEL'];
 const slots=[...baseSlots,...refSlots];
-let team=[],current=null,used=new Set(),usedNames=new Set(),rerolls=2,selected=null, squadBag=[], lastSeason=null;
+let team=[],current=null,used=new Set(),usedNames=new Set(),rerolls=2,selected=null, squadBag=[], lastSeason=null, statusMessage='';
 let activeBalance='f';
 const balanceProfiles={
  f:{label:'v35 final',desc:'Balance final: menos empates tontos, más pegada para ataques élite, defensa menos inflada y 38-0 reservado a combinaciones absurdas.',A:1.045,D:.948,C:1.018,powerAdd:.95,midLift:1.55,eliteLift:.55,rivalShift:-0.35,edgeAdd:.18,floorBoost:.45,lossRelief:.35,goalFor:.16,goalAgainst:.022,hofMin:70}
@@ -351,7 +409,8 @@ function nextSquad(){selected=null; current=squads[takeSquadIndex()]; renderAll(
 function renderAll(){renderDraft();updateTeam();}
 function renderDraft(){
  if(!current)return; $('club').textContent=current.club; $('era').textContent=current.era+' · '+current.players.length+' jugadores disponibles'; $('round').textContent=team.length+'/5'; $('need').textContent=selected?'Ahora colócalo en un hueco verde':'Primero elige jugador';
- $('hint').textContent=selected?('Seleccionado: '+selected.p[0]+' · posiciones '+positions(selected.p).join('/')):'El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.';
+ $('hint').textContent=statusMessage || (selected?('Seleccionado: '+selected.p[0]+' · posiciones '+positions(selected.p).join('/')):'El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.');
+ statusMessage='';
  $('options').innerHTML=current.players.map((p,i)=>{
   const id=playerId(p);
   const vs=validSlots(p);
@@ -359,22 +418,44 @@ function renderDraft(){
   const sec=secondaryPositions(p);
   const alreadyUsed=used.has(id)||usedNames.has(playerNameKey(p[0]));
   const cls='player'+(alreadyUsed?' used':'')+(selected&&selected.i===i?' selected':'')+(vs.length===0&&!alreadyUsed?' noFit':'');
-  return `<button class="${cls}" data-i="${i}">
+  return `<button class="${cls}" type="button" data-i="${i}">
     <div class="positions"><span class="pos ok">${p[1]}</span>${sec.map(x=>`<span class="pos">${x}</span>`).join('')}</div>
     <div class="name">${p[0]}</div>
     <div class="badges">${p[5].map(b=>`<span class="badge">${b}</span>`).join('')}</div>
   </button>`;
  }).join('');
  [...$('options').querySelectorAll('.player')].forEach(btn=>btn.onclick=()=>selectPlayer(Number(btn.dataset.i)));
- $('rerollBtn').disabled=team.length>=5||rerolls<=0; $('simBtn').disabled=team.length<5;
+ $('rerollBtn').disabled=team.length>=5||rerolls<=0; $('simBtn').disabled=team.length<5; syncActionButtons();
 }
 function selectPlayer(i){if(team.length>=5)return; const p=current.players[i]; if(used.has(playerId(p))||usedNames.has(playerNameKey(p[0])))return; selected={p,i}; renderAll();}
 function place(slot){
  if(!selected)return; const raw=selected.p; if(!validSlots(raw).includes(slot))return;
  const ap=playerVersionStats(raw,current); const line=lineFromSlot(slot); const mult=roleMultiplier(ap,line);
  if(mult<=0)return;
- used.add(playerId(raw)); usedNames.add(playerNameKey(raw[0])); ap.slot=slot; ap.line=line; ap.roleMult=mult; team.push(ap); selected=null; $('result').classList.add('hidden');
- if(team.length<5) nextSquad(); else {current=null; $('club').textContent='Cinco cerrado'; $('era').textContent='Simula la temporada.'; $('round').textContent='5/5'; $('options').innerHTML=''; $('hint').textContent='Plantilla cerrada. Dale a simular.'; $('simBtn').disabled=false; $('rerollBtn').disabled=true; updateTeam();}
+ ap.pickId=playerId(raw); ap.squadToken=seasonToken(current);
+ used.add(ap.pickId); usedNames.add(playerNameKey(raw[0])); ap.slot=slot; ap.line=line; ap.roleMult=mult; team.push(ap); selected=null; $('result').classList.add('hidden');
+ if(team.length<5) nextSquad(); else {current=null; $('club').textContent='Cinco cerrado'; $('era').textContent='Simula la temporada.'; $('round').textContent='5/5'; $('need').textContent='Listo para simular'; $('options').innerHTML=''; $('hint').textContent='Plantilla cerrada. Dale a simular.'; $('simBtn').disabled=false; $('rerollBtn').disabled=true; syncActionButtons(); updateTeam();}
+}
+function squadFromPick(p){
+ return squads.find(s=>seasonToken(s)===p.squadToken) || squads.find(s=>s.club===p.club && s.era===p.era) || null;
+}
+function undoLastPick(){
+ if(!team.length) return;
+ const removed=team.pop();
+ selected=null;
+ used.delete(removed.pickId || `${removed.club}|${removed.era}|${removed.name}`);
+ usedNames.delete(playerNameKey(removed.name));
+ lastSeason=null;
+ $('result').classList.add('hidden');
+ const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden');
+ current=squadFromPick(removed) || current || squads[takeSquadIndex()];
+ $('club').textContent=current.club;
+ $('era').textContent=current.era+' · '+current.players.length+' jugadores disponibles';
+ $('round').textContent=team.length+'/5';
+ $('need').textContent='Elige de nuevo';
+ statusMessage=`Deshecho: ${removed.name}. Puedes elegir otra pieza de esta plantilla.`;
+ $('simBtn').disabled=true;
+ renderAll();
 }
 function slotContribution(p){
  // La línea elegida importa, pero también si es posición natural o secundaria.
@@ -534,6 +615,64 @@ function updateTeam(){
  }).join('');
  [...document.querySelectorAll('.slot')].forEach(b=>b.onclick=()=>place(b.dataset.slot));
  const m=computeTeamMetrics(); $('atk').textContent=Math.round(m.A);$('def').textContent=Math.round(m.D);$('ctrl').textContent=Math.round(m.C);
+ syncActionButtons();
+ renderMobileDock();
+}
+function syncActionButtons(){
+ const draftStarted=!!current || team.length>0;
+ const complete=team.length>=5;
+ $('startBtn').classList.toggle('actionHidden', draftStarted);
+ $('rerollBtn').classList.toggle('actionHidden', !current || complete);
+ $('undoBtn').classList.toggle('actionHidden', team.length===0);
+ $('simBtn').classList.toggle('actionHidden', !complete);
+ $('resetBtn').classList.toggle('actionHidden', !draftStarted && $('result').classList.contains('hidden'));
+ $('undoBtn').disabled=team.length===0;
+ $('simBtn').disabled=!complete;
+ $('rerollBtn').disabled=!current || complete || rerolls<=0;
+}
+function renderMobileDock(){
+ const dock=$('mobilePickDock');
+ if(!dock) return;
+ if(selected && team.length<5){
+   const valid=validSlots(selected.p);
+   if(!valid.length){
+     dock.classList.remove('active');
+     dock.innerHTML='';
+     return;
+   }
+   dock.classList.add('active');
+   dock.innerHTML=`<div class="dockTitle"><b>${selected.p[0]}</b><button class="dockCancel" type="button">Cambiar</button></div><div class="dockSlots">${valid.map(s=>`<button class="dockSlot" type="button" data-slot="${s}">${slotLabel(s)}</button>`).join('')}</div>`;
+   dock.querySelector('.dockCancel').onclick=()=>{selected=null;renderAll();};
+   [...dock.querySelectorAll('.dockSlot')].forEach(btn=>btn.onclick=()=>place(btn.dataset.slot));
+   return;
+ }
+ if(team.length>=5){
+   const hasResult=!$('result').classList.contains('hidden');
+   dock.classList.add('active');
+   dock.innerHTML=`<div class="dockTitle"><b>Cinco cerrado</b><span>${hasResult?'Puedes repetir la simulacion':'Listo para simular'}</span></div><div class="dockActions"><button class="dockPrimary" type="button">${hasResult?'Simular otra vez':'Simular temporada'}</button><button class="dockSecondary" type="button">Deshacer ultimo</button><button class="dockSecondary" type="button">Reiniciar</button></div>`;
+   dock.querySelector('.dockPrimary').onclick=simulate;
+   const secondary=[...dock.querySelectorAll('.dockSecondary')];
+   secondary[0].onclick=undoLastPick;
+   secondary[1].onclick=reset;
+   return;
+ }
+ if(team.length>=5){
+   const hasResult=!$('result').classList.contains('hidden');
+   dock.classList.add('active');
+   dock.innerHTML=`<div class="dockTitle"><b>Cinco cerrado</b><span>${hasResult?'Puedes repetir la simulación':'Listo para simular'}</span></div><div class="dockActions"><button class="dockPrimary" type="button">${hasResult?'Simular otra vez':'Simular temporada'}</button><button class="dockSecondary" type="button">Reiniciar</button></div>`;
+   dock.querySelector('.dockPrimary').onclick=simulate;
+   dock.querySelector('.dockSecondary').onclick=reset;
+   return;
+ }
+ if(team.length>0 && current){
+   dock.classList.add('active');
+   dock.innerHTML=`<div class="dockTitle"><b>Draft ${team.length}/5</b><span>${current.club}</span></div><div class="dockActions"><button class="dockPrimary" type="button" ${rerolls<=0?'disabled':''}>Otro equipo (${rerolls})</button><button class="dockSecondary" type="button">Deshacer ultimo</button></div>`;
+   dock.querySelector('.dockPrimary').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
+   dock.querySelector('.dockSecondary').onclick=undoLastPick;
+   return;
+ }
+ dock.classList.remove('active');
+ dock.innerHTML='';
 }
 function chemistry(){
  const clubs={}, eras={};
@@ -729,7 +868,8 @@ function simulate(){
  const worstLine=worst?`<div class="storyBox"><b>💀 Peor derrota</b><span>${worst.rival}<br>${worst.forG}-${worst.againstG}</span></div>`:`<div class="storyBox"><b>💀 Peor derrota</b><span>Nadie te ganó esta temporada.</span></div>`;
  const topTable=makeTopTable(points);
  const hpMain=$('hallPanelMain'); if(hpMain) hpMain.classList.remove('hidden');
- $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div><div><span>Balance</span><b>${balanceProfile().label}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox"><b>📊 Top 5 final</b><div class="tableMini">${topTable}</div></div>${pain}${draws}<div class="resultActions"><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><div class="log">${log}</div>`;
+ $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div><div><span>Balance</span><b>${balanceProfile().label}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox"><b>📊 Top 5 final</b><div class="tableMini">${topTable}</div></div>${pain}${draws}<div class="resultActions"><button class="tinyBtn" onclick="shareResult()">Compartir</button><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><details class="matchDetails"><summary>Ver los 38 partidos</summary><div class="log">${log}</div></details>`;
+ syncActionButtons(); renderMobileDock(); scrollResultIntoView();
 }
 
 
@@ -785,6 +925,29 @@ function saveHallOfFame(hall){try{localStorage.setItem(HOF_KEY,JSON.stringify(ha
 function currentTeamSummary(){
  return team.map(p=>`${p.name} (${slotLabel(p.slot)})`).join(' · ');
 }
+function scrollResultIntoView(){
+ const result=$('result');
+ if(result && !result.classList.contains('hidden')){
+   result.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+}
+async function shareResult(){
+ if(!lastSeason) return;
+ const text=`38-0 España 5v5: ${lastSeason.w}-${lastSeason.d}-${lastSeason.l}, ${lastSeason.points} pts, goles ${lastSeason.gf}-${lastSeason.ga}. Equipo: ${currentTeamSummary()}`;
+ try{
+   if(navigator.share){ await navigator.share({title:'38-0 España 5v5',text}); }
+   else if(navigator.clipboard){ await navigator.clipboard.writeText(text); showShareToast('Resultado copiado'); }
+   else { prompt('Copia tu resultado:',text); }
+ }catch(e){}
+}
+function showShareToast(msg){
+ const old=document.querySelector('.shareToast'); if(old) old.remove();
+ const toast=document.createElement('div');
+ toast.className='shareToast';
+ toast.textContent=msg;
+ document.body.appendChild(toast);
+ setTimeout(()=>toast.remove(),1800);
+}
 function updateHallOfFame(season){
  const hall=loadHallOfFame();
  const entry={
@@ -822,8 +985,8 @@ function clearHallOfFame(){
  if(confirm('¿Borrar el Hall of Fame guardado?')){try{localStorage.removeItem(HOF_KEY);}catch(e){window.__hofMemory=[];}renderHallOfFame();}
 }
 
-function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;selected=null;refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Aparece un equipo/temporada y eliges de su plantilla.';$('round').textContent='0/5';$('options').innerHTML='';$('hint').textContent='El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.';$('simBtn').disabled=true;$('rerollBtn').disabled=true;$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
-$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
+function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Aparece un equipo/temporada y eliges de su plantilla.';$('round').textContent='0/5';$('options').innerHTML='';$('hint').textContent='El 5º jugador no va a FLEX: colócalo en +DEF, +MED o +DEL para reforzar esa línea.';$('simBtn').disabled=true;$('rerollBtn').disabled=true;$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
+$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
 $('rerollBtn').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
-$('simBtn').onclick=simulate;$('resetBtn').onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
+$('simBtn').onclick=simulate;$('resetBtn').onclick=reset;$('undoBtn').onclick=undoLastPick; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
 </script></body></html>
