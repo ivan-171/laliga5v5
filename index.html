@@ -880,6 +880,7 @@ function simulate(){
  const verdict = w===38?'Temporada perfecta de verdad. Esto ya sí es una locura histórica.':w>=34?'Equipo monstruoso, pero el 38-0 ya no se regala.':w>=28?'Equipo brutal. Domina LaLiga, aunque no es invencible.':w>=20?'Buen cinco. Calidad real, pero lejos de temporada perfecta.':w>=14?'Equipo irregular: tiene piezas buenas, pero la estructura le pesa.':'Equipo insuficiente para dominar toda la liga.';
  const synText=m.synergy.labels.length?m.synergy.labels.slice(0,3).join(', '):'Sin sinergia especial';
  const season={w,d,l,gf,ga,points,A,D,C,shape}; lastSeason=season;
+ const leagueTable=makeLeagueTable(season);
  const hofUpdate=updateHallOfFame(season);
  const mvp=pickMvp(season);
  const best=games.filter(g=>g.res==='V').sort((a,b)=>(b.forG-b.againstG)-(a.forG-a.againstG) || b.edge-a.edge)[0];
@@ -888,9 +889,8 @@ function simulate(){
  const mvpLine=mvp?`<div class="storyBox"><b>🏆 MVP: ${mvp.name}</b><span>${mvp.line} · ${mvp.club}<br>Impacto estimado: ${Math.round(mvp.mvpScore/10)} puntos de influencia.</span></div>`:'';
  const bestLine=best?`<div class="storyBox"><b>🔥 Mejor victoria</b><span>${best.rival}<br>${best.forG}-${best.againstG}</span></div>`:`<div class="storyBox"><b>🔥 Mejor victoria</b><span>No hubo una victoria clara que salve el relato.</span></div>`;
  const worstLine=worst?`<div class="storyBox"><b>💀 Peor derrota</b><span>${worst.rival}<br>${worst.forG}-${worst.againstG}</span></div>`:`<div class="storyBox"><b>💀 Peor derrota</b><span>Nadie te ganó esta temporada.</span></div>`;
- const leagueTable=makeLeagueTable(season);
  const hpMain=$('hallPanelMain'); if(hpMain) hpMain.classList.remove('hidden');
- $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox leagueTable"><b>Tabla final</b><div class="tableMini">${leagueTable}</div></div><div class="resultActions"><button class="tinyBtn" onclick="shareResult()">Compartir</button><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><details class="matchDetails"><summary>Ver los 38 partidos</summary><div class="log">${log}</div></details>`;
+ $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Posición liga</span><b>#${season.leaguePosition}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox leagueTable"><b>Tabla final</b><div class="tableMini">${leagueTable}</div></div><div class="resultActions"><button class="tinyBtn" onclick="shareResult()">Compartir</button><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><details class="matchDetails"><summary>Ver los 38 partidos</summary><div class="log">${log}</div></details>`;
  syncActionButtons(); renderMobileDock(); scrollResultIntoView();
 }
 
@@ -919,11 +919,14 @@ function seasonNarrative(season,mvp,best,worst){
  const m=computeTeamMetrics();
  const strongLine = m.A>=m.D && m.A>=m.C ? 'ataque' : m.D>=m.A && m.D>=m.C ? 'defensa' : 'control';
  const name=mvp?mvp.name:'tu bloque principal';
+ const pos=season.leaguePosition||20;
  let intro='';
- if(season.points>=95) intro='Temporada histórica: el equipo no sólo ganó, impuso una tiranía competitiva.';
- else if(season.points>=84) intro='Temporada de campeón: estructura fuerte, pegada suficiente y pocas noches realmente malas.';
- else if(season.points>=70) intro='Buen proyecto: compitió arriba, pero le faltó una pieza diferencial para romper la liga.';
- else if(season.points>=55) intro='Equipo de zona media-alta: hubo calidad, pero demasiadas jornadas se escaparon por detalles.';
+ if(pos===1 && season.points>=90) intro='Campeón total: no sólo ganaste la liga, la rompiste contra rivales durísimos.';
+ else if(pos===1) intro='Campeón de liga: quizá no fue una temporada perfecta, pero sí la más eficaz del año.';
+ else if(pos<=4 && season.points>=80) intro=`Temporada de élite: ${season.points} puntos y puesto #${pos}, pero el campeón puso un listón brutal.`;
+ else if(pos<=4) intro=`Buen curso competitivo: entraste en Top 4 desde el puesto #${pos}, aunque faltó colmillo para ganar la liga.`;
+ else if(season.points>=70) intro=`Buen proyecto: ${season.points} puntos, pero en esta liga sólo alcanzó para el puesto #${pos}.`;
+ else if(season.points>=55) intro=`Equipo de zona media-alta: hubo calidad, pero el puesto #${pos} marca el techo real del bloque.`;
  else intro='Proyecto frágil: nombres interesantes, pero sin una columna vertebral capaz de sostener 38 jornadas.';
  const lineText={
    ataque:'El equipo vivió de la pegada y del talento en campo rival.',
@@ -934,13 +937,18 @@ function seasonNarrative(season,mvp,best,worst){
  return `<b>${intro}</b><br>${lineText} ${name} fue la pieza que más sostuvo el plan. ${closer}`;
 }
 function opponentSeason(r){
- const strength=r.tier + (Math.random()*4-2);
- const pts=Math.round(Math.max(36,Math.min(99,(strength-58)*1.38 + Math.random()*8 - 2)));
- const w=Math.max(8,Math.min(31,Math.round((pts-14)/3 + Math.random()*3 - 1.5)));
- const d=Math.max(2,Math.min(14,pts-(w*3)));
- const l=Math.max(0,38-w-d);
- const gf=Math.round(42 + (strength-75)*1.45 + Math.random()*18);
- const ga=Math.round(24 + Math.max(0,88-strength)*1.25 + Math.random()*16);
+ const strength=r.tier + (Math.random()*3-1.5);
+ const elitePush=Math.max(0,strength-92)*0.65;
+ const target=Math.round(Math.max(58,Math.min(97,43 + (strength-70)*1.65 + elitePush + Math.random()*7 - 3.5)));
+ let d=Math.round(Math.max(3,Math.min(10,8 - Math.max(0,strength-86)*0.16 + Math.random()*4 - 2)));
+ let w=Math.round(Math.max(13,Math.min(32,(target-d)/3)));
+ let l=38-w-d;
+ if(l<0){d=Math.max(2,d+l);l=38-w-d;}
+ const maxPts=Math.min(98,target+1);
+ while(w*3+d>maxPts && (w>13 || d>3)){ if(d>3)d--; else w--; l=38-w-d; }
+ const pts=w*3+d;
+ const gf=Math.round(50 + Math.max(0,strength-75)*1.75 + Math.random()*16);
+ const ga=Math.round(18 + Math.max(0,92-strength)*1.05 + Math.random()*14);
  return {name:r.name,pts,w,d,l,gf,ga,gd:gf-ga,me:false};
 }
 function rankRows(rows){
@@ -954,6 +962,8 @@ function makeLeagueTable(season){
  const me={name:'Tu equipo',pts:season.points,w:season.w,d:season.d,l:season.l,gf:season.gf,ga:season.ga,gd:season.gf-season.ga,me:true};
  const rows=rankRows([me,...rivals]);
  const myIndex=rows.findIndex(r=>r.me);
+ season.leaguePosition=myIndex+1;
+ season.leagueChampion=rows[0]?.name || 'Tu equipo';
  const head='<div class="rankRow head"><span>#</span><span>Equipo</span><b>Pts</b><b>DG</b><b>V-E-D</b></div>';
  const top=rows.slice(0,4);
  const visible=top.some(r=>r.me)?top:[...top,{gap:true},rows[myIndex]];
@@ -1001,6 +1011,7 @@ function updateHallOfFame(season){
   gf:season.gf,
   ga:season.ga,
   gd:season.gf-season.ga,
+  leaguePosition:season.leaguePosition,
   A:Math.round(season.A),
   D:Math.round(season.D),
   C:Math.round(season.C),
@@ -1013,7 +1024,7 @@ function updateHallOfFame(season){
  let top=hall;
  if(entry.points>=minHallPoints){
    hall.push(entry);
-   hall.sort((a,b)=>b.points-a.points || b.gd-a.gd || b.gf-a.gf || a.ga-b.ga);
+   hall.sort((a,b)=>b.points-a.points || (a.leaguePosition||99)-(b.leaguePosition||99) || b.gd-a.gd || b.gf-a.gf || a.ga-b.ga);
    top=hall.slice(0,10);
    isNew=top.some(x=>x===entry) || top.some(x=>x.date===entry.date && x.team===entry.team && x.record===entry.record && x.points===entry.points);
    saveHallOfFame(top);
@@ -1023,7 +1034,7 @@ function updateHallOfFame(season){
 }
 function renderHallOfFame(){
  const hall=loadHallOfFame();
- const list=hall.length?`<div class="hofList">${hall.map((h,i)=>`<div class="hofRow"><span class="rank">#${i+1}</span> <b>${h.points} pts</b> · ${h.record} · ${h.gf}-${h.ga}<br><span>ATQ ${h.A||'-'} · DEF ${h.D||'-'} · CTRL ${h.C||'-'}</span><br>${h.team}<br><span>${h.date||''}</span><div class="hofControls"><button class="tinyBtn" onclick="deleteHallEntry(${i})">Borrar este</button></div></div>`).join('')}</div>`:'<div class="hofEmpty">Tus mejores equipos de 70+ puntos aparecerán aquí.</div>';
+ const list=hall.length?`<div class="hofList">${hall.map((h,i)=>`<div class="hofRow"><span class="rank">#${i+1}</span> <b>${h.points} pts</b> · Liga #${h.leaguePosition||'-'} · ${h.record} · ${h.gf}-${h.ga}<br><span>ATQ ${h.A||'-'} · DEF ${h.D||'-'} · CTRL ${h.C||'-'}</span><br>${h.team}<br><span>${h.date||''}</span><div class="hofControls"><button class="tinyBtn" onclick="deleteHallEntry(${i})">Borrar este</button></div></div>`).join('')}</div>`:'<div class="hofEmpty">Tus mejores equipos de 70+ puntos aparecerán aquí.</div>';
  const full=`<h3>👑 Hall of Fame</h3>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div>`;
  const compact=`<details><summary>👑 Hall of Fame ${hall.length?`· mejor: ${hall[0].points} pts`:''}</summary>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div></details><div class="hofMainClosed">El resultado de la temporada queda arriba; el Hall sólo guarda tus mejores equipos.</div>`;
  const aside=$('hallPanel'); if(aside){aside.classList.remove('compact'); aside.innerHTML=full;}
