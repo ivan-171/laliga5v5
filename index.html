@@ -1064,4 +1064,4 @@ function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls
 $('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
 $('rerollBtn').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
 $('simBtn').onclick=simulate;$('resetBtn').onclick=reset;$('undoBtn').onclick=undoLastPick;const qs=$('quickSimBtn');if(qs)qs.onclick=simulate;const qr=$('quickResetBtn');if(qr)qr.onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
-</script></body></html>
+</script><!-- pages rebuild 2026-07-09 relaxed-league-curve --></body></html>
