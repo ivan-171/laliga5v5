@@ -927,7 +927,7 @@ function seasonNarrative(season,mvp,best,worst){
  else if(pos<=4) intro=`Buen curso competitivo: entraste en Top 4 desde el puesto #${pos}, aunque faltó colmillo para ganar la liga.`;
  else if(season.points>=70) intro=`Buen proyecto: ${season.points} puntos, pero en esta liga sólo alcanzó para el puesto #${pos}.`;
  else if(season.points>=55) intro=`Equipo de zona media-alta: hubo calidad, pero el puesto #${pos} marca el techo real del bloque.`;
- else intro='Proyecto frágil: nombres interesantes, pero sin una columna vertebral capaz de sostener 38 jornadas.';
+ else intro=`Proyecto frágil: nombres interesantes, pero el puesto #${pos} deja claro que faltó una columna vertebral para sostener 38 jornadas.`;
  const lineText={
    ataque:'El equipo vivió de la pegada y del talento en campo rival.',
    defensa:'El equipo se sostuvo desde atrás y convirtió muchos partidos en guerras largas.',
