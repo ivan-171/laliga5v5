@@ -17,6 +17,7 @@
 .quickActions{margin-top:8px}
 .teamCard{position:sticky;top:12px;align-self:start}
 .hero{display:grid;gap:10px}.hero p{margin:0;max-width:760px}.hero .bar{margin-top:0}
+.rankRow{grid-template-columns:34px minmax(0,1fr) 38px 38px 56px;align-items:center;padding:6px 0}.rankRow span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rankRow b{text-align:right;color:var(--text)}.rankRow.me b{color:var(--gold)}.rankRow.head{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:900}.rankGap{color:var(--muted);font-size:12px;text-align:center;padding:5px 0}.leagueTable details{margin-top:8px}.leagueTable summary{cursor:pointer;color:var(--gold);font-weight:950;list-style:none}.leagueTable summary::-webkit-details-marker{display:none}
 .actionHidden{display:none!important}
 .matchDetails{margin-top:10px}.matchDetails summary{cursor:pointer;color:var(--gold);font-weight:950;padding:10px 0;list-style:none}.matchDetails summary::-webkit-details-marker{display:none}
 .shareToast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#f6f8fb;color:#07101d;border-radius:999px;padding:10px 14px;font-weight:950;box-shadow:0 12px 36px rgba(0,0,0,.35);z-index:40}
@@ -154,7 +155,9 @@ const squads=[
 {club:'Levante UD',era:'2011-12 · Europa League',players:[['Munúa','POR',5,82,64,['seguro']],['Juanfran','DEF',58,78,66,['veterano']],['Ballesteros','DEF',42,84,56,['capitán']],['Nano','DEF',46,80,60,['central']],['Javi Venta','DEF',56,76,66,['lateral']],['Iborra','MED',68,80,76,['llegada']],['Barkero','MED',78,62,84,['zurda']],['Xavi Torres','MED',58,78,74,['trabajo']],['Valdo','MED',74,62,76,['banda']],['Koné','DEL',86,46,72,['explosión']],['Juanlu','MED',76,58,78,['gol desde banda']],['Rubén Suárez','DEL',76,44,74,['calidad']],['El Zhar','DEL',72,50,70,['rotación']],['Del Horno','DEF',54,76,64,['fondo']]]},
 {club:'Alavés',era:'2000-01 · final UEFA',players:[['Herrera','POR',5,82,64,['seguro']],['Contra','DEF',72,76,78,['carril']],['Téllez','DEF',46,80,58,['central']],['Karmona','DEF',46,82,58,['capitán']],['Geli','DEF',58,78,66,['lateral']],['Desio','MED',56,80,72,['trabajo']],['Tomic','MED',70,62,82,['toque']],['Jordi Cruyff','MED',76,52,82,['talento']],['Astudillo','MED',66,76,74,['equilibrio']],['Javi Moreno','DEL',88,46,72,['killer']],['Iván Alonso','DEL',82,48,70,['remate']],['Magno','DEL',76,46,70,['banda']],['Pablo Gómez','MED',70,60,76,['rotación']],['Eggen','DEF',44,78,58,['fondo']]]},
 {club:'Racing Santander',era:'2007-08 · Marcelino UEFA',players:[['Toño','POR',5,82,64,['seguro']],['Pinillos','DEF',56,78,66,['lateral']],['Garay','DEF',54,86,68,['central goleador']],['Oriol','DEF',46,80,60,['fiable']],['Ayoze','DEF',58,76,66,['banda']],['Colsa','MED',64,78,76,['equilibrio']],['Duscher','MED',56,82,72,['muro']],['Jorge López','MED',78,60,82,['calidad']],['Óscar Serrano','MED',76,58,78,['banda']],['Munitis','DEL',80,56,78,['movilidad']],['Tchité','DEL',82,46,70,['gol']],['Smolarek','DEL',78,44,70,['rotación']],['Pablo Álvarez','MED',72,58,76,['trabajo']],['Luis Fernández','DEF',54,76,64,['fondo']]]},
-{club:'UD Las Palmas',era:'2001-02 · Valerón-Viera cantera',players:[['Nacho González','POR',5,80,64,['seguro']],['Ángel Sánchez','DEF',58,76,66,['lateral']],['Samuél','DEF',46,78,58,['central']],['Olias','DEF',46,78,58,['oficio']],['Orlando','DEF',56,74,66,['fondo']],['Josico','MED',54,80,72,['trabajo']],['Jorge Larena','MED',72,62,82,['talento']],['Vinny Samways','MED',64,78,76,['orden']],['Guayre','DEL',80,50,76,['velocidad']],['Rubén Castro','DEL',78,44,72,['joven gol']],['Orlando Suárez','DEL',76,48,70,['banda']],['Álvaro','DEL',74,46,68,['rotación']],['Pablo Lago','MED',68,60,76,['toque']],['Schiavi','DEF',48,78,60,['central']]]},
+{club:'UD Las Palmas',era:'2001-02 · Valerón-Viera cantera',players:[['Nacho González','POR',5,80,64,['seguro']],['Ángel Sánchez','DEF',58,76,66,['lateral']],['Samuél','DEF',46,78,58,['central']],['Olias','DEF',46,78,58,['oficio']],['Orlando','DEF',56,74,66,['fondo']],['Josico','MED',54,80,72,['trabajo']],['Jorge Larena','MED',72,62,82,['talento']],['Vinny Samways','MED',64,78,76,['orden']],['Guayre','DEL',80,50,76,['velocidad']],['Rubén Castro','DEL',78,44,72,['joven gol']],['Orlando Suárez','DEL',76,48,70,['banda']],['Álvaro','DEL',74,46,68,['rotación']],['Pablo Lago','MED',68,60,76,['toque']],['Valerón','MED',84,46,92,['mago']],['Jonathan Viera','MED',82,50,88,['cantera']],['Schiavi','DEF',48,78,60,['central']]]},
+{club:'Real Zaragoza',era:'1994-95 · Recopa',players:[['Cedrún','POR',5,84,64,['seguro']],['Belsué','DEF',62,78,70,['lateral']],['Cáceres','DEF',50,84,62,['central']],['Aguado','DEF',48,82,62,['capitán']],['Solana','DEF',58,78,68,['oficio']],['Nayim','MED',76,66,84,['gol imposible']],['Poyet','MED',78,78,82,['llegada']],['Aragón','MED',72,72,82,['toque']],['Higuera','DEL',86,48,76,['calidad']],['Esnáider','DEL',90,50,76,['carácter']],['Pardeza','DEL',82,50,76,['movilidad']],['Gustavo López','MED',76,58,80,['banda']],['Gay','DEF',54,76,64,['fondo']],['Oscar','MED',68,68,76,['rotación']]]},
+{club:'RCD Mallorca',era:'2002-03 · Copa del Rey',players:[['Leo Franco','POR',6,84,66,['reflejos']],['Campano','DEF',64,76,72,['lateral']],['Nadal','DEF',46,84,62,['jerarquía']],['Lussenhoff','DEF',46,82,60,['central']],['Poli','DEF',58,76,68,['oficio']],['Ibagaza','MED',82,54,88,['talento']],['Novo','MED',76,66,78,['energía']],['Marcos','MED',70,72,78,['trabajo']],['Eto’o','DEL',92,54,80,['explosivo']],['Pandiani','DEL',86,54,70,['rifle']],['Luque','DEL',86,48,80,['zurda']],['Riera','MED',76,56,78,['banda']],['Engonga','MED',58,78,74,['veterano']],['Cortés','DEF',54,74,64,['fondo']]]},
 {club:'SD Eibar',era:'2017-18 · Mendilibar',players:[['Dmitrović','POR',5,82,66,['seguro']],['Capa','DEF',70,76,74,['lateral']],['Ramis','DEF',46,82,60,['central']],['Arbilla','DEF',56,80,70,['polivalente']],['José Ángel','DEF',66,76,74,['lateral']],['Dani García','MED',54,82,74,['ancla']],['Joan Jordán','MED',72,72,82,['toque']],['Inui','MED',80,54,82,['desborde']],['Orellana','MED',82,50,86,['fantasía']],['Pedro León','MED',78,54,82,['golpeo']],['Charles','DEL',84,48,70,['gol']],['Kike García','DEL',80,54,70,['trabajo']],['Sergi Enrich','DEL',78,56,72,['pelea']],['Escalante','MED',60,78,74,['físico']]]},
 {club:'Osasuna',era:'2022-23 · final Copa',players:[['Sergio Herrera','POR',5,84,66,['seguro']],['Nacho Vidal','DEF',56,76,66,['lateral']],['David García','DEF',48,86,62,['líder']],['Aridane','DEF',44,80,58,['central']],['Manu Sánchez','DEF',62,74,70,['profundidad']],['Torró','MED',56,82,74,['ancla']],['Moncayola','MED',70,76,82,['cantera']],['Moi Gómez','MED',74,64,84,['toque']],['Aimar Oroz','MED',76,62,84,['talento']],['Chimy Ávila','DEL',84,58,76,['colmillo']],['Budimir','DEL',82,46,70,['remate']],['Abde','DEL',82,44,78,['desborde']],['Rubén García','MED',74,58,80,['zurda']],['Kike García','DEL',78,54,68,['pelea']]]},
 {club:'Tenerife',era:'1992-93 · equipo revelación',players:[['Agustín','POR',5,82,64,['seguro']],['Toño','DEF',56,76,66,['lateral']],['César Gómez','DEF',48,82,60,['central']],['Dertycia','DEL',84,44,70,['gol']],['Chano','MED',72,72,82,['director']],['Redondo','MED',70,84,88,['elegancia']],['Felipe Miñambres','MED',78,62,84,['calidad']],['Pizzi','DEL',82,44,70,['joven gol']],['Pier','DEL',78,48,70,['movilidad']],['Juanele','DEL',80,50,76,['talento']],['Ezequiel Castillo','DEF',46,78,60,['oficio']],['Luis Delgado','DEF',52,76,64,['fondo']],['Quique Medina','MED',64,72,74,['trabajo']],['Dani','DEL',76,46,66,['rotación']]]}
@@ -644,8 +647,10 @@ function syncActionButtons(){
  $('resetBtn').classList.toggle('actionHidden', !draftStarted && !hasResult);
  const quickSim=$('quickSimBtn');
  const quickReset=$('quickResetBtn');
- if(quickSim){quickSim.classList.toggle('actionHidden', !complete);quickSim.disabled=!complete;}
- if(quickReset){quickReset.classList.toggle('actionHidden', !draftStarted && !hasResult);}
+ if(quickSim){quickSim.classList.toggle('actionHidden', !complete);quickSim.disabled=!complete;quickSim.textContent=hasResult?'Empezar de nuevo':'Simular temporada';quickSim.onclick=hasResult?reset:simulate;}
+ if(quickReset){quickReset.classList.toggle('actionHidden', hasResult || (!draftStarted && !hasResult));}
+ $('simBtn').textContent=hasResult?'Empezar de nuevo':'Simular 38 partidos';
+ $('simBtn').onclick=hasResult?reset:simulate;
  $('undoBtn').disabled=team.length===0;
  $('simBtn').disabled=!complete;
  $('rerollBtn').disabled=!current || complete || rerolls<=0;
@@ -676,8 +681,8 @@ function renderMobileDock(){
  }
  if(team.length>=5){
    dock.classList.add('active');
-   dock.innerHTML=`<div class="dockTitle"><b>Cinco cerrado</b><span>${hasResult?'Puedes repetir la simulacion':'Listo para simular'}</span></div><div class="dockActions"><button class="dockPrimary" type="button">${hasResult?'Simular otra vez':'Simular temporada'}</button><button class="dockSecondary" type="button">Deshacer ultimo</button><button class="dockSecondary" type="button">Reiniciar</button></div>`;
-   dock.querySelector('.dockPrimary').onclick=simulate;
+   dock.innerHTML=`<div class="dockTitle"><b>${hasResult?'Temporada simulada':'Cinco cerrado'}</b><span>${hasResult?'Haz otro draft':'Listo para simular'}</span></div><div class="dockActions"><button class="dockPrimary" type="button">${hasResult?'Empezar de nuevo':'Simular temporada'}</button><button class="dockSecondary" type="button">Deshacer ultimo</button><button class="dockSecondary" type="button">Reiniciar</button></div>`;
+   dock.querySelector('.dockPrimary').onclick=hasResult?reset:simulate;
    const secondary=[...dock.querySelectorAll('.dockSecondary')];
    secondary[0].onclick=undoLastPick;
    secondary[1].onclick=reset;
@@ -880,14 +885,12 @@ function simulate(){
  const best=games.filter(g=>g.res==='V').sort((a,b)=>(b.forG-b.againstG)-(a.forG-a.againstG) || b.edge-a.edge)[0];
  const worst=games.filter(g=>g.res==='D').sort((a,b)=>(b.againstG-b.forG)-(a.againstG-a.forG))[0];
  const story=seasonNarrative(season,mvp,best,worst);
- const pain = lostAgainst.length?`<p>Derrotas contra: ${lostAgainst.slice(0,4).join(', ')}${lostAgainst.length>4?'…':''}</p>`:'';
- const draws = drewAgainst.length?`<p>Empates clave: ${drewAgainst.slice(0,3).join(', ')}${drewAgainst.length>3?'…':''}</p>`:'';
  const mvpLine=mvp?`<div class="storyBox"><b>🏆 MVP: ${mvp.name}</b><span>${mvp.line} · ${mvp.club}<br>Impacto estimado: ${Math.round(mvp.mvpScore/10)} puntos de influencia.</span></div>`:'';
  const bestLine=best?`<div class="storyBox"><b>🔥 Mejor victoria</b><span>${best.rival}<br>${best.forG}-${best.againstG}</span></div>`:`<div class="storyBox"><b>🔥 Mejor victoria</b><span>No hubo una victoria clara que salve el relato.</span></div>`;
  const worstLine=worst?`<div class="storyBox"><b>💀 Peor derrota</b><span>${worst.rival}<br>${worst.forG}-${worst.againstG}</span></div>`:`<div class="storyBox"><b>💀 Peor derrota</b><span>Nadie te ganó esta temporada.</span></div>`;
- const topTable=makeTopTable(points);
+ const leagueTable=makeLeagueTable(season);
  const hpMain=$('hallPanelMain'); if(hpMain) hpMain.classList.remove('hidden');
- $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div><div><span>Balance</span><b>${balanceProfile().label}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox"><b>📊 Top 5 final</b><div class="tableMini">${topTable}</div></div>${pain}${draws}<div class="resultActions"><button class="tinyBtn" onclick="shareResult()">Compartir</button><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><details class="matchDetails"><summary>Ver los 38 partidos</summary><div class="log">${log}</div></details>`;
+ $('result').innerHTML=`<div class="record ${cls}">${w}-${d}-${l}</div><div class="why"><div><span>Puntos</span><b>${points}</b></div><div><span>Ataque ponderado</span><b>${Math.round(A)}</b></div><div><span>Defensa ponderada</span><b>${Math.round(D)}</b></div><div><span>Control ponderado</span><b>${Math.round(C)}</b></div><div><span>Forma POR-DEF-MED-DEL</span><b>${shape}</b></div><div><span>Química / sinergia</span><b>${synText}</b></div><div><span>Goles</span><b>${gf}-${ga}</b></div></div><p>${verdict}</p><div class="seasonStory">${story}${hofUpdate.isNew?'<br><span class="small">👑 Nuevo equipo añadido al Hall of Fame.</span>':''}</div><div class="storyGrid">${mvpLine}${bestLine}${worstLine}</div><div class="storyBox leagueTable"><b>Tabla final</b><div class="tableMini">${leagueTable}</div></div><div class="resultActions"><button class="tinyBtn" onclick="shareResult()">Compartir</button><button class="tinyBtn" onclick="renderHallOfFame()">Actualizar Hall</button><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div><details class="matchDetails"><summary>Ver los 38 partidos</summary><div class="log">${log}</div></details>`;
  syncActionButtons(); renderMobileDock(); scrollResultIntoView();
 }
 
@@ -930,10 +933,33 @@ function seasonNarrative(season,mvp,best,worst){
  const closer = worst ? `La derrota ante ${worst.rival} marcó el techo real del equipo.` : 'Nadie encontró una forma clara de tumbarte.';
  return `<b>${intro}</b><br>${lineText} ${name} fue la pieza que más sostuvo el plan. ${closer}`;
 }
-function makeTopTable(points){
- const rivals=buildRivalCalendar().sort((a,b)=>b.tier-a.tier).slice(0,4).map(r=>({name:r.name,pts:Math.max(72,Math.min(99,Math.round(r.tier*.92 + Math.random()*5 - 1)))}));
- const rows=[{name:'Tu equipo',pts:points,me:true},...rivals].sort((a,b)=>b.pts-a.pts).slice(0,5);
- return rows.map((r,i)=>`<div class="rankRow ${r.me?'me':''}"><span>${i+1}</span><span>${r.name}</span><b>${r.pts}</b></div>`).join('');
+function opponentSeason(r){
+ const strength=r.tier + (Math.random()*4-2);
+ const pts=Math.round(Math.max(36,Math.min(99,(strength-58)*1.38 + Math.random()*8 - 2)));
+ const w=Math.max(8,Math.min(31,Math.round((pts-14)/3 + Math.random()*3 - 1.5)));
+ const d=Math.max(2,Math.min(14,pts-(w*3)));
+ const l=Math.max(0,38-w-d);
+ const gf=Math.round(42 + (strength-75)*1.45 + Math.random()*18);
+ const ga=Math.round(24 + Math.max(0,88-strength)*1.25 + Math.random()*16);
+ return {name:r.name,pts,w,d,l,gf,ga,gd:gf-ga,me:false};
+}
+function rankRows(rows){
+ return rows.sort((a,b)=>b.pts-a.pts || b.gd-a.gd || b.gf-a.gf || a.ga-b.ga);
+}
+function leagueRow(r,i){
+ return `<div class="rankRow ${r.me?'me':''}"><span>${i+1}</span><span>${r.name}</span><b>${r.pts}</b><b>${r.gd>0?'+'+r.gd:r.gd}</b><b>${r.w}-${r.d}-${r.l}</b></div>`;
+}
+function makeLeagueTable(season){
+ const rivals=buildRivalCalendar().sort((a,b)=>b.tier-a.tier).slice(0,19).map(opponentSeason);
+ const me={name:'Tu equipo',pts:season.points,w:season.w,d:season.d,l:season.l,gf:season.gf,ga:season.ga,gd:season.gf-season.ga,me:true};
+ const rows=rankRows([me,...rivals]);
+ const myIndex=rows.findIndex(r=>r.me);
+ const head='<div class="rankRow head"><span>#</span><span>Equipo</span><b>Pts</b><b>DG</b><b>V-E-D</b></div>';
+ const top=rows.slice(0,4);
+ const visible=top.some(r=>r.me)?top:[...top,{gap:true},rows[myIndex]];
+ const preview=visible.map((r,i)=>r.gap?'<div class="rankGap">...</div>':leagueRow(r,rows.indexOf(r))).join('');
+ const full=rows.map((r,i)=>leagueRow(r,i)).join('');
+ return `${head}${preview}<details><summary>Mostrar tabla completa</summary><div class="tableMini">${head}${full}</div></details>`;
 }
 
 const HOF_KEY='laliga_5v5_hall_v35';
@@ -975,6 +1001,9 @@ function updateHallOfFame(season){
   gf:season.gf,
   ga:season.ga,
   gd:season.gf-season.ga,
+  A:Math.round(season.A),
+  D:Math.round(season.D),
+  C:Math.round(season.C),
   team:currentTeamSummary(),
   shape:season.shape,
   date:new Date().toLocaleDateString()
@@ -994,7 +1023,7 @@ function updateHallOfFame(season){
 }
 function renderHallOfFame(){
  const hall=loadHallOfFame();
- const list=hall.length?`<div class="hofList">${hall.map((h,i)=>`<div class="hofRow"><span class="rank">#${i+1}</span> <b>${h.points} pts</b> · ${h.record} · ${h.gf}-${h.ga}<br>${h.team}<br><span>${h.date||''}</span></div>`).join('')}</div>`:'<div class="hofEmpty">Tus mejores equipos de 70+ puntos aparecerán aquí.</div>';
+ const list=hall.length?`<div class="hofList">${hall.map((h,i)=>`<div class="hofRow"><span class="rank">#${i+1}</span> <b>${h.points} pts</b> · ${h.record} · ${h.gf}-${h.ga}<br><span>ATQ ${h.A||'-'} · DEF ${h.D||'-'} · CTRL ${h.C||'-'}</span><br>${h.team}<br><span>${h.date||''}</span><div class="hofControls"><button class="tinyBtn" onclick="deleteHallEntry(${i})">Borrar este</button></div></div>`).join('')}</div>`:'<div class="hofEmpty">Tus mejores equipos de 70+ puntos aparecerán aquí.</div>';
  const full=`<h3>👑 Hall of Fame</h3>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div>`;
  const compact=`<details><summary>👑 Hall of Fame ${hall.length?`· mejor: ${hall[0].points} pts`:''}</summary>${list}<div class="hofControls"><button class="tinyBtn" onclick="clearHallOfFame()">Borrar Hall</button></div></details><div class="hofMainClosed">El resultado de la temporada queda arriba; el Hall sólo guarda tus mejores equipos.</div>`;
  const aside=$('hallPanel'); if(aside){aside.classList.remove('compact'); aside.innerHTML=full;}
@@ -1003,9 +1032,16 @@ function renderHallOfFame(){
 function clearHallOfFame(){
  if(confirm('¿Borrar el Hall of Fame guardado?')){try{localStorage.removeItem(HOF_KEY);}catch(e){window.__hofMemory=[];}renderHallOfFame();}
 }
+function deleteHallEntry(i){
+ const hall=loadHallOfFame();
+ hall.splice(i,1);
+ saveHallOfFame(hall);
+ renderHallOfFame();
+ showShareToast('Entrada borrada');
+}
 
 function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Sale una plantilla historica. Elige una pieza y luego su hueco.';$('round').textContent='0/5';$('need').textContent='Empieza el draft';$('options').innerHTML='';$('hint').textContent='Cuando selecciones un jugador, los huecos validos se iluminan en verde.';$('simBtn').disabled=true;$('rerollBtn').disabled=true;$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
-$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
+$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
 $('rerollBtn').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
 $('simBtn').onclick=simulate;$('resetBtn').onclick=reset;$('undoBtn').onclick=undoLastPick;const qs=$('quickSimBtn');if(qs)qs.onclick=simulate;const qr=$('quickResetBtn');if(qr)qr.onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
 </script></body></html>
