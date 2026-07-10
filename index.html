@@ -79,7 +79,7 @@
  .quickActions{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom));z-index:20;background:rgba(8,13,22,.82);backdrop-filter:blur(10px);padding:7px;border:1px solid rgba(255,255,255,.10);border-radius:14px}
 }
 </style></head>
-<body><div class="app"><section class="hero"><h1><span>38-0</span> LaLiga 5v5</h1><p>Draftea cinco jugadores historicos, encajalos en su sitio y mira si pueden firmar una temporada perfecta.</p><div class="bar"><div class="pill">5 picks</div><div class="pill">Sin repetir nombres</div><div class="pill">Posicion real importa</div><div class="pill">Simulacion 38 jornadas</div><div class="pill">Hall of Fame</div></div><div class="flow" id="flow"></div></section><div class="layout"><main class="card"><div class="head"><b>Draft</b><span class="small" id="need">Empieza el draft</span></div><div class="challenge"><div><div class="club" id="club">Pulsa empezar</div><div class="era" id="era">Sale una plantilla historica. Elige una pieza y luego su hueco.</div></div><div class="round" id="round">0/5</div></div><div class="hint" id="hint">Cuando selecciones un jugador, los huecos validos se iluminan en verde.</div><div class="opts" id="options"></div><div class="buttons"><button class="btn" id="startBtn" type="button">Empezar draft</button><button class="btn secondary" id="rerollBtn" type="button" disabled>Otro equipo (2)</button><button class="btn secondary" id="undoBtn" type="button">Deshacer pick</button></div><div class="buttons quickActions"><button class="btn actionHidden" id="quickSimBtn" type="button" disabled>Simular temporada</button><button class="btn secondary actionHidden" id="quickResetBtn" type="button">Nuevo draft</button></div><div class="result hidden" id="result" aria-live="polite"></div><div class="hof hidden" id="hallPanelMain"></div></main><aside class="card teamCard"><div class="head"><b>Tu cinco</b><span class="small" id="teamCount">0/5</span></div><div class="team" id="team"></div><div class="scorebox"><div class="metric"><strong id="atk">0</strong><span>Ataque</span></div><div class="metric"><strong id="def">0</strong><span>Defensa</span></div><div class="metric"><strong id="ctrl">0</strong><span>Control</span></div></div><div class="note"><b>Simulacion:</b> rivales historicos, estrellas en partidos igualados y relato de temporada.</div><div class="hof" id="hallPanel"></div><div class="buttons"><button class="btn" id="simBtn" type="button" disabled>Simular 38 partidos</button><button class="btn secondary" id="resetBtn" type="button">Reiniciar</button></div></aside></div></div><div class="mobilePickDock" id="mobilePickDock"></div>
+<body><div class="app"><section class="hero"><h1><span>38-0</span> LaLiga 5v5</h1><p>Draftea cinco jugadores historicos, encajalos en su sitio y mira si pueden firmar una temporada perfecta.</p><div class="bar"><div class="pill">5 picks</div><div class="pill">Sin repetir nombres</div><div class="pill">Posicion real importa</div><div class="pill">Simulacion 38 jornadas</div><div class="pill">Hall of Fame</div></div><div class="flow" id="flow"></div></section><div class="layout"><main class="card"><div class="head"><b>Draft</b><span class="small" id="need">Empieza el draft</span></div><div class="challenge"><div><div class="club" id="club">Pulsa empezar</div><div class="era" id="era">Sale una plantilla historica. Elige una pieza y luego su hueco.</div></div><div class="round" id="round">0/5</div></div><div class="hint" id="hint">Cuando selecciones un jugador, los huecos validos se iluminan en verde.</div><div class="opts" id="options"></div><div class="buttons"><button class="btn" id="startBtn" type="button">Empezar draft</button><button class="btn secondary" id="rerollBtn" type="button" disabled>Otro equipo (2)</button><button class="btn secondary" id="seasonRerollBtn" type="button" disabled>Otra temporada (1)</button><button class="btn secondary" id="undoBtn" type="button">Deshacer pick</button></div><div class="buttons quickActions"><button class="btn actionHidden" id="quickSimBtn" type="button" disabled>Simular temporada</button><button class="btn secondary actionHidden" id="quickResetBtn" type="button">Nuevo draft</button></div><div class="result hidden" id="result" aria-live="polite"></div><div class="hof hidden" id="hallPanelMain"></div></main><aside class="card teamCard"><div class="head"><b>Tu cinco</b><span class="small" id="teamCount">0/5</span></div><div class="team" id="team"></div><div class="scorebox"><div class="metric"><strong id="atk">0</strong><span>Ataque</span></div><div class="metric"><strong id="def">0</strong><span>Defensa</span></div><div class="metric"><strong id="ctrl">0</strong><span>Control</span></div></div><div class="note"><b>Simulacion:</b> rivales historicos, estrellas en partidos igualados y relato de temporada.</div><div class="hof" id="hallPanel"></div><div class="buttons"><button class="btn" id="simBtn" type="button" disabled>Simular 38 partidos</button><button class="btn secondary" id="resetBtn" type="button">Reiniciar</button></div></aside></div></div><div class="mobilePickDock" id="mobilePickDock"></div>
 <script>
 // v35: balance final: reduce empates artificiales, sube pegada real y ajusta MVP defensivo.
 const squads=[
@@ -185,7 +185,7 @@ const squads=[
 const baseSlots=['POR','DEF','MED','DEL'];
 const refSlots=['REF_DEF','REF_MED','REF_DEL'];
 const slots=[...baseSlots,...refSlots];
-let team=[],current=null,used=new Set(),usedNames=new Set(),rerolls=2,selected=null, squadBag=[], lastSeason=null, statusMessage='';
+let team=[],current=null,used=new Set(),usedNames=new Set(),rerolls=2,seasonRerolls=1,selected=null, squadBag=[], lastSeason=null, statusMessage='';
 let activeBalance='f';
 const balanceProfiles={
  f:{label:'v35 final',desc:'Balance final: menos empates tontos, más pegada para ataques élite, defensa menos inflada y 38-0 reservado a combinaciones absurdas.',A:1.045,D:.948,C:1.018,powerAdd:.95,midLift:1.55,eliteLift:.55,rivalShift:-0.35,edgeAdd:.18,floorBoost:.45,lossRelief:.35,goalFor:.16,goalAgainst:.022,hofMin:70}
@@ -418,6 +418,39 @@ function validSlots(p){
 function refillSquadBag(){ squadBag=squads.map((_,i)=>i); }
 function takeSquadIndex(){ if(squadBag.length===0) refillSquadBag(); const r=Math.floor(Math.random()*squadBag.length); return squadBag.splice(r,1)[0]; }
 function nextSquad(){selected=null; current=squads[takeSquadIndex()]; renderAll();}
+function seasonAlternatives(){
+ if(!current) return [];
+ const token=seasonToken(current);
+ return squads.map((s,i)=>({s,i})).filter(x=>x.s.club===current.club && seasonToken(x.s)!==token);
+}
+function removeFromSquadBag(i){
+ const pos=squadBag.indexOf(i);
+ if(pos>=0) squadBag.splice(pos,1);
+}
+function updateRerollLabels(){
+ const rb=$('rerollBtn'); if(rb) rb.textContent='Otro equipo ('+rerolls+')';
+ const sr=$('seasonRerollBtn'); if(sr) sr.textContent='Otra temporada ('+seasonRerolls+')';
+}
+function rerollTeam(){
+ if(rerolls<=0 || team.length>=5) return;
+ rerolls--;
+ selected=null;
+ updateRerollLabels();
+ nextSquad();
+}
+function rerollSeason(){
+ if(seasonRerolls<=0 || !current || team.length>=5) return;
+ const choices=seasonAlternatives();
+ if(!choices.length) return;
+ seasonRerolls--;
+ selected=null;
+ const pick=choices[Math.floor(Math.random()*choices.length)];
+ current=pick.s;
+ removeFromSquadBag(pick.i);
+ statusMessage='Mismo club, otra temporada.';
+ updateRerollLabels();
+ renderAll();
+}
 function renderAll(){renderDraft();updateTeam();}
 function renderDraft(){
  if(!current){syncActionButtons();renderProgress();renderMobileDock();return;}
@@ -438,7 +471,10 @@ function renderDraft(){
   </button>`;
  }).join('');
  [...$('options').querySelectorAll('.player')].forEach(btn=>btn.onclick=()=>selectPlayer(Number(btn.dataset.i)));
- $('rerollBtn').disabled=team.length>=5||rerolls<=0; $('simBtn').disabled=team.length<5; syncActionButtons();renderProgress();
+ $('rerollBtn').disabled=team.length>=5||rerolls<=0;
+ const seasonBtn=$('seasonRerollBtn');
+ if(seasonBtn) seasonBtn.disabled=team.length>=5||seasonRerolls<=0||seasonAlternatives().length===0;
+ $('simBtn').disabled=team.length<5; syncActionButtons();renderProgress();
 }
 function selectPlayer(i){if(team.length>=5)return; const p=current.players[i]; if(used.has(playerId(p))||usedNames.has(playerNameKey(p[0])))return; selected={p,i}; renderAll();}
 function place(slot){
@@ -447,7 +483,7 @@ function place(slot){
  if(mult<=0)return;
  ap.pickId=playerId(raw); ap.squadToken=seasonToken(current);
  used.add(ap.pickId); usedNames.add(playerNameKey(raw[0])); ap.slot=slot; ap.line=line; ap.roleMult=mult; team.push(ap); selected=null; $('result').classList.add('hidden');
- if(team.length<5) nextSquad(); else {current=null; $('club').textContent='Cinco cerrado'; $('era').textContent='Simula la temporada.'; $('round').textContent='5/5'; $('need').textContent='Listo para simular'; $('options').innerHTML=''; $('hint').textContent='Plantilla cerrada. Dale a simular.'; $('simBtn').disabled=false; $('rerollBtn').disabled=true; syncActionButtons(); updateTeam();}
+ if(team.length<5) nextSquad(); else {current=null; $('club').textContent='Cinco cerrado'; $('era').textContent='Simula la temporada.'; $('round').textContent='5/5'; $('need').textContent='Listo para simular'; $('options').innerHTML=''; $('hint').textContent='Plantilla cerrada. Dale a simular.'; $('simBtn').disabled=false; $('rerollBtn').disabled=true; const sb=$('seasonRerollBtn'); if(sb) sb.disabled=true; syncActionButtons(); updateTeam();}
 }
 function squadFromPick(p){
  return squads.find(s=>seasonToken(s)===p.squadToken) || squads.find(s=>s.club===p.club && s.era===p.era) || null;
@@ -642,6 +678,8 @@ function syncActionButtons(){
  const hasResult=!$('result').classList.contains('hidden');
  $('startBtn').classList.toggle('actionHidden', draftStarted);
  $('rerollBtn').classList.toggle('actionHidden', !current || complete);
+ const seasonBtn=$('seasonRerollBtn');
+ if(seasonBtn) seasonBtn.classList.toggle('actionHidden', !current || complete);
  $('undoBtn').classList.toggle('actionHidden', team.length===0);
  $('simBtn').classList.toggle('actionHidden', !complete);
  $('resetBtn').classList.toggle('actionHidden', !draftStarted && !hasResult);
@@ -654,6 +692,7 @@ function syncActionButtons(){
  $('undoBtn').disabled=team.length===0;
  $('simBtn').disabled=!complete;
  $('rerollBtn').disabled=!current || complete || rerolls<=0;
+ if(seasonBtn) seasonBtn.disabled=!current || complete || seasonRerolls<=0 || seasonAlternatives().length===0;
  renderProgress();
 }
 function renderMobileDock(){
@@ -688,11 +727,14 @@ function renderMobileDock(){
    secondary[1].onclick=reset;
    return;
  }
- if(team.length>0 && current){
+ if(current && team.length<5){
    dock.classList.add('active');
-   dock.innerHTML=`<div class="dockTitle"><b>Pick ${team.length+1}/5</b><span>${current.club}</span></div><div class="dockActions"><button class="dockPrimary" type="button" ${rerolls<=0?'disabled':''}>Cambiar plantilla (${rerolls})</button><button class="dockSecondary" type="button">Deshacer ultimo</button></div>`;
-   dock.querySelector('.dockPrimary').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
-   dock.querySelector('.dockSecondary').onclick=undoLastPick;
+   const hasSeasonAlt=seasonAlternatives().length>0;
+   dock.innerHTML=`<div class="dockTitle"><b>Pick ${team.length+1}/5</b><span>${current.club}</span></div><div class="dockActions"><button class="dockPrimary" type="button" ${rerolls<=0?'disabled':''}>Cambiar equipo (${rerolls})</button><button class="dockSecondary" type="button" ${seasonRerolls<=0||!hasSeasonAlt?'disabled':''}>Otra temporada (${seasonRerolls})</button>${team.length>0?'<button class="dockSecondary" type="button">Deshacer ultimo</button>':''}</div>`;
+   dock.querySelector('.dockPrimary').onclick=rerollTeam;
+   const secondary=[...dock.querySelectorAll('.dockSecondary')];
+   secondary[0].onclick=rerollSeason;
+   if(team.length>0 && secondary[1]) secondary[1].onclick=undoLastPick;
    return;
  }
  dock.classList.remove('active');
@@ -1060,8 +1102,9 @@ function deleteHallEntry(i){
  showShareToast('Entrada borrada');
 }
 
-function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Sale una plantilla historica. Elige una pieza y luego su hueco.';$('round').textContent='0/5';$('need').textContent='Empieza el draft';$('options').innerHTML='';$('hint').textContent='Cuando selecciones un jugador, los huecos validos se iluminan en verde.';$('simBtn').disabled=true;$('rerollBtn').disabled=true;$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
-$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('rerollBtn').textContent='Otro equipo (2)';$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
-$('rerollBtn').onclick=()=>{if(rerolls>0&&team.length<5){rerolls--;$('rerollBtn').textContent='Otro equipo ('+rerolls+')';nextSquad();}};
-$('simBtn').onclick=simulate;$('resetBtn').onclick=reset;$('undoBtn').onclick=undoLastPick;const qs=$('quickSimBtn');if(qs)qs.onclick=simulate;const qr=$('quickResetBtn');if(qr)qr.onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateTeam();renderHallOfFame();
-</script><!-- pages rebuild 2026-07-09 relaxed-league-curve --></body></html>
+function reset(){team=[];current=null;used=new Set();usedNames=new Set();rerolls=2;seasonRerolls=1;selected=null;statusMessage='';lastSeason=null;refillSquadBag();$('club').textContent='Pulsa empezar';$('era').textContent='Sale una plantilla historica. Elige una pieza y luego su hueco.';$('round').textContent='0/5';$('need').textContent='Empieza el draft';$('options').innerHTML='';$('hint').textContent='Cuando selecciones un jugador, los huecos validos se iluminan en verde.';$('simBtn').disabled=true;$('rerollBtn').disabled=true; const sb=$('seasonRerollBtn'); if(sb) sb.disabled=true; updateRerollLabels();$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); updateTeam();}
+$('startBtn').onclick=()=>{team=[];used=new Set();usedNames=new Set();rerolls=2;seasonRerolls=1;selected=null;statusMessage='';lastSeason=null;refillSquadBag();updateRerollLabels();$('result').classList.add('hidden'); const hp=$('hallPanelMain'); if(hp) hp.classList.add('hidden'); nextSquad();};
+$('rerollBtn').onclick=rerollTeam;
+const seasonRerollButton=$('seasonRerollBtn');if(seasonRerollButton)seasonRerollButton.onclick=rerollSeason;
+$('simBtn').onclick=simulate;$('resetBtn').onclick=reset;$('undoBtn').onclick=undoLastPick;const qs=$('quickSimBtn');if(qs)qs.onclick=simulate;const qr=$('quickResetBtn');if(qr)qr.onclick=reset; const bm=$('balanceMode'); if(bm){bm.onchange=()=>{updateBalanceHelp(); updateTeam(); if(!$('result').classList.contains('hidden')) simulate(); renderHallOfFame();}; updateBalanceHelp();} updateRerollLabels();updateTeam();renderHallOfFame();
+</script><!-- pages rebuild 2026-07-10 season-reroll --></body></html>
